@@ -1,0 +1,13 @@
+<style>
+  .trait_thumb_wrapper {
+    padding:12px;
+    margin:6px auto;
+    border:1px solid #333;
+    cursor:pointer;
+  }
+</style>
+<div class="col-xs-12 col-ms-6 col-sm-3 col-centered trait_thumb_wrapper" ng-click="traitSelect()">
+  <h2>{{args.title}}</h2>
+  <img class='img-responsive' src="{{args.main_img}}" />
+  <p>{{args.content}}</p>
+</div>

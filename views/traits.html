@@ -1,0 +1,14 @@
+
+<div class='main_content  container-fluid'>
+
+        <div class='row'>
+          <div class='col-sm-1 col xs-0' style='padding:0'></div>
+            <div class='col-sm-10 col xs-12'>
+              <back-to-menu txt="backMenuTxt"></back-to-menu>
+              <div style='text-align:center'><h1>{{viewData}}</h1></div>
+              <trait-thumb ng-repeat="item in tritems" selected="currState.selected" args="item"></trait-thumb>
+            </div>
+          <div class='col-sm-1 col xs-0' style='padding:0'></div>
+        </div>
+
+</div>

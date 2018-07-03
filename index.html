@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Holstein 1.0</title>
+
+    <?php
+	$subfolder = explode('/', $_SERVER['REQUEST_URI']);
+	$site_root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']  . '/' . $subfolder[1] . '/' . $subfolder[2] . '/';
+	?>
+
+
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link id="set_style" rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	  <link id="set_style" rel="stylesheet" href="css/bootstrap_ms.css" type="text/css" />
+    <link id="set_style" rel="stylesheet" href="css/ngDialog.css" type="text/css" />
+    <link id="set_style" rel="stylesheet" href="css/ngDialog-custom-width.css" type="text/css" />
+    <link id="set_style" rel="stylesheet" href="css/ngDialog-theme-default.css" type="text/css" />
+    <link rel='stylesheet' href='css/styles.css' />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <script src='data/data.js'></script>
+
+	  <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+	  <script src="js/ngDialog.min.js"></script>
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="js/angular-simple-logger.js"></script>
+    <script src="js/snap.svg-min.js"></script>
+    <script src='js/holstein.js'></script>
+
+  	<script type='text/javascript'>var siteRoot ='<?php echo $site_root ?>';</script>
+
+
+</head>
+
+<body ng-app='holsteinModule' class='bg_fade' ng-controller='mainCtrl'>
+    <nav ng-controller='navCtrl' class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#!home">Holstein Virtual Cow</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar" uib-collapse="isNavCollapsed">
+          <ul class="nav navbar-nav">
+            <li uib-dropdown><a href="#!" uib-dropdown-toggle>Traits<b class="caret"></b></a>
+              <bs-nav-dropdown args="navMenus.traits"></bs-nav-dropdown>
+            </li>
+            <li><a href="#!ideal">Ideal Cow</a></li>
+            <li><a href="#!locomotion">Locomotion</a></li>
+            <li><a href="#!guide">Classification Guide</a></li>
+            <li><a href="#!contacts">Contacts</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <h2>{{menuState.inner}}</h2>
+	<ng-view></ng-view>
+  <side-tabs args="navMenus.traits"></side-tabs>
+	<footer class='footer'>
+    	<div class='container'>
+   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'6px'}">&copy; Parasang 2018 <span style = "color:#333;">Status: {{status.msg}}</span></p>
+   		</div>
+    </footer>
+
+</body>
+
+</html>
