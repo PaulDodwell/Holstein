@@ -1,7 +1,18 @@
 <style>
+  .side_tabs_wrapper {
+    position:absolute;
+    right:0;
+    /*top:200px;*/
+    bottom:-400px;
+    width:220px;
+    min-height:320px;;
+    overflow:hidden;
+    /*border:1px solid #eee;*/
+    z-index:10;
+  }
   .side_tabs {
     position:absolute;
-    top:200px;
+    top:0;
     width:220px;
     min-height:70px;;
     overflow:hidden;
@@ -40,8 +51,10 @@
   	transition: all 0.3s ease-in-out;
   }
 </style>
+<div class='side_tabs_wrapper'>
 <div class="side_tabs slideTrans" ng-class="{'tabs_active':active,'tabs_hidden':!active}">
   <div class="side_tab" ng-repeat="tab in args.items" style="background:{{tab.color}};" ng-click="doTabs(tab.target)">
     <div class="side_tab_txt" style="color:{{tab.txtColor}};">{{tab.title}}</div>
   </div>
+</div>
 </div>

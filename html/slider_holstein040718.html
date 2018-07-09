@@ -186,6 +186,7 @@ transition: all 0.25s linear;
 }
 
 </style>
+<div class='slider_indicator'>Current Score: <span ng-show="options.showCurPercent">{{curState.curPercent | number:1}}%</span> <span ng-show="options.showNearKeyLabel">{{curState.nearKeyLabel}}</span></div>
 <div ng-attr-id="{{ options.id + '_wrapper'}}" class='slider_wrapper'>
   <div ng-attr-id="{{ options.id }}" class="slider_box {{options.boxClasses}}">
     <span ng-if="markers.length > 0"><div ng-repeat="marker in markers" class='slider_mark slider_color' ng-class="{'end_marker':marker.pos == 100,'slider_mark_sm':options.markerMin}" style="{{'left:'+marker.pos+'%;background:'+options.markerBgColor+';'}}"></div></span>

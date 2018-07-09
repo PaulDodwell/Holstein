@@ -15,22 +15,41 @@ html {
 }
 
 body {
-  margin-bottom: 50px;
+  margin-bottom: 80px;
   background-color:rgba(255,255,255,0) !important;
+	max-width:1920px;
 }
 
-.footer {
+.xfooter {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 50px;
-  background-color: none;
+  height: 80px;
+  background-color: #d9d9d9;
 }
 
+.footer {
+	position: fixed;
+  height: 80px;
+  bottom: 0;
+  width: 100%;
+  background-color: #d9d9d9;
+}
+
+.sm_circle {
+ 	float:right;
+	width:24px;
+	height:24px;
+	border:2px solid #1C3764;
+	border-radius:30px;
+	margin:42px 4px 4px 4px;
+}
 
 h1 {
 	font-size:1.8em;
+	text-align:left;
+	padding-left:12px;
 }
 
 ul {
@@ -275,22 +294,26 @@ a.butt:active {
 
 .navbar {
 	margin-bottom:0 !important;
+	height:70px;
+	border-bottom: 3px solid #C7BC52;
 }
-/*
-div.navbar-collapse.collapse {
-    	display: block;
-    	overflow: hidden;
-    	max-height: 0px;
-    	-webkit-transition: max-height .3s ease;
-    	-moz-transition: max-height .3s ease;
-    	-o-transition: max-height .3s ease;
-    	transition: max-height .3s ease;
-    }
-div.navbar-collapse.collapse.in {
-    	max-height: 2000px;
-    }
-*/
-/*compass styles*/
+
+.navbar-nav {
+	margin-top:24px;
+	color:#1C3764;
+}
+
+.header-logo {
+	height:40px;
+	width:auto;
+}
+
+.showfade {
+	-webkit-transition: opacity .6s ease;
+	-moz-transition: opacity .6s ease;
+	-o-transition: opacity .6s ease;
+	transition: opacity .6s ease;
+}
 
 .page_title {
 	color:#066;
@@ -2002,7 +2025,7 @@ h2 {
 
 
 .fader.ng-hide, .fader.ng-show {
-    transition: 1s cubic-bezier(0.5, 0.1, 0.25, 1) all;
+  transition: 1s cubic-bezier(0.5, 0.1, 0.25, 1) all;
 	transition: opacity 0.5s linear;
 }
 

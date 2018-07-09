@@ -13,12 +13,12 @@ holsteinModule.config(function($routeProvider) {
 						templateUrl : "views/home.html",
 						controller : "homeCtrl"
 				  })
-				  .when("/guide/:data", {
+				  .when("/guide", {
 						templateUrl : "views/guide.html",
 						controller : "guideCtrl"
 				  })
-				  .when("/ideal_cow/:data", {
-						templateUrl : "views/ideal_cow.html",
+				  .when("/ideal-cow", {
+						templateUrl : "views/ideal-cow.html",
 						controller : "idealCtrl"
 				  })
 				  .when("/traits/:data", {
@@ -99,33 +99,45 @@ holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$l
 	$scope.viewData = $routeParams.data;
 	$scope.tritems = [];
 
-/*
-	for(var i = 0;i<$scope.navMenus.traits.length;i++) {
-		if($scope.navMenus.traits[i].target.data == $scope.viewData) {
-			$scope.tritems = $scope.navMenus.traits[i].items;
-			$scope.viewData = $scope.navMenus.traits[i].title;
-			$scope.targetData = $scope.navMenus.traits[i].target.data
-		}
-	};
-*/
-
 	$scope.tritems = $scope.navMenus[$scope.viewData].items;
 	$scope.viewData = $scope.navMenus[$scope.viewData].name;
 	$scope.targetData = $scope.navMenus[$scope.viewData].name
 
-
 	$scope.currState = {
 		selected: (typeof $routeParams.trait !== 'undefined') && $routeParams.trait ? $routeParams.trait : null,
-		item: (typeof $routeParams.trait !== 'undefined') && $routeParams.trait ? $scope.tritems[arraySvce.arrIndexOf($scope.tritems,$routeParams.trait,'title')] : null
+		item: (typeof $routeParams.trait !== 'undefined') && $routeParams.trait ? $scope.tritems[arraySvce.arrIndexOf($scope.tritems,$routeParams.trait,'name')] : null
 	};
+
+	//alert(JSON.stringify($scope.currState.item));
 
 	$scope.$watch('currState.selected',function(val) {
 		if(val) {
-			var i = arraySvce.arrIndexOf($scope.tritems,val,'title');
+			var i = arraySvce.arrIndexOf($scope.tritems,val,'name');
 			$scope.currState.item = $scope.tritems[i];
-			$location.path('/traits/'+$scope.targetData+"/"+$scope.currState.item.title);
+			$location.path('/traits/'+$scope.targetData+"/"+$scope.currState.item.name);
 		}
 	});
+
+}]);
+
+holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
+	$scope.viewData = $routeParams.data;
+
+	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
+
+	$scope.sliderArgs = [];
+	$scope.sliderState = [];
+
+	$scope.sliderArgs = JSON.parse(JSON.stringify(dataObj.sliderDefaults()));
+	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
+	$scope.sliderArgs.keyNames = $scope.keyNames;
+	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+
+	$scope.$watch('sliderState',function(val) {
+		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
+	},true)
+
+	$scope.show = true;
 
 }]);
 
@@ -221,27 +233,20 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$http','$
 
 	}
 
-	holsteinModule.controller('sliderCtrl',['$scope','$rootScope','$window','$interval','Compare','ngDialog','ArraySvce','DataObj',sliderCtrl]);
+	holsteinModule.controller('xsliderCtrl',['$scope','$rootScope','Compare','ArraySvce','DataObj',sliderCtrl]);
 
-  	function sliderCtrl($scope,$rootScope,$window,$interval,compare,ngDialog,arraySvce,dataObj  ) {
+  	function sliderCtrl($scope,$rootScope,compare,arraySvce,dataObj  ) {
 
-			$scope.keyNames =  [{'pos':0,'key':'1'},{'pos':17,'key':'2'},{'pos':33,'key':'3'},{'pos':50,'key':'4'},{'pos':67,'key':'5'},{'pos':83,'key':'6'},{'pos':100,'key':'7'}];
+			//$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':12.5,'label':'2'},{'pos':25,'label':'3'},{'pos':37.5,'label':'4'},{'pos':50,'label':'5'},{'pos':62.5,'label':'6'},{'pos':75,'label':'7'},{'pos':87.5,'label':'8'},{'pos':100,'label':'9'}];
+			$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
 
 			$scope.sliderArgs = [];
 			$scope.sliderState = [];
 
-			$scope.sliderArgs.push(JSON.parse(JSON.stringify(dataObj.sliderDefaults())));
-			$scope.sliderState.push(JSON.parse(JSON.stringify(dataObj.sliderState())));
-			$scope.sliderArgs[0].keyNames = $scope.keyNames;
-			$scope.sliderState[0].curPos = $scope.sliderArgs[0].minOffset;
-
-			$scope.sliderArgs.push(JSON.parse(JSON.stringify(dataObj.sliderDefaults())));
-			$scope.sliderState.push(JSON.parse(JSON.stringify(dataObj.sliderState())));
-			$scope.sliderArgs[1].id = 'bare_slider';
-			$scope.sliderArgs[1].showCurPercent = true;
-			$scope.sliderArgs[1].showNearKeyLabel = false;
-			$scope.sliderArgs[1].keyNames =null;
-			$scope.sliderState[1].curPos = $scope.sliderArgs[0].minOffset;
+			$scope.sliderArgs = JSON.parse(JSON.stringify(dataObj.sliderDefaults()));
+			//$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
+			$scope.sliderArgs.keyNames = $scope.keyNames;
+			$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
 
 	}
 
@@ -255,6 +260,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 				args: '=',
 				menus: '=',
 				startMenu: '=',
+				mainMenu: '=',
 				menuState: '=',
 				currNavContent: '=',
 				sliderState: '='
@@ -267,10 +273,24 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 					$scope.navItems = [];
 					$scope.segs = [];
 					$scope.segLines = [];
+					$scope.legends = [];
 					$scope.titles = [];
+					$scope.icons = [];
 					$scope.titleCenters = [];
 					$scope.currNavText = '';
 					$scope.currWheelRotate = 0;
+
+					var iconShow = $scope.menus[$rootScope.menuState.inner].icons_show;
+
+					console.log('circleNav - iconShow: '+iconShow+' menuState: '+$rootScope.menuState.inner);
+
+					var iconAttr = {
+						size: 90,
+						iconOffsetY: 40,
+						iconOffsetX: -50,
+						ttlOffsetY: -40,
+						ttlOffsetX: -20
+					};
 
 					$scope.viewBoxSize = (typeof $scope.args.viewBoxSize != "undefined" && $scope.args.viewBoxSize) ? $scope.args.viewBoxSize : '0 0 400 400';
 
@@ -449,7 +469,10 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 							outerR: outerR
 						}
 
-						var titlePos = snapUtil.calcSegTitlePos(args,lines);
+
+						var titlePos = snapUtil.calcSegTitlePos(args,lines,iconShow,iconAttr);
+
+						$scope.legends[idx] = $scope.s.group();
 
 						$scope.titles[idx] = $scope.s.text(titlePos.x, titlePos.y, lines);
 						$scope.titles[idx].selectAll("tspan:nth-child(n+2)").attr({
@@ -458,6 +481,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						});
 
 						var titleColor = (typeof items[i].txtColor !== 'undefined' && items[i].txtColor) ? items[i].txtColor : $scope.args.navTxtTitleColor;
+
 						$scope.titles[idx].attr({
 							id: 'title ' + (idx),
 							class: 'seg_title',
@@ -470,7 +494,17 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 							e.preventDefault();
 							$scope.segSelect(idx,true);
 						});
+
+						$scope.legends[idx].add($scope.titles[idx]);
+
+						if(iconShow) {
+							$scope.icons[idx] = $scope.s.image(items[i].icon,titlePos.center.x+iconAttr.iconOffsetX, titlePos.y+iconAttr.iconOffsetY, iconAttr.size, iconAttr.size);
+							$scope.legends[idx].add($scope.icons[idx]);
+						}
+
 					}
+
+
 
 					$scope.drawOuterSegTitle = function(idx, angle) {
 
@@ -638,6 +672,8 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						$scope.items = $scope.args.mainWheel === true ? $scope.menus[$rootScope.menuState.inner].items : $scope.menus[$rootScope.menuState.outer].items;
 
+						iconShow = $scope.menus[$rootScope.menuState.inner].icons_show;
+
 						deltaAngle = 2 * Math.PI / $scope.items.length;
 						angle = $scope.args.startAngle;
 						if(typeof $scope.s !== 'undefined') {
@@ -684,19 +720,22 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						var target = $scope.items[idx].target;
 
+
+
 						switch(target.type) {
 								case "menu":
 
 										$rootScope.menuState.inner = $scope.items[idx].target.innerMenu;
 										$rootScope.menuState.outer = $scope.items[idx].target.outerMenu;
+										console.log('doSegTarget - target: '+JSON.stringify(target)+' '+$rootScope.menuState.inner);
 										break;
 								case "view":
-										var path = target.view + "/" + target.data;
+										var path = target.view + "/" + target.route;
 										//alert(path);
 										$location.path(path);
 										break;
 								case "url":
-										alert("go to url: "+target.data);
+										alert("go to url: "+target.route);
 										break;
 								default:
 										$rootScope.menuState.inner = 'main';
@@ -705,10 +744,6 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						}
 						$scope.$apply(function() {});
 					}
-
-					$scope.$watch('sliderState',function(val) {
-					//	$scope.segSelect(val.nearKeyLabel,false);
-					},true)
 
 					//Initialise Wheel
 					$scope.drawNav();
@@ -904,11 +939,12 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 
 				 $scope.snapToMark = function() {
 							var p = $scope.rounder($scope.curState.curPercent,100/$scope.options.steps);
-							$scope.curState.nearKey = p;
+							var nearKey = $scope.getNearKey(p);
+							$scope.curState.nearKey = nearKey.idx;
 							$scope.$apply(function() {
 								$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
 								$scope.curState.curPercent = p;
-								$scope.curState.nearKeyLabel = $scope.getKeyLabel(p);
+								$scope.curState.nearKeyLabel = nearKey.label;
 							});
 							$element.css({'left':$scope.curState.curPos + 'px'});
 							$scope.focusKey = ("#sk_" + $scope.options.id) + p;
@@ -919,11 +955,27 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 					$scope.getKeyLabel = function(p) {
 						if($scope.keyMarkers.length > 0) {
 							var idx = arraySvce.arrIndexOf($scope.keyMarkers,p,'pos');
-							var key = $scope.keyMarkers[idx].key;
-							return key;
+						//	alert(p + " "+$scope.keyMarkers.length+" "+idx+" "+$scope.keyMarkers[idx].label);
+						//	var key = $scope.keyMarkers[idx].label;
+							return idx + 1;
 						}
 						else {
-							return false;
+							return 'unknown';
+						}
+					}
+
+					$scope.getNearKey = function(p) {
+						if($scope.keyMarkers.length > 0) {
+							var idx = arraySvce.arrIndexOf($scope.keyMarkers,p,'pos');
+							var keyData = {
+								idx: idx + 1,
+								pos: $scope.keyMarkers[idx].pos,
+								label: $scope.keyMarkers[idx].label
+							}
+							return keyData;
+						}
+						else {
+							return 'unknown';
 						}
 					}
 
@@ -1031,6 +1083,49 @@ holsteinModule.directive('traitFull', [function () {
     }
 }]);
 
+holsteinModule.directive('traitFullImg', ['$rootScope',function ($rootScope) {
+    return {
+        restrict: 'E',
+				scope: {
+					args: '=',
+					sliderState: '=',
+					parentMenu: '='
+				},
+        templateUrl: 'html/trait_full_img.html',
+				controller: function($scope, $element) {
+						$scope.img_src = $scope.args.img_path  + "/" +$scope.args.name + "_0" + $scope.sliderState.nearKey + ".png";
+				}
+    }
+}]);
+
+holsteinModule.directive('traitDesc', [function () {
+    return {
+        restrict: 'E',
+				replace: true,
+				scope: {
+					content: '='
+				},
+        templateUrl: 'html/trait_desc.html',
+				controller: function($scope, $element) {
+					//alert($scope.content.main_text)
+				}
+    }
+}]);
+
+holsteinModule.directive('menuDesc', [function () {
+    return {
+        restrict: 'E',
+				replace: true,
+				scope: {
+					content: '='
+				},
+        templateUrl: 'html/menu_desc.html',
+				controller: function($scope, $element) {
+					//alert($scope.content.main_text)
+				}
+    }
+}]);
+
 holsteinModule.directive('backToMenu', [function () {
     return {
         restrict: 'E',
@@ -1072,7 +1167,7 @@ holsteinModule.directive('sideTabs', ['$location','$rootScope', function ($locat
     }
 }]);
 
-holsteinModule.directive('bsNavDropdown', [function () {
+holsteinModule.directive('bsNavDropdown', ['$location','$rootScope', function ($location, $rootScope) {
     return {
         restrict: 'E',
 				replace: true,
@@ -1084,8 +1179,14 @@ holsteinModule.directive('bsNavDropdown', [function () {
 					//alert('dropdown data: ' + JSON.stringify($scope.args));
 
 					$scope.targetHref = function(target) {
-						var path = "#!" + target.view + "/" + target.data;
+						var path = "#!" + target.view + "/" + target.route;
 						return path;
+					}
+
+					$scope.goTarget = function(target) {
+					  var path = "/";
+						$location.path(path);
+						$rootScope.menuState.inner = target.innerMenu;
 					}
 
 				}
@@ -1166,7 +1267,31 @@ holsteinModule.factory('SnapUtil',['$rootScope',function($rootScope) {
 		box.attr({stroke: '#f00',strokeWidth: 1,fill: 'none'});
 	}
 
-	service.calcSegTitlePos = function(args,lines) {
+	service.calcSegTitlePos = function(args,lines,iconShow,iconAttr) {
+
+		console.log(iconShow);
+
+		var center = {
+						x: args.center.x + Math.cos(args.angle + args.deltaAngle/2) * args.outerR * 0.666,
+						y: args.center.y + Math.sin(args.angle + args.deltaAngle/2) * args.outerR * 0.666
+				};
+		//use temp svg object to calculate bounding box
+		var svg = Snap();
+		var ttlTmp = svg.text(-300, -300, lines);
+		ttlTmp.selectAll("tspan:nth-child(n+2)").attr({ dy: "1.2em", x: -300 });
+		var bb = ttlTmp.getBBox();
+		svg.remove();
+
+		return {
+			x: iconShow === true ? center.x - bb.width/1.5 + iconAttr.ttlOffsetX : center.x - bb.width/1.5,
+			y: iconShow === true ? center.y - (lines.length > 1 ? bb.height/5 : bb.height/2) + iconAttr.ttlOffsetY : center.y - (lines.length > 1 ? bb.height/5 : bb.height/2),
+			center: center
+		}
+	}
+
+	service.xcalcSegTitlePos = function(args,lines,icons,iconAttr) {
+
+		console.log(icons);
 
 		var center = {
 						x: args.center.x + Math.cos(args.angle + args.deltaAngle/2) * args.outerR * 0.666,
@@ -1181,7 +1306,8 @@ holsteinModule.factory('SnapUtil',['$rootScope',function($rootScope) {
 
 		return {
 			x: center.x - bb.width/1.5,
-			y: center.y - (lines.length > 1 ? bb.height/5 : bb.height/2)
+			y: center.y - (lines.length > 1 ? bb.height/5 : bb.height/2),
+			center: center
 		}
 	}
 
@@ -1310,8 +1436,8 @@ holsteinModule.factory('DataObj',['$rootScope',function($rootScope) {
 					 range: 0,
 					 curPos: 8,
 					 curPercent: 0,
-				 	 nearKey: 0,
-					 nearKeyLabel: 0,
+				 	 nearKey: 1,
+					 nearKeyLabel: 1,
 					 mouseDown: false
 				 }
 
