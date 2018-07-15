@@ -2,16 +2,11 @@
 <div class='main_content  container-fluid'>
 
         <div class='row'>
-        <div class='col-md-12' ng-controller='sliderCtrl'>
-            <slider-ctrl options="sliderArgs[0]" cur-state="sliderState[0]"></slider-ctrl>
-        </div>
-        </div>
-        <div class='row'>
-          <div class='col-sm-2 col xs-0'><back-to-menu txt="backMenuTxt"></back-to-menu></div>
-            <div class='col-sm-8 col xs-12'>
-              <div class='col-sm-12' style='text-align:center'><h1>Locomotion</h1><h3>Params: {{viewData}}</h3></div>
-            </div>
-          <div class='col-sm-2 col xs-0'></div>
+          <div class='col-sm-1 col xs-0' style='padding:0'></div>
+          <div class='col-sm-10 col xs-12'>
+              <locomotion-video args="locomotion.args" slider-args="sliderArgs" slider-state="sliderState" n-key="nKey" video-src="videoSrc" parent-menu="'traits'"></locomotion-video>
+          <div class='col-sm-1 col xs-0' style='padding:0'></div>
+
         </div>
 
 </div>

@@ -1,17 +1,33 @@
 
-<div class='main_content  container-fluid'>
+<div class='main_content  container-fluid' ng-controller="locomotionCtrl">
+
 
         <div class='row'>
-        <div class='col-md-12' ng-controller='sliderCtrl'>
-            <slider-ctrl options="sliderArgs" cur-state="sliderState"></slider-ctrl>
-        </div>
-        </div>
-        <div class='row'>
-          <div class='col-sm-2 col xs-0'><back-to-menu txt="backMenuTxt"></back-to-menu></div>
-            <div class='col-sm-8 col xs-12'>
-              <div class='col-sm-12' style='text-align:center'><h1>Ideal Cow</h1><h3>Params: {{viewData}}</h3></div>
-            </div>
-          <div class='col-sm-2 col xs-0'></div>
-        </div>
+
+          <div class='col-xs-12'><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}">&larr;</a> Ideal Holstein Cow</h1></div>
+
+          <div class='col-sm-1 col xs-0'></div>
+
+          <div class='col-sm-7 col xs-12'>
+
+                <div style='min-height:460px;background-color:#d9d9d9;'>
+                  <h2 style='padding-top:60px !important;'>Coming soon</h2>
+                </div>
+
+              <div class='col-xs-12'>
+                  <slider-ctrl options="sliderArgs" cur-state="sliderState"></slider-ctrl>
+              </div>
+
+          </div>
+
+          <div class='col-sm-3 col xs-12'>
+              <h2 style='text-align:left;padding-left:12px;'>Ideal Cow</h2>
+              <p>Here is some text about the ideal Holstein cow.</p>
+              <p>Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow.</p>
+              <back-to-menu align="'left'" txt="backMenuTxt"></back-to-menu>
+          </div>
+          <div class='col-sm-1 col xs-0'></div>
+
+       </div>
 
 </div>

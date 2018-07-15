@@ -9,8 +9,9 @@
     cursor:pointer;
   }
 
-  .nav_seg {
+  .nav_seg,.center_img,.back_arrow {
     pointer-events:auto !important;
+    cursor:pointer;
   }
 
   .nav_seg:hover {
@@ -20,10 +21,16 @@
   .outer_seg_title {
 
   }
+  .center_circle,.center_img {
+
+  }
+  /*
   .wheel_wrapper {
     position:relative;
     top:72px;
+    height:400px;
   }
+  */
   .menu_title {
       margin-top:72px
   }
@@ -49,9 +56,8 @@
 
         <div class='row'>
           <div class='col-sm-1 col-xs-0'></div>
-          <div class='col-sm-6' >
+          <div class='col-sm-6' style='height:420px;'>
               <div class='col-xs-12'><div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" start-menu="'main'" main-menu="menuState.inner" menu-state="menuState" curr-nav-content="currNavText" slider-state="sliderState[0]"></circle-nav></div></div>
-              <div style='margin-top:36px;clear:both;text-align:right;font-size:1.2em;'>{{currNavText}}</div>
           </div>
           <div class='col-sm-4'>
               <menu-desc content="navMenus[menuState.inner]"></menu-desc>

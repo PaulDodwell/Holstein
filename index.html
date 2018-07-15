@@ -30,15 +30,21 @@
     <script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <script src="js/angular-simple-logger.js"></script>
     <script src="js/snap.svg-min.js"></script>
+    <!--three.js viewer module-->
+    <script src="js/threeControllers.js"></script>
+    <script src="js/threeDirectives.js"></script>
+    <script src="js/threeServices.js"></script>
+    <!--<script src="js/threeViewer.js"></script>-->
+    <!--three.js-->
+    <script src="js/threelib/Three.js"></script>
+    <script src="js/threelib/Detector.js"></script>
+    <!--main app-->
     <script src='js/holstein.js'></script>
-
-  	<script type='text/javascript'>var siteRoot ='<?php echo $site_root ?>';</script>
-
 
 </head>
 
-<body ng-app='holsteinModule' class='bg_fade' ng-controller='mainCtrl' id='bootstrap-holstein'>
-    <nav ng-controller='navCtrl' class="navbar navbar-default navbar-custom">
+<body ng-app='holsteinModule' class='bg_fade' ng-controller='mainCtrl'>
+    <nav ng-controller='navCtrl' class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
@@ -60,7 +66,7 @@
           </ul>
         </div>
       </div>
-      <side-tabs args="navMenus.traits"></side-tabs>
+      <side-tabs ng-show="sideBars.show && winSize.w > 768" args="navMenus.traits"></side-tabs>
     </nav>
 	<ng-view></ng-view>
 	<footer class='footer'>

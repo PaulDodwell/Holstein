@@ -17,12 +17,16 @@ var txtDesc = {
       "A desirable udder should possess a central ligament and fore and rear udder attachments that are wide and strong, with udder size comprising of length and width, not solely depth as the latter is often associated with pendulous udders."
     ],
     feet_legs: [
-      "Complex cooperative efforts of muscles, tendons, ligaments and bones of the locomotor system enable the functionality of movement. Cattle feet and legs also serve as supportive weight-bearing structures; with feet tissues absorbing the majority of movement associated impact.",
+      "Complex cooperative efforts of muscles, tendons, ligaments and bones of the locomotor system enable the functionality of movement. Cattle Legs and Feet also serve as supportive weight-bearing structures; with feet tissues absorbing the majority of movement associated impact.",
       "Therefore optimum feet and leg conformation consists of straight, distant front legs, proving good chest width for strong heart and capacious lung accommodation, with rear legs desirably strong, straight from the rear view and almost perpendicular from hock to pastern when examined from the side.",
       "Feet and leg anatomy is closely linked to the cows ability to walk fluidly, which is assessed by the animals locomotion."
     ],
     body_conformation: [
       "Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, capacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.",
+      "Body size, form and weight alterations also affect animal movement, by the total space required and the scale of forces exerted in free movement execution. Therefore alterations in body conformation scores have a direct impact on her environmental and spatial requirements."
+    ],
+    dairy_strength: [
+      "Temporary text - Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, capacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.",
       "Body size, form and weight alterations also affect animal movement, by the total space required and the scale of forces exerted in free movement execution. Therefore alterations in body conformation scores have a direct impact on her environmental and spatial requirements."
     ]
   },
@@ -59,6 +63,24 @@ var txtDesc = {
           ],
           footer_text: 'Reference Scale: This measure is optical in relation to the balance of the animal. Ensure scoring is always conducted from the same side, because all cows are deeper on one side than the other.'
       },
+      bone_quality: {
+            main_text: 'The descriptive text for bone quality trait',
+            scores_text: [
+              {
+                score: '1-3 = Low',
+                desc: ''
+              },
+              {
+                score: '4-6 = Intermediate',
+                desc: ''
+              },
+              {
+                score: '7-9 = High',
+                desc: ''
+              }
+            ],
+            footer_text: 'Footer reference text for bone quality trait'
+        },
 	  chest_width: {
         main_text: 'Measured from the inside surface between the top of the front legs.',
         scores_text: [
@@ -355,7 +377,7 @@ var txtDesc = {
         ],
         footer_text: 'Reference scale: 2 = (0cm); 3cm per point'
       },
-	  udder_support: {
+	    udder_support: {
         main_text: 'The depth of the cleft/ligament, measured at the base of the rear udder.',
         scores_text: [
           {
@@ -397,9 +419,34 @@ var txtDesc = {
         ],
         footer_text: ''
       },
-  },
+      udder_texture: {
+          main_text: 'This is the descriptive text for udder texture.',
+          scores_text: [
+            {
+              score: '1-3 = texture 1',
+              desc: ''
+            },
+            {
+              score: '4-6 = texture 2',
+              desc: ''
+            },
+            {
+              score: '7-9 = texture 3',
+              desc: ''
+            }
+          ],
+          footer_text: 'This is the footer text for udder texture'
+        }
+    }
 
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 var navMenus = {
     main: {
@@ -433,9 +480,9 @@ var navMenus = {
             color: '#9FABCD',
             txtColor:'#333',
             target: {
-              type: 'view',
+              type: 'url',
               view: 'guide',
-              route: ''
+              route: 'pdf/type_classification_guide.pdf'
               }
           },
           {
@@ -447,7 +494,7 @@ var navMenus = {
             txtColor:'#fff',
             target: {
               type: 'view',
-              view: 'ideal_cow',
+              view: 'ideal-cow',
               route: ''
               }
             }
@@ -478,8 +525,8 @@ var navMenus = {
         },
         {
           idx: 1,
-          title: 'Feet & Legs',
-          content: 'Feet & Legs text content',
+          title: 'Legs & Feet',
+          content: 'Legs & Feet text content',
           icon: 'img/icons/icon_feet_legs_bl.png',
           color: '#9FABC0',
           txtColor: '#333',
@@ -601,7 +648,7 @@ var navMenus = {
               idx: 2,
               title: 'Udder Support',
               name: 'udder_support',
-              content: txtDesc.traits.fore_udder_support,
+              content: txtDesc.traits.udder_support,
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
@@ -626,10 +673,10 @@ var navMenus = {
               target: {
                   type: 'view',
                   view: 'traits',
-                  route: 'udder_traits//udder_texture'
+                  route: 'udder_traits/udder_texture'
                 }
             }
-          ]
+        ]
       },
       teat_traits: {
         name: 'teat_traits',
@@ -715,9 +762,9 @@ var navMenus = {
     feet_legs: {
       name: 'feet_legs',
       parent: 'traits',
-      title: 'Feet and Legs',
+      title: 'Legs and Feet',
       desc: {
-        heading: 'Feet & Legs',
+        heading: 'Legs & Feet',
         paras: txtDesc.menus.feet_legs
       },
       icons_show: false,
@@ -758,6 +805,40 @@ var navMenus = {
         },
         {
           idx: 2,
+          title: 'Bone Quality',
+          name: 'bone_quality',
+          content: txtDesc.traits.bone_quality,
+          icon: 'img/icons/icon_blank.png',
+          color: '#1C3764',
+          txtColor: '#fff',
+          vid_src: 'video/test1.mp4',
+          main_img: 'img/Trait_17_00035.jpg',
+          img_path: 'img/trait',
+          target: {
+              type: 'view',
+              view: 'traits',
+              route: 'feet_legs/bone_quality'
+            }
+        },
+        {
+          idx: 4,
+          title: '',
+          name: 'locomotion',
+          content: txtDesc.traits.locomotion,
+          icon: 'img/icons/icon_blank.png',
+          color: '#D9D9D9',
+          txtColor:'#333',
+          vid_src: 'video/test1.mp4',
+          main_img: 'img/Trait_17_00035.jpg',
+          img_path: 'img/trait',
+          target: {
+              type: 'view',
+              view: 'traits',
+              route: 'feet_legs/locomotion'
+            }
+          },
+        {
+          idx: 3,
           title: 'Foot Angle',
           name: 'foot_angle',
           content: txtDesc.traits.foot_angle,
@@ -773,23 +854,23 @@ var navMenus = {
               route: 'feet_legs/foot_angle'
             }
         },
-        {
-          idx: 3,
-          title: 'Locomotion',
-          name: 'locomotion',
-          content: txtDesc.traits.locomotion,
-          icon: 'img/icons/icon_blank.png',
-          color: '#d9d9d9',
-          txtColor:'#333',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'feet_legs/locomotion'
+          {
+            idx: 5,
+            title: 'Locomotion',
+            name: 'locomotion',
+            content: txtDesc.traits.locomotion,
+            icon: 'img/icons/icon_blank.png',
+            color: '#D9D9D9',
+            txtColor:'#333',
+            vid_src: 'video/test1.mp4',
+            main_img: 'img/Trait_17_00035.jpg',
+            img_path: 'img/trait',
+            target: {
+                type: 'view',
+                view: 'traits',
+                route: 'feet_legs/locomotion'
+              }
             }
-          }
         ]
       },
     body_conformation: {
@@ -821,29 +902,12 @@ var navMenus = {
         },
         {
           idx: 1,
-          title: 'Chest Width',
-          name: 'chest_width',
-          content:  txtDesc.traits.chest_width,
-          icon: 'img/icons/icon_blank.png',
-          color: '#d9d9d9',
-          txtColor:'#333',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'body_conformation/chest_width'
-            }
-        },
-        {
-          idx: 2,
           title: 'Body Depth',
           name: 'body_depth',
           content: txtDesc.traits.body_depth,
           icon: 'img/icons/icon_blank.png',
-          color: '#1C3764',
-          txtColor: '#fff',
+          color: '#D9D9D9',
+          txtColor: '#333',
           vid_src: 'video/test1.mp4',
           main_img: 'img/Trait_17_00035.jpg',
           img_path: 'img/trait',
@@ -854,24 +918,7 @@ var navMenus = {
             }
         },
         {
-          idx: 3,
-          title: 'Angularity',
-          name: 'angularity',
-          content:  txtDesc.traits.angularity,
-          icon: 'img/icons/icon_blank.png',
-          color: '#d9d9d9',
-          txtColor:'#333',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'body_conformation/angularity'
-            }
-        },
-        {
-          idx: 4,
+          idx: 2,
           title: 'Rump Angle',
           name: 'rump_angle',
           content: txtDesc.traits.rump_angle,
@@ -888,12 +935,12 @@ var navMenus = {
             }
         },
         {
-          idx: 5,
+          idx: 3,
           title: 'Rump Width',
           name: 'rump_width',
           content:  txtDesc.traits.rump_width,
           icon: 'img/icons/icon_blank.png',
-          color: '#d9d9d9',
+          color: '#D9D9D9',
           txtColor:'#333',
           vid_src: 'video/test1.mp4',
           main_img: 'img/Trait_17_00035.jpg',
@@ -910,30 +957,34 @@ var navMenus = {
       name: 'dairy_strength',
       parent: 'traits',
       title: 'Dairy Strength',
+      desc: {
+        heading: 'Dairy Strength',
+        paras: txtDesc.menus.dairy_strength
+      },
       icons_show: false,
       items: [
             {
               idx: 0,
-              title: 'Dairy Strength #1',
-              name: 'dairy_strength_1',
-              content: 'Dairy Strength #1 text content',
+              title: 'Chest Width',
+              name: 'chest_width',
+              content:  txtDesc.traits.chest_width,
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
-              txtColor: '#fff',
+              txtColor:'#fff',
               vid_src: 'video/test1.mp4',
-              main_img: 'video/test1.mp4',
+              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               target: {
                   type: 'view',
                   view: 'traits',
-                  route: 'dairy_strength/dairy_strength_1'
+                  route: 'dairy_strength/chest_width'
                 }
             },
             {
               idx: 1,
-              title: 'Dairy Strength #2',
-              name: 'dairy_strength_2',
-              content: 'Dairy Strength #2 text content',
+              title: 'Angularity',
+              name: 'angularity',
+              content:  txtDesc.traits.angularity,
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
@@ -943,75 +994,7 @@ var navMenus = {
               target: {
                   type: 'view',
                   view: 'traits',
-                  route: 'dairy_strength/dairy_strength_2'
-                }
-            },
-            {
-              idx: 2,
-              title: 'Dairy Strength #3',
-              name: 'dairy_strength_3',
-              content: 'Dairy Strength #3 text content',
-              icon: 'img/icons/icon_blank.png',
-              color: '#1C3764',
-              txtColor: '#fff',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
-              img_path: 'img/trait',
-              target: {
-                  type: 'view',
-                  view: 'traits',
-                  route: 'dairy_strength/dairy_strength_3'
-                }
-            },
-            {
-              idx: 3,
-              title: 'Dairy Strength #4',
-              name: 'dairy_strength_4',
-              content: 'Dairy Strength #4 text content',
-              icon: 'img/icons/icon_blank.png',
-              color: '#d9d9d9',
-              txtColor:'#333',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
-              img_path: 'img/trait',
-              target: {
-                  type: 'view',
-                  view: 'traits',
-                  route: 'dairy_strength/dairy_strength_4'
-                }
-            },
-            {
-              idx: 4,
-              title: 'Dairy Strength #5',
-              name: 'dairy_strength_5',
-              content: 'Dairy Strength #5 text content',
-              icon: 'img/icons/icon_blank.png',
-              color: '#1C3764',
-              txtColor: '#fff',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
-              img_path: 'img/trait',
-              target: {
-                  type: 'view',
-                  view: 'traits',
-                  route: 'dairy_strength/dairy_strength_5'
-                }
-            },
-            {
-              idx: 5,
-              title: 'Dairy Strength #6',
-              name: 'dairy_strength_6',
-              content: 'Dairy Strength #5 text content',
-              icon: 'img/icons/icon_blank.png',
-              color: '#d9d9d9',
-              txtColor:'#333',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
-              img_path: 'img/trait',
-              target: {
-                  type: 'view',
-                  view: 'traits',
-                  route: 'dairy_strength/dairy_strength_6'
+                  route: 'dairy_strength/angularity'
                 }
             }
           ]
@@ -1023,43 +1006,52 @@ var navMenus = {
       icons_show: false,
       items: [
         {
-          idx: 0,
-          title: 'Locomotion 1',
-          name: 'locomotion_1',
-          content: 'Locomotion 1 text content',
-          icon: 'img/icons/icon_blank.png',
-          color: '#1C3764',
-          target: {
-              type: 'view',
-              view: 'locomotion',
-              route: 'locomotion_1'
-            }
+        idx: 0,
+        title: 'Locomotion',
+        name: 'locomotion',
+        content: txtDesc.traits.locomotion,
+        icon: 'img/icons/icon_blank.png',
+        color: '#D9D9D9',
+        txtColor:'#333',
+        vid_src: 'video/locomotion_low.mp4',
+        img_path: 'img/trait',
+        target: {
+            type: 'view',
+            view: '',
+            route: 'locomotion'
+          }
         },
         {
-          idx: 1,
-          title: 'Locomotion 2',
-          name: 'locomotion_2',
-          content: 'Locomotion 2 text content',
-          icon: 'img/icons/icon_blank.png',
-          color: '#D9D9D9',
-          target: {
-              type: 'view',
-              view: 'locomotion',
-              route: 'locomotion_2'
-            }
+        idx: 1,
+        title: 'Locomotion',
+        name: 'locomotion',
+        content: txtDesc.traits.locomotion,
+        icon: 'img/icons/icon_blank.png',
+        color: '#D9D9D9',
+        txtColor:'#333',
+        vid_src: 'video/locomotion_intermediate.mp4',
+        img_path: 'img/trait',
+        target: {
+            type: 'view',
+            view: '',
+            route: 'locomotion'
+          }
         },
         {
-          idx: 2,
-          title: 'Locomotion 3',
-          name: 'locomotion_3',
-          content: 'Locomotion 3 text content',
-          icon: 'img/icons/icon_blank.png',
-          color: '#6D9473',
-          target: {
-              type: 'view',
-              view: 'locomotion',
-              route: 'locomotion_3'
-            }
+        idx: 2,
+        title: 'Locomotion',
+        name: 'locomotion',
+        content: txtDesc.traits.locomotion,
+        icon: 'img/icons/icon_blank.png',
+        color: '#D9D9D9',
+        txtColor:'#333',
+        vid_src: 'video/locomotion_high.mp4',
+        img_path: 'img/trait',
+        target: {
+            type: 'view',
+            view: '',
+            route: 'locomotion'
+          }
         }
       ]
     },
@@ -1155,6 +1147,7 @@ var navOpts = {
   navTxtTitleColor: '#fff',
   navTxtTitleSize: '1.8em',
   defaultCenterImg: 'img/Trait_17_00035.jpg',
+  backArrowImg: 'img/icons/back_arrow.png',
   rotate: false,
   showSelectMarker: false,
   bg: '#999'

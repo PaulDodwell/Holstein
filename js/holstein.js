@@ -1,6 +1,6 @@
 // JavaScript Document
 
-var holsteinModule = angular.module('holsteinModule',['ngRoute','ngDialog','ngAnimate','ui.bootstrap']);
+var holsteinModule = angular.module('holsteinModule',['ngRoute','ngDialog','ngAnimate','ui.bootstrap','threeViewer.services','threeViewer.controllers','threeViewer.directives']);
 
 
 holsteinModule.config(function($routeProvider) {
@@ -31,6 +31,7 @@ holsteinModule.config(function($routeProvider) {
 				 })
 					.when("/locomotion", {
 						templateUrl : "views/locomotion.html",
+						controller : "locomotionCtrl"
 
 				  })
 				  .when("/settings", {
@@ -41,6 +42,8 @@ holsteinModule.config(function($routeProvider) {
 
 
 holsteinModule.run(['$rootScope','$location','$routeParams', function($rootScope, $location, $routeParams) {
+
+		$rootScope.sitePath = window.location.host + window.location.pathname;
 
 		$rootScope.dialog = null;
 		$rootScope.curIdx = 0;
@@ -57,6 +60,47 @@ holsteinModule.run(['$rootScope','$location','$routeParams', function($rootScope
 		  // Get all URL parameter
 		  //console.log($routeParams);
 		});
+/*
+		$httpBackend.whenGET('/model/1').respond(
+        {
+            "points":
+            [
+                {
+                    x: 0, y: 0, z: 0
+                },
+                {
+                    x: 2, y: 5, z: 10
+                },
+                {
+                    x: 4, y: 10, z: 20
+                },
+                {
+                    x: 2, y: 15, z: 30
+                },
+                {
+                    x: 4, y: 10, z: 40
+                },
+                {
+                    x: 2, y: 5, z: 50
+                },
+                {
+                    x: 4, y: 0, z: 40
+                },
+                {
+                    x: 2, y: -5, z: 30
+                },
+                {
+                    x: 0, y: -10, z: 20
+                },
+                {
+                    x: -2, y: -5, z: 10
+                }
+            ]
+        }
+
+);
+*/
+
 
 }]);
 
@@ -91,8 +135,25 @@ holsteinModule.controller('guideCtrl',['$scope','$rootScope','$routeParams',func
 	$scope.viewData = $routeParams.data;
 }]);
 
-holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams',function ($scope, $rootScope, $routeParams) {
+holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
 	$scope.viewData = $routeParams.data;
+
+	$scope.sideBars.show = false;
+
+	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
+
+	$scope.sliderArgs = [];
+	$scope.sliderState = [];
+
+	$scope.sliderArgs = JSON.parse(JSON.stringify(dataObj.sliderDefaults()));
+	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
+	$scope.sliderArgs.keyNames = $scope.keyNames;
+	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+
+	$scope.$watch('sliderState',function(val) {
+		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
+	},true);
+
 }]);
 
 holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$location','ArraySvce',function ($scope, $rootScope, $routeParams, $location, arraySvce) {
@@ -121,6 +182,7 @@ holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$l
 }]);
 
 holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
+alert("Locomotion Controller");
 	$scope.viewData = $routeParams.data;
 
 	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
@@ -132,7 +194,7 @@ holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','Dat
 	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
 	$scope.sliderArgs.keyNames = $scope.keyNames;
 	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
-
+	alert(JSON.stringify($scope.sliderArgs));
 	$scope.$watch('sliderState',function(val) {
 		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
 	},true)
@@ -141,8 +203,48 @@ holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','Dat
 
 }]);
 
-holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams',function ($scope, $rootScope, $routeParams) {
+holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
 	$scope.viewData = $routeParams.data;
+
+	$scope.sideBars.show = true;
+
+	$scope.locomotion = {
+		args:$scope.navMenus['locomotion'].items[0]
+	}
+
+	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
+
+	$scope.sliderArgs = [];
+	$scope.sliderState = [];
+
+	$scope.sliderArgs = JSON.parse(JSON.stringify(dataObj.sliderDefaults()));
+	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
+	$scope.sliderArgs.keyNames = $scope.keyNames;
+	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+
+	$scope.videoSrc = {
+		src: 'locomotion_1.mp4',
+		src1: 'locomotion_1.mp4',
+		src2: 'locomotion_2.mp4',
+		src3: 'locomotion_3.mp4'
+	}
+
+	$scope.nKey = 1;
+
+	$scope.$watch('sliderState',function(val) {
+		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
+		$scope.nKey = parseInt(val.nearKey);
+		if($scope.nKey > 6) {
+			$scope.videoSrc.src = 'locomotion_3.mp4';
+		}
+		else if($scope.nKey > 3) {
+			$scope.videoSrc.src = 'locomotion_2.mp4';
+		}
+		else  {
+			$scope.videoSrc.src = 'locomotion_1.mp4';
+		};
+	},true);
+
 }]);
 
 holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$http','$interval','$location','Compare','ngDialog','ArraySvce','DataObj',mainCtrl]);
@@ -172,6 +274,10 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$http','$
    	$window.onbeforeunload =  $scope.onExit;
 
 		//Initialise scope vars
+		$scope.sideBars = {
+			show: true
+		}
+
 		$scope.params = {};
 
 		$http.get("data/options.json").then(function(data) {
@@ -206,7 +312,6 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$http','$
 		},true)
 
 		$scope.initApp = function() {
-		//Auth checks complete so start the compass and get device data
 			console.log('INIT APP');
 			$scope.status.init = true;
 		}
@@ -281,6 +386,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 					$scope.currWheelRotate = 0;
 
 					var iconShow = $scope.menus[$rootScope.menuState.inner].icons_show;
+					//var parentMenu = $scope.menus[$rootScope.menuState.inner].parent;
 
 					console.log('circleNav - iconShow: '+iconShow+' menuState: '+$rootScope.menuState.inner);
 
@@ -315,17 +421,8 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						$scope.centerCircle.attr({
 								fill: $scope.args.fill,
 								stroke: $scope.args.stroke,
-								strokeWidth: $scope.args.strokeWidth
-						});
-
-						$scope.centerCircle.mousedown(function() {
-							this.attr({stroke:'#00C'});
-							this.animate({ transform: 'S1.4' }, 600, mina.bounce );
-						});
-
-						$scope.centerCircle.mouseup(function() {
-							this.attr({stroke:$scope.args.stroke});
-							this.animate({ transform: 'S1' }, 600, mina.bounce );
+								strokeWidth: $scope.args.strokeWidth,
+								class: 'center_circle'
 						});
 
 						$scope.navWheel.add($scope.centerCircle);
@@ -338,7 +435,37 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 							var imgX = Math.round($scope.navCenter.x - ($scope.args.innerCircleR + (imgW-imgH)/2));
 							var imgY =Math.round($scope.navCenter.y - $scope.args.innerCircleR);
 							$scope.centerImg = $scope.s.image($scope.args.defaultCenterImg, imgX, imgY, imgW, imgH);
+							$scope.centerImg.attr({
+								class: 'center_img'
+							});
+
+							$scope.centerImg.mousedown(function(e) {
+								e.preventDefault();
+								//alert($scope.menus[$rootScope.menuState.inner].parent);
+								$scope.goMenu($scope.menus[$rootScope.menuState.inner].parent, $rootScope.menuState.inner);
+							});
+
 							$scope.navWheel.add($scope.centerImg);
+					}
+
+					var drawBackArrow = function() {
+						var imgW = 80;
+						var imgH = 40;
+						var imgX = Math.round($scope.navCenter.x - 40);
+						var imgY = Math.round($scope.navCenter.y) + 60;
+
+						$scope.backArrow = $scope.s.image($scope.args.backArrowImg, imgX, imgY, imgW, imgH);
+						$scope.backArrow.attr({
+							class: 'back_arrow'
+						});
+
+						$scope.backArrow.mousedown(function(e) {
+							e.preventDefault();
+							//alert($scope.menus[$rootScope.menuState.inner].parent);
+							$scope.goMenu($scope.menus[$rootScope.menuState.inner].parent, $rootScope.menuState.inner);
+						});
+
+						$scope.navWheel.add($scope.backArrow);
 					}
 
 					var drawSlice = function(idx,color,angle, innerR, outerR, items) {
@@ -673,6 +800,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						$scope.items = $scope.args.mainWheel === true ? $scope.menus[$rootScope.menuState.inner].items : $scope.menus[$rootScope.menuState.outer].items;
 
 						iconShow = $scope.menus[$rootScope.menuState.inner].icons_show;
+						parentMenu = $scope.menus[$rootScope.menuState.inner].parent;
 
 						deltaAngle = 2 * Math.PI / $scope.items.length;
 						angle = $scope.args.startAngle;
@@ -686,6 +814,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						  drawCenterCircle();
 							drawDonutMask();
 							drawCenterImg();
+							drawBackArrow();
 						}
 
 						if($scope.args.rotate === true && $scope.args.showSelectMarker === true) {
@@ -712,7 +841,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						$scope.navWheel.add($scope.allSegs);
 					}
 
-					$scope.$watch('menuState',function(val) {
+					$scope.$watch('menuState.inner',function(val) {
 						$scope.drawNav();
 					},true);
 
@@ -720,28 +849,27 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						var target = $scope.items[idx].target;
 
-
-
 						switch(target.type) {
 								case "menu":
-
-										$rootScope.menuState.inner = $scope.items[idx].target.innerMenu;
-										$rootScope.menuState.outer = $scope.items[idx].target.outerMenu;
-										console.log('doSegTarget - target: '+JSON.stringify(target)+' '+$rootScope.menuState.inner);
+										$scope.goMenu($scope.items[idx].target.innerMenu, $scope.items[idx].target.outerMenu);
 										break;
 								case "view":
 										var path = target.view + "/" + target.route;
-										//alert(path);
 										$location.path(path);
+										$scope.$apply(function() {});
 										break;
 								case "url":
-										alert("go to url: "+target.route);
+										window.open(target.route,'_blank');
 										break;
 								default:
-										$rootScope.menuState.inner = 'main';
-										$rootScope.menuState.outer = 'main';
-										$scope.drawNav();
+									$scope.goMenu('main','main');
 						}
+					}
+
+					$scope.goMenu = function(inner,outer) {
+						//alert("goMenu");
+						$rootScope.menuState.inner = inner;
+						$rootScope.menuState.outer = outer;
 						$scope.$apply(function() {});
 					}
 
@@ -1070,30 +1198,52 @@ holsteinModule.directive('traitThumb', [function () {
     }
 }]);
 
-holsteinModule.directive('traitFull', [function () {
-    return {
-        restrict: 'E',
-				scope: {
-					args: '='
-				},
-        templateUrl: 'html/trait_full.html',
-				controller: function($scope, $element) {
-
-				}
-    }
-}]);
-
-holsteinModule.directive('traitFullImg', ['$rootScope',function ($rootScope) {
+holsteinModule.directive('locomotionVideo', ['$rootScope','$location','ApiSvce',function ($rootScope, $location, apiSvce) {
     return {
         restrict: 'E',
 				scope: {
 					args: '=',
+					sliderArgs: '=',
+					sliderState: '=',
+					nKey: '=',
+					videoSrc: '=',
+					parentMenu: '='
+				},
+        templateUrl: 'html/locomotion_video.html',
+				controller: function($scope, $element) {
+						$scope.show = true;
+				}
+    }
+}]);
+
+holsteinModule.directive('traitFullImg', ['$rootScope','$location','ApiSvce',function ($rootScope, $location, apiSvce) {
+    return {
+        restrict: 'E',
+				scope: {
+					args: '=',
+					sliderArgs: '=',
 					sliderState: '=',
 					parentMenu: '='
 				},
         templateUrl: 'html/trait_full_img.html',
 				controller: function($scope, $element) {
-						$scope.img_src = $scope.args.img_path  + "/" +$scope.args.name + "_0" + $scope.sliderState.nearKey + ".png";
+
+						$scope.imgStatus = {
+							exists: false,
+							init: false
+						}
+
+						$scope.sitePath = $rootScope.sitePath;
+						$scope.img_src = $scope.args.img_path  + "/" + $scope.args.name + "_0" + $scope.sliderState.nearKey + ".png";
+						//alert($scope.img_src);
+						apiSvce.exists($scope.img_src).then(function successCallback(response) {
+							$scope.imgStatus.exists = true;
+							$scope.imgStatus.init = true;
+								//alert($scope.img_src +" "+ 	$scope.imgStatus.exists +" "+ $scope.imgStatus.init);
+						}, function failureCallback(reason) {
+							$scope.imgStatus.init = true;
+						});
+
 				}
     }
 }]);
@@ -1130,9 +1280,10 @@ holsteinModule.directive('backToMenu', [function () {
     return {
         restrict: 'E',
 				scope: {
-					txt: '='
+					txt: '=',
+					align: '@'
 				},
-        template: '<a ng-href="#/">{{txt}}</a>'
+        template: '<a style="text-align:{{align}};" ng-href="#/">{{txt}}</a>'
     }
 }]);
 
@@ -1193,6 +1344,83 @@ holsteinModule.directive('bsNavDropdown', ['$location','$rootScope', function ($
     }
 }]);
 
+
+holsteinModule.directive(
+            "bnFadeHelper",
+            function() {
+                // I alter the DOM to add the fader image.
+                function compile( element, attributes, transclude ) {
+                    element.prepend( "<img class='fader' />" );
+                    return( link );
+                }
+                // I bind the UI events to the $scope.
+                function link( $scope, element, attributes ) {
+                    var fader = element.find( "img.fader" );
+                    var primary = element.find( "img.image" );
+                    // Watch for changes in the source of the primary
+                    // image. Whenever it changes, we want to show it
+                    // fade into the new source.
+                    $scope.$watch(
+                        "sliderState.nearKey",
+                        function( newValue, oldValue ) {
+                            // If the $watch() is initializing, ignore.
+                            if ( newValue === oldValue ) {
+                                return;
+                            }
+                            // If the fader is still fading out, don't
+                            // bother changing the source of the fader;
+                            // just let the previous image continue to
+                            // fade out.
+                            if ( isFading() ) {
+                                return;
+                            }
+                            initFade( oldValue );
+                        }
+                    );
+                    // I prepare the fader to show the previous image
+                    // while fading out of view.
+                    function initFade( fadeSource ) {
+                        fader
+                            .prop( "src", fadeSource )
+                            .addClass( "show" )
+                        ;
+                        // Don't actually start the fade until the
+                        // primary image has loaded the new source.
+                        primary.one( "load", startFade );
+                    }
+                    // I determine if the fader is currently fading
+                    // out of view (that is currently animated).
+                    function isFading() {
+                        return(
+                            fader.hasClass( "show" ) ||
+                            fader.hasClass( "fadeOut" )
+                        );
+                    }
+                    // I start the fade-out process.
+                    function startFade() {
+                        // The .width() call is here to ensure that
+                        // the browser repaints before applying the
+                        // fade-out class (so as to make sure the
+                        // opacity doesn't kick in immediately).
+                        fader.width();
+                        fader.addClass( "fadeOut" );
+                        setTimeout( teardownFade, 250 );
+                    }
+                    // I clean up the fader after the fade-out has
+                    // completed its animation.
+                    function teardownFade() {
+                        fader.removeClass( "show fadeOut" );
+                    }
+                }
+                // Return the directive configuration.
+                return({
+                    compile: compile,
+                    restrict: "A"
+                });
+            }
+        );
+
+
 // SERVICES
 
 holsteinModule.factory("Compare", [function() {
@@ -1221,6 +1449,20 @@ holsteinModule.factory("Compare", [function() {
 			return service;
 
 		}]);
+
+holsteinModule.factory("ApiSvce", ['$http',function($http) {
+
+					var apiUrl = window.location.protocol + "//" + window.location.hostname + window.location.pathname;
+					var service = {}
+
+					service.exists = function(f) {
+						return $http.get(apiUrl+f);
+						return true;
+					}
+
+					return service;
+
+			}]);
 
 
 holsteinModule.factory('ArraySvce',['$rootScope',function($rootScope) {
