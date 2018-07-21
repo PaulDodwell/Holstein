@@ -4,7 +4,7 @@
     <meta charset='UTF-8'>
     <title>Holstein Virtual Cow 1.0</title>
 
-	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="viewport" content="user-scalable=no, width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script src="js/angular-route.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
 	  <script src="js/ngDialog.min.js"></script>
-    <script src="js/angular-touch.min.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/angular.hammer.js"></script>
     <script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
-    <script src="js/angular-simple-logger.js"></script>
     <script src="js/snap.svg-min.js"></script>
     <!--three.js viewer module-->
     <script src="js/threeControllers.js"></script>
@@ -36,43 +36,55 @@
     <script src="js/threeServices.js"></script>
     <!--<script src="js/threeViewer.js"></script>-->
     <!--three.js-->
-    <script src="js/threelib/Three.js"></script>
+    <script src="js/threelib/three.min.js"></script>
     <script src="js/threelib/Detector.js"></script>
+    <script src="js/threelib/OrbitControls.js"></script>
+    <script src="js/threelib/CanvasRenderer.js"></script>
+    <script src="js/threelib/Projector.js"></script>
+    <script src="js/threelib/JSONLoader.js"></script>
     <!--main app-->
     <script src='js/holstein.js'></script>
 
 </head>
 
-<body ng-app='holsteinModule' class='bg_fade' ng-controller='mainCtrl'>
+<body ng-app='holsteinModule' class='bg_fade' ng-class="{'body_sticky_footer':stickyFooter}" ng-controller='mainCtrl' ng-click="sideBars.active = false">
+
     <nav ng-controller='navCtrl' class="navbar navbar-default">
+
       <div class="container-fluid">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#!home"><img class='header-logo' src='img/icons/holstein-logo.png' /></a>
+          <a class="navbar-brand" href="#!home" ng-click="isNavCollapsed = true"><img class='header-logo' src='img/icons/holstein-logo.png' /></a>
         </div>
+
         <div class="collapse navbar-collapse" id="myNavbar" uib-collapse="isNavCollapsed">
           <ul class="nav navbar-nav">
             <li uib-dropdown><a href="#!" uib-dropdown-toggle>Traits<b class="caret"></b></a>
               <bs-nav-dropdown args="navMenus.traits"></bs-nav-dropdown>
             </li>
-            <li><a href="#!ideal-cow">Ideal Cow</a></li>
-            <li><a href="#!locomotion">Locomotion</a></li>
-            <li><a href="#!guide">Classification Guide</a></li>
-            <li><a href="#!contacts">Contacts</a></li>
+            <li><a href="#!ideal-cow" ng-click="isNavCollapsed = true">Ideal Cow</a></li>
+            <li><a href="#!locomotion" ng-click="isNavCollapsed = true">Locomotion</a></li>
+            <li><a href="#!guide" ng-click="isNavCollapsed = true">Classification Guide</a></li>
+            <li><a href="#!contacts" ng-click="isNavCollapsed = true">Contacts</a></li>
+            <li><a href="#!help" ng-click="isNavCollapsed = true">Help</a></li>
           </ul>
         </div>
+
       </div>
-      <side-tabs ng-show="sideBars.show && winSize.w > 768" args="navMenus.traits"></side-tabs>
+      <side-tabs ng-show="sideBars.show && winSize.w > 492 && !(menuState.inner == 'main' || menuState.inner == 'traits')" args="navMenus.traits" active="sideBars.active"></side-tabs>
     </nav>
-	<ng-view></ng-view>
-	<footer class='footer'>
+
+  <ng-view></ng-view>
+
+	<footer class='footer' ng-class="{'sticky_footer':stickyFooter}">
     	<div class='container'>
         <div style="position:relative;height:35px;text-align:right;line-height:70px;border-bottom:2px solid #1C3764;color:#1C3764;"><span style="position:absolute;bottom:-24px;right:72px;">Social Media</span><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div></div>
-   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'6px'}">Development Prototype by Breeze &amp; Freeze 2018 <span style = "color:#333;">Status: {{status.msg}}</span></p>
+   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'6px'}">Dev Prototype: Breeze &amp; Freeze</span></p>
    		</div>
  </footer>
 

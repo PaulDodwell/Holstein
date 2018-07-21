@@ -52,17 +52,18 @@
       font-size:0.9em;
   }
 </style>
-<div class='main_content  container-fluid'>
+<div class='container-fluid'>
 
         <div class='row'>
-          <div class='col-sm-1 col-xs-0'></div>
-          <div class='col-sm-6' style='height:420px;'>
-              <div class='col-xs-12'><div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" start-menu="'main'" main-menu="menuState.inner" menu-state="menuState" curr-nav-content="currNavText" slider-state="sliderState[0]"></circle-nav></div></div>
+
+          <div class='col-sm-7 col-sm-push-5 wheel_outer'>
+              <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" start-menu="'main'" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText" slider-state="sliderState[0]"></circle-nav></div>
           </div>
-          <div class='col-sm-4'>
-              <menu-desc content="navMenus[menuState.inner]"></menu-desc>
+          <div class='col-sm-5 col-sm-pull-7'>
+              <menu-desc menu-state="menuState" parent-menu="parentMenu" content="navMenus[menuState.inner]"></menu-desc>
           </div>
-          <div class='col-sm-1 col-xs-0'></div>
+
+
        </div>
 
 </div>

@@ -1,0 +1,33 @@
+
+<div class='main_content  container-fluid'>
+
+
+        <div class='row'>
+
+          <div class='col-xs-12'><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}">&larr;</a>Locomotion</h1></div>
+
+          <div class='col-sm-1 col xs-0'></div>
+
+          <div class='col-sm-7 col xs-12'>
+
+                <div style='min-height:460px;background-color:#d9d9d9;' ng-controller='SceneControl'>
+                  <h2 style='padding-top:60px !important;' ng-click="addModel()">Coming soon</h2>
+                </div>
+
+              <div class='col-xs-12'>
+                  <slider-ctrl options="sliderArgs" cur-state="sliderState"></slider-ctrl>
+              </div>
+
+          </div>
+
+          <div class='col-sm-3 col xs-12'>
+            <div class="col-xs-12 col-sm-4 col-md-5 trait_txt">
+              <h2>{{args.title}}</h2>
+              <trait-desc content="args.content"></trait-desc>
+            </div>
+          </div>
+          <div class='col-sm-1 col xs-0'></div>
+
+       </div>
+
+</div>

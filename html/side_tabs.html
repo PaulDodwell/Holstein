@@ -8,6 +8,7 @@
     min-height:320px;;
     overflow:hidden;
     /*border:1px solid #eee;*/
+    pointer-events:none;
     z-index:10;
   }
   .side_tabs {
@@ -16,7 +17,7 @@
     width:220px;
     min-height:70px;;
     overflow:hidden;
-    /*border:1px solid #eee;*/
+  /*  border:1px solid #dee;*/
   }
   .side_tab {
     width:100%;
@@ -24,6 +25,7 @@
     margin:12px 0;
     border-top-left-radius:12px;
     border-bottom-left-radius:12px;
+    pointer-events:auto;
     cursor:pointer;
   }
   .side_tab:hover {
@@ -53,7 +55,7 @@
 </style>
 <div class='side_tabs_wrapper'>
 <div class="side_tabs slideTrans" ng-class="{'tabs_active':active,'tabs_hidden':!active}">
-  <div class="side_tab" ng-repeat="tab in args.items" style="background:{{tab.color}};" ng-click="doTabs(tab.target)">
+  <div class="side_tab" ng-repeat="tab in args.items" style="background:{{tab.color}};" ng-click="doTabs(tab.target); $event.stopPropagation();">
     <div class="side_tab_txt" style="color:{{tab.txtColor}};">{{tab.title}}</div>
   </div>
 </div>

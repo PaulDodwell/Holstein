@@ -1,6 +1,6 @@
 <div class='menu_text_wrapper'>
 
-  <div class='main_text'><h1>{{content.desc.heading}}</h1></div>
+  <div class='main_text'><h1><a ng-show="!(menuState.inner == 'main')" class='back_link' ng-click="menuState.inner=parentMenu;sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /></a> {{content.desc.heading}}</h1></div>
 
   <p ng-repeat="para in content.desc.paras">{{para}}</p>
 

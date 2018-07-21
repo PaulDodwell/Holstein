@@ -1,0 +1,41 @@
+
+<div class='main_content  container-fluid'>
+
+
+        <div class='row'>
+
+          <div class='col-xs-12'><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}">&larr;</a> Ideal Holstein Cow</h1></div>
+
+          <div class='col-sm-1 col-xs-0'></div>
+
+          <div class='col-sm-7 col-xs-12'>
+
+            <div ng-controller="SceneControl">
+                <div>
+                    X-Offset <input type="number" ng-model="data.xOffset" />
+                    Y-Offset <input type="number" ng-model="data.yOffset" />
+                    <button ng-click="addModel()">Add</button>
+                    <button ng-click="increaseCameraZ()">Increase Camera Z</button>
+                    <button ng-click="decreaseCameraZ()">Decrease Camera Z</button>
+                </div>
+            </div>
+
+            <div three-viewport></div>
+
+              <div class='col-xs-12'>
+                  <slider-ctrl options="sliderArgs" cur-state="sliderState"></slider-ctrl>
+              </div>
+
+          </div>
+
+          <div class='col-sm-3 col xs-12'>
+              <h2 style='text-align:left;padding-left:12px;'>Ideal Cow</h2>
+              <p>Here is some text about the ideal Holstein cow.</p>
+              <p>Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow. Here is some text about the ideal cow.</p>
+              <back-to-menu align="'left'" txt="backMenuTxt"></back-to-menu>
+          </div>
+          <div class='col-sm-1 col-xs-0'></div>
+
+       </div>
+
+</div>

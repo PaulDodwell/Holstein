@@ -34,8 +34,11 @@ holsteinModule.config(function($routeProvider) {
 						controller : "locomotionCtrl"
 
 				  })
-				  .when("/settings", {
-						templateUrl : "views/settings.html"
+				  .when("/contacts", {
+						templateUrl : "views/contacts.html"
+				  })
+					.when("/help", {
+						templateUrl : "views/help.html"
 				  });
 
 });
@@ -54,62 +57,123 @@ holsteinModule.run(['$rootScope','$location','$routeParams', function($rootScope
 			outer: 'main',
 		}
 
+		$rootScope.loadStatus = null;
+
 		$rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
 		  console.log('Current route name: ' + $location.path() + JSON.stringify(current));
 		  $rootScope.navActive = $location.path();
 		  // Get all URL parameter
 		  //console.log($routeParams);
 		});
-/*
-		$httpBackend.whenGET('/model/1').respond(
-        {
-            "points":
-            [
-                {
-                    x: 0, y: 0, z: 0
-                },
-                {
-                    x: 2, y: 5, z: 10
-                },
-                {
-                    x: 4, y: 10, z: 20
-                },
-                {
-                    x: 2, y: 15, z: 30
-                },
-                {
-                    x: 4, y: 10, z: 40
-                },
-                {
-                    x: 2, y: 5, z: 50
-                },
-                {
-                    x: 4, y: 0, z: 40
-                },
-                {
-                    x: 2, y: -5, z: 30
-                },
-                {
-                    x: 0, y: -10, z: 20
-                },
-                {
-                    x: -2, y: -5, z: 10
-                }
-            ]
-        }
-
-);
-*/
-
 
 }]);
 
 
 
-
-
-
 //Controllers
+
+holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$document','$http','$location','Compare','ngDialog','ArraySvce','DataObj',mainCtrl]);
+
+	function mainCtrl($scope,$rootScope,$window,$document,$http,$location,compare,ngDialog,arraySvce,dataObj  ) {
+
+		$scope.winSize = {
+			w: $window.innerWidth,
+			h: $window.innerHeight
+		};
+
+		var getViewBounds = function() {
+			$scope.viewPortHeight = Math.max($document[0].documentElement.clientHeight, $window.innerHeight || 0);
+			$scope.bodyBounds = $document[0].body.getBoundingClientRect();
+		  $scope.stickyFooter = ($scope.viewPortHeight > $scope.bodyBounds.height) ? true :false;
+			console.log($scope.bodyBounds.height+" "+$scope.viewPortHeight+" "+$scope.stickyFooter);
+			return false;
+		}
+
+		angular.element($window).bind('resize', function () {
+			$scope.winSize = {
+				w: $window.innerWidth,
+				h: $window.innerHeight
+			};
+			getViewBounds();
+			$scope.$apply();
+		});
+
+		angular.element($window).bind('scroll', function () {
+			getViewBounds();
+			$scope.$apply();
+		});
+
+		getViewBounds();
+
+		$scope.onExit = function() {
+			//
+		};
+
+   	$window.onbeforeunload =  $scope.onExit;
+
+		//Initialise scope vars
+
+		$scope.sideBars = {
+			show: true,
+			active: false
+		}
+
+		$scope.status = {
+			msg: "Holstein app is running",
+			init: false
+		}
+
+		$scope.getColorName = function(palette,color) {
+				var idx = arraySvce.arrIndexOf($scope.palettes[palette].colors,color,'code');
+				return $scope.palettes[palette].colors[idx].title;
+		}
+
+			//$scope.navItems = dataObj.getDefault('navItems');
+			$scope.navOpts = dataObj.getDefault('navOpts');
+			$scope.navOptsOuter = dataObj.getDefault('navOptsOuter');
+			$scope.navMenus = dataObj.getDefault('navMenus');
+			$scope.cow3D = dataObj.getDefault('ideal_cow');
+			$rootScope.menuState = {
+				inner: 'main',
+				outer: 'main'
+			}
+			$scope.parentMenu = 'main';
+			$scope.backMenuTxt =  '< Back to Menu';
+
+
+		//INITIALISE APP
+
+		$scope.$watch('menuState',function(val) {
+			$scope.parentMenu = $scope.navMenus[val.inner].parent ? $scope.navMenus[val.inner].parent : 'main';
+		},true)
+
+		$scope.initApp = function() {
+			console.log('INIT APP');
+			$scope.status.init = true;
+		}
+
+		$scope.toggleRotate = function() {
+			$scope.navOpts.rotate = !$scope.navOpts.rotate;
+		}
+
+		$scope.say = function(msg) {
+
+			var d = ngDialog.openConfirm({
+				template: msg,
+				className: 'ngdialog-theme-default',
+				plain:true,
+				closeByNavigation: true,
+				controller: function() {
+					//
+				}
+			});
+			setTimeout(function() {
+						ngDialog.close(d);
+										},1600);
+		}
+
+	}// end mainCtrl
+
 
 holsteinModule.controller('navCtrl',['$scope','$rootScope','$location','$routeParams',function ($scope, $rootScope, $location, $routeParams) {
 	$scope.isNavCollapsed = true;
@@ -182,7 +246,7 @@ holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$l
 }]);
 
 holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
-alert("Locomotion Controller");
+
 	$scope.viewData = $routeParams.data;
 
 	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
@@ -194,12 +258,14 @@ alert("Locomotion Controller");
 	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
 	$scope.sliderArgs.keyNames = $scope.keyNames;
 	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
-	alert(JSON.stringify($scope.sliderArgs));
+
 	$scope.$watch('sliderState',function(val) {
 		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
 	},true)
 
 	$scope.show = true;
+	$scope.sideBars.show = true;
+	$scope.sideBars.active = false;
 
 }]);
 
@@ -247,96 +313,6 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 
 }]);
 
-holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$http','$interval','$location','Compare','ngDialog','ArraySvce','DataObj',mainCtrl]);
-
-	function mainCtrl($scope,$rootScope,$window,$http,$interval,$location,compare,ngDialog,arraySvce,dataObj  ) {
-
-		angular.element($window).bind('resize', function(){
-        	$scope.$digest();
-        });
-
-		$scope.winSize = {
-			w: $window.innerWidth,
-			h: $window.innerHeight
-		};
-
-		angular.element($window).bind('resize', function () {
-			$scope.winSize = {
-				w: $window.innerWidth,
-				h: $window.innerHeight
-			};
-		});
-
-		$scope.onExit = function() {
-		 //
-		};
-
-   	$window.onbeforeunload =  $scope.onExit;
-
-		//Initialise scope vars
-		$scope.sideBars = {
-			show: true
-		}
-
-		$scope.params = {};
-
-		$http.get("data/options.json").then(function(data) {
-				$scope.params = data.data;
-				});
-
-		$scope.status = {
-			msg: "Holstein app is running",
-			init: false
-		}
-
-		$scope.getColorName = function(palette,color) {
-				var idx = arraySvce.arrIndexOf($scope.palettes[palette].colors,color,'code');
-				return $scope.palettes[palette].colors[idx].title;
-		}
-
-			//$scope.navItems = dataObj.getDefault('navItems');
-			$scope.navOpts = dataObj.getDefault('navOpts');
-			$scope.navOptsOuter = dataObj.getDefault('navOptsOuter');
-			$scope.navMenus = dataObj.getDefault('navMenus');
-			$rootScope.menuState = {
-				inner: 'main',
-				outer: 'main'
-			}
-			$scope.backMenuTxt =  '< Back to Menu';
-
-
-		//INITIALISE APP
-
-		$scope.$watch('menuState',function(val) {
-			console.log("Main Controller: "+val.inner);
-		},true)
-
-		$scope.initApp = function() {
-			console.log('INIT APP');
-			$scope.status.init = true;
-		}
-
-		$scope.toggleRotate = function() {
-			$scope.navOpts.rotate = !$scope.navOpts.rotate;
-		}
-
-		$scope.say = function(msg) {
-
-			var d = ngDialog.openConfirm({
-				template: msg,
-				className: 'ngdialog-theme-default',
-				plain:true,
-				closeByNavigation: true,
-				controller: function() {
-					//
-				}
-			});
-			setTimeout(function() {
-						ngDialog.close(d);
-										},1600);
-		}
-
-	}
 
 	holsteinModule.controller('xsliderCtrl',['$scope','$rootScope','Compare','ArraySvce','DataObj',sliderCtrl]);
 
@@ -365,7 +341,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 				args: '=',
 				menus: '=',
 				startMenu: '=',
-				mainMenu: '=',
+				sideBars: '=',
 				menuState: '=',
 				currNavContent: '=',
 				sliderState: '='
@@ -814,7 +790,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						  drawCenterCircle();
 							drawDonutMask();
 							drawCenterImg();
-							drawBackArrow();
+							//drawBackArrow();
 						}
 
 						if($scope.args.rotate === true && $scope.args.showSelectMarker === true) {
@@ -861,9 +837,13 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 								case "url":
 										window.open(target.route,'_blank');
 										break;
+								case "blank":
+								//do nothing
+										break;
 								default:
 									$scope.goMenu('main','main');
 						}
+						$scope.sideBars.active = false;
 					}
 
 					$scope.goMenu = function(inner,outer) {
@@ -908,18 +888,23 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 						 $scope.winSize.w = $window.innerWidth;
 					});
 
+					$scope.getElementDimensions = function () {
+				    return { 'h': $element.parent()[0].offsetHeight, 'w': $element.parent()[0].offsetWidth };
+				  };
+
+					$scope.getElementOffset = function () {
+					    var rect = $element.parent()[0].getBoundingClientRect(),
+					    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+					    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+					    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+					}
+
 					$scope.track = {
-						startX: 0,
+						startX: $scope.getElementOffset().left,
 						startY: 0,
 						x: 0,
 						y: 0
 					}
-					//startX = 0, startY = 0, x = 0, y = 0;
-
-
-					$scope.getElementDimensions = function () {
-				    return { 'h': $element.parent()[0].offsetHeight, 'w': $element.parent()[0].offsetWidth };
-				  };
 
 					$scope.doMarkers = function() {
 						if($scope.options.showMarkers === true) {
@@ -972,12 +957,18 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 						event.preventDefault();
 						event.stopPropagation();
 						$scope.track.x = event.pageX - $scope.track.startX;
-						$scope.curState.mouseDown = false;
 						var pos = $scope.xLeft($scope.track.x);
-							$scope.$apply(function() {
-								$scope.curState.curPos = pos;
-								$scope.curState.curPercent = $scope.posPcent(pos);
-							});
+						//alert(event.pageX+" - "+$scope.track.startX+" = "+$scope.track.x+" pos="+pos);
+						$scope.$apply(function() {
+
+							$scope.curState.mouseDown = false;
+							$scope.curState.curPos = pos;
+
+							$scope.track.startX = event.pageX - $scope.curState.curPos;
+
+							$scope.curState.curPercent = $scope.posPcent(pos);
+						});
+					//	alert("astartX:"+$scope.track.startX+"track.x:"+$scope.track.x+" pos:"+pos+" curPercent:"+$scope.curState.curPercent);
 						if($scope.keyMarkers.length == 0 && $scope.options.steps == 0) {
 							$scope.setHandle($scope.track.x);
 						}
@@ -1069,6 +1060,7 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 							var p = $scope.rounder($scope.curState.curPercent,100/$scope.options.steps);
 							var nearKey = $scope.getNearKey(p);
 							$scope.curState.nearKey = nearKey.idx;
+							//alert(p+" nearKey:"+$scope.curState.nearKey+" track.x:"+$scope.track.x+" curPercent:"+$scope.curState.curPercent+" keyLabel:"+$scope.curState.nearKeyLabel);
 							$scope.$apply(function() {
 								$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
 								$scope.curState.curPercent = p;
@@ -1221,6 +1213,7 @@ holsteinModule.directive('traitFullImg', ['$rootScope','$location','ApiSvce',fun
         restrict: 'E',
 				scope: {
 					args: '=',
+					sideBars: '=',
 					sliderArgs: '=',
 					sliderState: '=',
 					parentMenu: '='
@@ -1233,9 +1226,11 @@ holsteinModule.directive('traitFullImg', ['$rootScope','$location','ApiSvce',fun
 							init: false
 						}
 
+						$scope.show = true;
+
 						$scope.sitePath = $rootScope.sitePath;
 						$scope.img_src = $scope.args.img_path  + "/" + $scope.args.name + "_0" + $scope.sliderState.nearKey + ".png";
-						//alert($scope.img_src);
+						//alert(JSON.stringify($scope.sliderArgs));
 						apiSvce.exists($scope.img_src).then(function successCallback(response) {
 							$scope.imgStatus.exists = true;
 							$scope.imgStatus.init = true;
@@ -1267,11 +1262,13 @@ holsteinModule.directive('menuDesc', [function () {
         restrict: 'E',
 				replace: true,
 				scope: {
+					menuState: '=',
+					parentMenu: '=',
 					content: '='
 				},
         templateUrl: 'html/menu_desc.html',
 				controller: function($scope, $element) {
-					//alert($scope.content.main_text)
+					//
 				}
     }
 }]);
@@ -1287,16 +1284,26 @@ holsteinModule.directive('backToMenu', [function () {
     }
 }]);
 
+holsteinModule.directive('backLink', [function () {
+    return {
+        restrict: 'E',
+				scope: {
+					parentMenu: '=',
+					align: '@'
+				},
+        template: '<a class="back_link" ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /></a>'
+    }
+}]);
+
 holsteinModule.directive('sideTabs', ['$location','$rootScope', function ($location, $rootScope) {
     return {
         restrict: 'E',
 				scope: {
-					args: '='
+					args: '=',
+					active: '='
 				},
         templateUrl: 'html/side_tabs.html',
 				controller: function($scope, $element) {
-					//alert(JSON.stringify($scope.args));
-					$scope.active = false;
 
 					$scope.doTabs = function(target) {
 						if($scope.active === true) {
@@ -1350,50 +1357,73 @@ holsteinModule.directive(
             function() {
                 // I alter the DOM to add the fader image.
                 function compile( element, attributes, transclude ) {
-                    element.prepend( "<img class='fader' />" );
+                    element.prepend( "<img class='fading'/>" );
                     return( link );
                 }
                 // I bind the UI events to the $scope.
-                function link( $scope, element, attributes ) {
-                    var fader = element.find( "img.fader" );
-                    var primary = element.find( "img.image" );
+                function link( scope, element, attributes ) {
+                    //var fader = element.find( "img.fading" );
+                    //var primary = element.find( "img.image" );
                     // Watch for changes in the source of the primary
                     // image. Whenever it changes, we want to show it
                     // fade into the new source.
-                    $scope.$watch(
-                        "sliderState.nearKey",
-                        function( newValue, oldValue ) {
-                            // If the $watch() is initializing, ignore.
-                            if ( newValue === oldValue ) {
-                                return;
-                            }
-                            // If the fader is still fading out, don't
-                            // bother changing the source of the fader;
-                            // just let the previous image continue to
-                            // fade out.
-                            if ( isFading() ) {
-                                return;
-                            }
-                            initFade( oldValue );
-                        }
-                    );
+
+										scope.fader = {};
+										scope.primary = {};
+
+										element.ready(function() {
+											scope.fader = element[0].querySelector("img.fading");
+											scope.primary = element[0].querySelector("img.image");
+
+											scope.$watch(
+	                        function(){return scope.primary.src;},
+	                        function( newValue, oldValue ) {
+														console.log("fadewatch o:"+newValue+" n:"+oldValue);
+	                            // If the $watch() is initializing, ignore.
+	                            if ( newValue === oldValue ) {
+	                                return;
+	                            }
+	                            // If the fader is still fading out, don't
+	                            // bother changing the source of the fader;
+	                            // just let the previous image continue to
+	                            // fade out.
+	                            if ( isFading() ) {
+	                                return;
+	                            }
+	                            initFade( oldValue );
+	                        }
+	                    );
+
+										});
+
+
+
                     // I prepare the fader to show the previous image
                     // while fading out of view.
                     function initFade( fadeSource ) {
-                        fader
-                            .prop( "src", fadeSource )
-                            .addClass( "show" )
-                        ;
+                        //fader
+                        //    .prop( "src", fadeSource )
+                        //    .addClass( "show" )
+                        //;
+												scope.fader.src = fadeSource;
+												scope.fader.classList.add("show");
                         // Don't actually start the fade until the
                         // primary image has loaded the new source.
-                        primary.one( "load", startFade );
+                        //scope.primary.on( "load", startFade );
+												scope.primary.addEventListener("load", startFade);
                     }
                     // I determine if the fader is currently fading
                     // out of view (that is currently animated).
-                    function isFading() {
+                    function xisFading() {
                         return(
-                            fader.hasClass( "show" ) ||
-                            fader.hasClass( "fadeOut" )
+                            scope.fader.hasClass( "show" ) ||
+                            scope.fader.hasClass( "fadeOut" )
+                        );
+                    }
+										function isFading() {
+                        return(
+                          scope.fader.classList.contains( "show" ) ||
+                          scope.fader.classList.contains( "fadeOut" )
                         );
                     }
                     // I start the fade-out process.
@@ -1402,14 +1432,24 @@ holsteinModule.directive(
                         // the browser repaints before applying the
                         // fade-out class (so as to make sure the
                         // opacity doesn't kick in immediately).
-                        fader.width();
-                        fader.addClass( "fadeOut" );
+                        //scope.fader.width();
+												//scope.fader.classList.add("fadeOut");
+                        //fader.addClass( "fadeOut" );
+												forceFade()
                         setTimeout( teardownFade, 250 );
                     }
+										function forceFade() {
+										    setTimeout(function() {
+													scope.fader.classList.add("fadeOut");
+													return false;
+												}, 1);
+										}
                     // I clean up the fader after the fade-out has
                     // completed its animation.
                     function teardownFade() {
-                        fader.removeClass( "show fadeOut" );
+                        //fader.removeClass( "show fadeOut" );
+												scope.fader.classList.remove("show");
+												scope.fader.classList.remove("fadeOut");
                     }
                 }
                 // Return the directive configuration.

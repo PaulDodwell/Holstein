@@ -161,17 +161,17 @@ var txtDesc = {
             desc: 'and/or Short Stride'
           },
           {
-            score: 'Slight abduction*',
+            score: '4-6 = Slight abduction*',
             desc: 'and Medium Stride'
           },
           {
-            score: 'No Abduction*',
+            score: '7-9 = No Abduction*',
             desc: 'and Long Stride'
           }
         ],
         footer_text: '*Abduction – The spreading out of the legs to the side of the body, and away from the medial line (centre of the body).'
       },
-	  rear_leg_rear_view: {
+	  rear_legs_rear_view: {
         main_text: 'The angle of the rear leg toes in relation to the medial body line of the animal, considering the distance between the hocks.',
         scores_text: [
           {
@@ -189,7 +189,7 @@ var txtDesc = {
         ],
         footer_text: ''
       },
-      rear_leg_side_view: {
+      rear_legs_side_view: {
         main_text: 'The angle measured at the front of the hock',
         scores_text: [
           {
@@ -646,6 +646,38 @@ var navMenus = {
             },
             {
               idx: 2,
+              title: 'Rear Udder Width',
+              name: 'rear_udder_width',
+              content: txtDesc.traits.rear_udder_width,
+              icon: 'img/icons/icon_blank.png',
+              color: '#1C3764',
+              txtColor: '#fff',
+              main_img: 'img/Trait_17_00035.jpg',
+              img_path: 'img/trait',
+              target: {
+                  type: 'view',
+                  view: 'traits',
+                  route: 'udder_traits/rear_udder_width'
+                }
+            },
+            {
+              idx: 3,
+              title: 'Udder Depth',
+              name: 'udder_depth',
+              content: txtDesc.traits.udder_depth,
+              icon: 'img/icons/icon_blank.png',
+              color: '#d9d9d9',
+              txtColor:'#333',
+              main_img: 'img/Trait_17_00035.jpg',
+              img_path: 'img/trait',
+              target: {
+                  type: 'view',
+                  view: 'traits',
+                  route: 'udder_traits/udder_depth'
+                }
+            },
+            {
+              idx: 4,
               title: 'Udder Support',
               name: 'udder_support',
               content: txtDesc.traits.udder_support,
@@ -661,7 +693,7 @@ var navMenus = {
                 }
             },
             {
-              idx: 3,
+              idx: 5,
               title: 'Udder Texture',
               name: 'udder_texture',
               content: txtDesc.traits.udder_texture,
@@ -771,91 +803,23 @@ var navMenus = {
       items: [
         {
           idx: 0,
-          title: 'Rear Leg Side View',
-          name: 'rear_leg_side_view',
-          content: txtDesc.traits.rear_leg_side_view,
+          title: 'Rear Legs Side View',
+          name: 'rear_legs_side_view',
+          content: txtDesc.traits.rear_legs_side_view,
           icon: 'img/icons/icon_blank.png',
           color: '#1C3764',
           txtColor: '#fff',
           vid_src: 'video/test1.mp4',
-          main_img: 'rear_leg_side_view_01.png',
+          main_img: 'rear_legs_side_view_01.png',
           img_path: 'img/trait',
           target: {
               type: 'view',
               view: 'traits',
-              route: 'feet_legs/rear_leg_side_view'
-            }
-        },
-        {
-          idx: 1,
-          title: 'Rear Leg Rear View',
-          name: 'rear_leg_rear_view',
-          content: txtDesc.traits.rear_leg_rear_view,
-          icon: 'img/icons/icon_blank.png',
-          color: '#d9d9d9',
-          txtColor:'#333',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'feet_legs/rear_leg_rear_view'
-            }
-        },
-        {
-          idx: 2,
-          title: 'Bone Quality',
-          name: 'bone_quality',
-          content: txtDesc.traits.bone_quality,
-          icon: 'img/icons/icon_blank.png',
-          color: '#1C3764',
-          txtColor: '#fff',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'feet_legs/bone_quality'
-            }
-        },
-        {
-          idx: 4,
-          title: '',
-          name: 'locomotion',
-          content: txtDesc.traits.locomotion,
-          icon: 'img/icons/icon_blank.png',
-          color: '#D9D9D9',
-          txtColor:'#333',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'feet_legs/locomotion'
-            }
-          },
-        {
-          idx: 3,
-          title: 'Foot Angle',
-          name: 'foot_angle',
-          content: txtDesc.traits.foot_angle,
-          icon: 'img/icons/icon_blank.png',
-          color: '#1C3764',
-          txtColor: '#fff',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
-          img_path: 'img/trait',
-          target: {
-              type: 'view',
-              view: 'traits',
-              route: 'feet_legs/foot_angle'
+              route: 'feet_legs/rear_legs_side_view'
             }
         },
           {
-            idx: 5,
+            idx: 1,
             title: 'Locomotion',
             name: 'locomotion',
             content: txtDesc.traits.locomotion,
@@ -867,10 +831,61 @@ var navMenus = {
             img_path: 'img/trait',
             target: {
                 type: 'view',
-                view: 'traits',
-                route: 'feet_legs/locomotion'
+                view: 'locomotion',
+                route: ''
               }
-            }
+            },
+            {
+              idx: 2,
+              title: 'Foot Angle',
+              name: 'foot_angle',
+              content: txtDesc.traits.foot_angle,
+              icon: 'img/icons/icon_blank.png',
+              color: '#1C3764',
+              txtColor: '#fff',
+              vid_src: 'video/test1.mp4',
+              main_img: 'img/Trait_17_00035.jpg',
+              img_path: 'img/trait',
+              target: {
+                  type: 'view',
+                  view: 'traits',
+                  route: 'feet_legs/foot_angle'
+                }
+            },
+            {
+              idx: 3,
+              title: 'Bone Quality',
+              name: 'bone_quality',
+              content: txtDesc.traits.bone_quality,
+              icon: 'img/icons/icon_blank.png',
+              color: '#D9D9D9',
+              txtColor: '#333',
+              vid_src: 'video/test1.mp4',
+              main_img: 'img/Trait_17_00035.jpg',
+              img_path: 'img/trait',
+              target: {
+                  type: 'view',
+                  view: 'traits',
+                  route: 'feet_legs/bone_quality'
+                }
+            },
+            {
+              idx: 4,
+              title: 'Rear Legs Rear View',
+              name: 'rear_legs_rear_view',
+              content: txtDesc.traits.rear_legs_rear_view,
+              icon: 'img/icons/icon_blank.png',
+              color: '#1C3764',
+              txtColor: '#fff',
+              vid_src: 'video/test1.mp4',
+              main_img: 'img/Trait_17_00035.jpg',
+              img_path: 'img/trait',
+              target: {
+                  type: 'view',
+                  view: 'traits',
+                  route: 'feet_legs/rear_legs_rear_view'
+                }
+            },
         ]
       },
     body_conformation: {
@@ -1184,3 +1199,25 @@ var sideTabs = [
     target: ''
   }
 ];
+
+var xideal_cow = {
+  path: 'data/new_deer02.json',
+  xOffset: 0,
+  yOffset: 0,
+  zOffset: 0,
+  xRot: -3,
+  yRot: 4.2,
+  zRot: 0.1,
+  scale:10,
+}
+
+var ideal_cow = {
+  path: 'data/v_low_res_200718.json',
+  xOffset: 0,
+  yOffset: -24,
+  zOffset: 0,
+  xRot: 0,
+  yRot: -0.7,
+  zRot: 0,
+  scale:0.35,
+}

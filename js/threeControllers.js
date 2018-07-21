@@ -2,29 +2,53 @@
 angular.module('threeViewer.controllers', ['threeViewer.services'])
 
   // Control that manages changes to the 3d scene
-.controller('SceneControl', ['$scope', '$rootScope', 'ModelFactory', 'CameraService',
-    function ($scope, $rootScope, ModelFactory, CameraService) {
-        $scope.data = {};
-        $scope.data.xOffset = 0;
-        $scope.data.yOffset = 0;
+.controller('SceneControl', ['$scope', '$rootScope', 'CowFactory', 'CameraService',
+    function ($scope, $rootScope, CowFactory, CameraService) {
 
-        //alert("SceneControl Init "+$rootScope.menuState.inner);
+        $scope.set3d = {
+          aspect:1.556,
+          autoRotate: false,
+          autoRotateSpeed: 2,
+          rotateSpeed: 0.17,
+          enableDamping: true,
+          dampingFactor: 0.23,
+          /*
+          colorBG: 0xe9e1a2,
+          hexColorBG: '#e9e1a2',
+          */
+          colorBG: 0xffffff,
+          hexColorBG: '#ffffff',
+          opacityBG: 1,
+          camZ: 80
+        }
 
-        // adds new models at the provided offset
+        $scope.manager = {};
+
+        $scope.controls = {};
+
         $scope.addModel = function () {
-            ModelFactory.addModel($scope.data.xOffset, $scope.data.yOffset);
+            CowFactory.addModel($scope.cow3D);
+        }
+
+        $scope.toggleRotate = function() {
+          $scope.controls.autoRotate = !$scope.controls.autoRotate;
+          $scope.controls.update();
         }
 
         // brings camera out
         $scope.increaseCameraZ = function () {
-            CameraService.perspectiveCam.position.z += 50;
+            CameraService.perspectiveCam.position.z += 2;
         }
 
         //brings camera in
         $scope.decreaseCameraZ = function () {
-            CameraService.perspectiveCam.position.z -= 50;
+            CameraService.perspectiveCam.position.z -= 2;
         }
-    }])
-  .controller('threeTstCtrl',['$scope','$rootScope',function ($scope, $rootScope) {
-    	alert("Three Viewer Init "+$rootScope.menuState.inner);
+
+        $scope.$watch('cow3D',function(val) {
+          CowFactory.moveModel(val);
+        },true);
+
+        $scope.addModel();
+
     }]);

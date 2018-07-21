@@ -1,0 +1,69 @@
+
+<style>
+
+  .seg_title {
+    font-weight:'bold';
+  }
+
+  .seg_title:hover {
+    cursor:pointer;
+  }
+
+  .nav_seg,.center_img,.back_arrow {
+    pointer-events:auto !important;
+    cursor:pointer;
+  }
+
+  .nav_seg:hover {
+    cursor:pointer;
+  }
+
+  .outer_seg_title {
+
+  }
+  .center_circle,.center_img {
+
+  }
+  /*
+  .wheel_wrapper {
+    position:relative;
+    top:72px;
+    height:400px;
+  }
+  */
+  .menu_title {
+      margin-top:72px
+  }
+  .menu_text_wrapper {
+      padding:0 12px 12px 12px;
+      margin-top:72px;
+      min-height:0;
+      overflow:hidden;
+  }
+  .menu_text_wrapper h1 {
+      text-align:left;
+      margin-top:0;
+  }
+  .menu_text_text_wrapper {
+
+  }
+  .menu_text_wrapper p {
+      text-align:left;
+      font-size:0.9em;
+  }
+</style>
+<div class='container-fluid'>
+
+        <div class='row'>
+
+          <div class='col-sm-7 col-sm-push-7' style='height:420px;border:1px solid #d9d9d9;'>
+              <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" start-menu="'main'" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText" slider-state="sliderState[0]"></circle-nav></div>
+          </div>
+          <div class='col-sm-5 col-sm-pull-5' style='border:1px solid #d9d9d9;'>
+              <menu-desc content="navMenus[menuState.inner]"></menu-desc>
+          </div>
+
+
+       </div>
+
+</div>
