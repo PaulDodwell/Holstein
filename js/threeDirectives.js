@@ -129,6 +129,9 @@ angular.module('threeViewer.directives', ['threeViewer.services'])
                   $scope.controls.rotateSpeed = $scope.set3d.rotateSpeed;
                   $scope.controls.enableDamping = $scope.set3d.enableDamping;
                   $scope.controls.dampingFactor = $scope.set3d.dampingFactor;
+                  $scope.controls.enablePan = $scope.set3d.enablePan;
+                  $scope.controls.maxDistance = $scope.set3d.maxDistance;
+                  $scope.controls.minDistance = $scope.set3d.minDistance;
                   $scope.controls.update();
                   // add renderer to DOM
                   el[0].appendChild(renderer.domElement);

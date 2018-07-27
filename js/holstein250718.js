@@ -116,17 +116,21 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$document
 		$scope.sideBars = {
 			show: true,
 			active: false
-		};
+		}
 
 		$scope.status = {
 			msg: "Holstein app is running",
 			init: false
-		};
+		}
+
+		$scope.panning = function() {
+			console.log('panning');
+		}
 
 		$scope.getColorName = function(palette,color) {
 				var idx = arraySvce.arrIndexOf($scope.palettes[palette].colors,color,'code');
 				return $scope.palettes[palette].colors[idx].title;
-		};
+		}
 
 			//$scope.navItems = dataObj.getDefault('navItems');
 			$scope.navOpts = dataObj.getDefault('navOpts');
@@ -150,6 +154,10 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$document
 		$scope.initApp = function() {
 			console.log('INIT APP');
 			$scope.status.init = true;
+		}
+
+		$scope.toggleRotate = function() {
+			$scope.navOpts.rotate = !$scope.navOpts.rotate;
 		}
 
 		$scope.say = function(msg) {
@@ -195,22 +203,28 @@ holsteinModule.controller('guideCtrl',['$scope','$rootScope','$routeParams',func
 	$scope.viewData = $routeParams.data;
 }]);
 
-holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','$window',function ($scope, $rootScope, $routeParams, $window) {
+holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
 	$scope.viewData = $routeParams.data;
 
 	$scope.sideBars.show = false;
 
-	$scope.toggleRotate = function() {
-		$scope.navOpts.rotate = !$scope.navOpts.rotate;
-	}
+	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
 
-	$scope.resetView = function() {
-		$window.location.reload();
-	}
+	$scope.sliderArgs = [];
+	$scope.sliderState = [];
+
+	$scope.sliderArgs = JSON.parse(JSON.stringify(dataObj.sliderDefaults()));
+	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
+	$scope.sliderArgs.keyNames = $scope.keyNames;
+	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+
+	$scope.$watch('sliderState',function(val) {
+		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
+	},true);
 
 }]);
 
-holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$window','ArraySvce',function ($scope, $rootScope, $routeParams, $window, arraySvce) {
+holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$location','ArraySvce',function ($scope, $rootScope, $routeParams, $location, arraySvce) {
 	$scope.viewData = $routeParams.data;
 	$scope.tritems = [];
 
@@ -335,21 +349,23 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 
 //DIRECTIVES
 
-holsteinModule.directive('circleNav', ['$window','$rootScope','$location','ArraySvce','SnapUtil','ngDialog', function($window, $rootScope, $location, arraySvce, snapUtil, ngDialog) {
+holsteinModule.directive('circleNav', ['$window','$rootScope','$location','ArraySvce','SnapUtil', function($window, $rootScope, $location, arraySvce, snapUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
 			scope: {
 				args: '=',
 				menus: '=',
+				startMenu: '=',
 				sideBars: '=',
 				menuState: '=',
-				currNavContent: '='
+				currNavContent: '=',
+				sliderState: '='
 			},
-			template: '<svg class="wheel_svg" style="height:{{wheelHeight()}}px;" viewbox="0 0 800 800"></svg>',
+			template: '<svg style="position:absolute;top:0;left:0;width:100%;height:400px;background:none;pointer-events:none;" viewbox="{{viewBoxSize}}"></svg>',
 			controller: function($scope, $element) {
 
-
+				//$scope.items = $scope.menus[$scope.startMenu];
 
 					$scope.navItems = [];
 					$scope.segs = [];
@@ -380,21 +396,16 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						return { 'h': $element.parent()[0].offsetHeight, 'w': $element.parent()[0].offsetWidth };
 					};
 
-					$scope.wheelHeight = function() {
-						var h = Math.max($scope.args.minHeight,($scope.getElementDimensions().w * $scope.args.scaleFactor));
-						return h;
-					}
-
 					var box =  $scope.getElementDimensions();
 
 					$scope.navCenter = 	{
-						x: $scope.args.x,
-						y: $scope.args.y
+						x: 400,
+						y: 400
 					}
 
 					var angle = 0, deltaAngle = 0;
 
-
+					//
 
 					var drawCenterCircle = function() {
 
@@ -528,7 +539,6 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 								$scope.segs[idx].mousedown(function(e) {
 									e.preventDefault();
-									e.stopPropagation();
 									if($scope.args.rotate === true) {
 										$scope.segSelect(idx,true);
 									}
@@ -674,7 +684,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						 $scope.titles[idx].animate({
 								 startOffset: '50%'
 						 },5000);
-							//console.log($scope.titles[idx].node.innerHTML + " " + $scope.titles[idx].attr('textpath') + " " + center.x + " " + center.y + " " + idx);
+							console.log($scope.titles[idx].node.innerHTML + " " + $scope.titles[idx].attr('textpath') + " " + center.x + " " + center.y + " " + idx);
 					}
 
 					$scope.setActiveContent = function(idx,apply) {
@@ -840,10 +850,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 										$scope.$apply(function() {});
 										break;
 								case "url":
-										var once = false;
-										var t = setTimeout(function() {
-											$scope.openUrl(target.route);
-										},10);
+										window.open(target.route,'_blank');
 										break;
 								case "blank":
 								//do nothing
@@ -852,17 +859,6 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 									$scope.goMenu('main','main');
 						}
 						$scope.sideBars.active = false;
-					}
-
-					$scope.openUrl = function(url) {
-						$scope.targetUrl = url;
-						ngDialog.open({
-						  template: 'html/open_guide.html',
-						  className: 'ngdialog-theme-default',
-						  scope: $scope,
-						  closeByNavigation: true
-						});
-
 					}
 
 					$scope.goMenu = function(inner,outer) {
@@ -972,6 +968,30 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 				    $scope.$apply();
 					});
 
+					$element.on('click', function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+						$scope.track.x = event.pageX - $scope.track.startX;
+						var pos = $scope.xLeft($scope.track.x);
+						//alert(event.pageX+" - "+$scope.track.startX+" = "+$scope.track.x+" pos="+pos);
+						$scope.$apply(function() {
+
+							$scope.curState.mouseDown = false;
+							$scope.curState.curPos = pos;
+
+							$scope.track.startX = event.pageX - $scope.curState.curPos;
+
+							$scope.curState.curPercent = $scope.posPcent(pos);
+						});
+					//	alert("astartX:"+$scope.track.startX+"track.x:"+$scope.track.x+" pos:"+pos+" curPercent:"+$scope.curState.curPercent);
+						if($scope.keyMarkers.length == 0 && $scope.options.steps == 0) {
+							$scope.setHandle($scope.track.x);
+						}
+						else {
+							$scope.snapCall();
+						}
+					});
+
 					$scope.doMarkers();
 
 				}//end Controller
@@ -1002,41 +1022,32 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 					$element.on('mousedown', function(event) {
 						event.preventDefault();
 						event.stopPropagation();
-					});
-
-					$scope.clickTap = function(event) {
-							$scope.track.x = event.center.x - $scope.track.startX;
-							var pos = $scope.xLeft($scope.track.x);
-							$scope.curState.curPos = pos;
-							$scope.track.startX = event.center.x - $scope.curState.curPos;
-							$scope.curState.curPercent = $scope.posPcent(pos);
-							if($scope.keyMarkers.length == 0 && $scope.options.steps == 0) {
-								$scope.setHandle($scope.track.x);
-							}
-							else {
-								$scope.snapCall();
-							}
-					}
-
-					$scope.panStart = function(event) {
-						$scope.track.startX = event.center.x - $scope.curState.curPos;
-						$scope.curState.touchEvents.panning = true;
+						$scope.track.startX = event.pageX - $scope.curState.curPos;
+						$document.on('mousemove', mousemove);
+						$document.on('mouseup', mouseup);
 						$scope.curState.mouseDown = true;
 						$scope.setHandle($scope.track.x);
-					}
+					});
 
-					$scope.panMove = function(event) {
-						$scope.track.x = event.center.x - $scope.track.startX;
+					function mousemove(event) {
+						//y = event.pageY - startY;
+						$scope.track.x = event.pageX - $scope.track.startX;
+
 						$scope.setHandle($scope.track.x);
+
 					}
 
-					$scope.panEnd = function(event) {
-						$scope.curState.touchEvents.panning = false;
-						$scope.curState.mouseDown = false;
+					function mouseup() {
+						$document.off('mousemove', mousemove);
+						$document.off('mouseup', mouseup);
+						$scope.$apply(function(){
+							$scope.curState.mouseDown = false;
+						})
 						$scope.snapToMark();
 					}
 
 					$scope.getElementX = function () {
+						//console.log($scope.curState.curPos);
 				    return $element.css('left');
 				  };
 
@@ -1049,34 +1060,52 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 					 $element.css({
 						 left:  pos + 'px'
 					 });
-					$scope.curState.curPos = pos;
-					$scope.curState.curPercent = $scope.posPcent(pos);
-					var p = $scope.rounder($scope.curState.curPercent,100/$scope.options.steps);
-					var nearKey = $scope.getNearKey(p);
-					$scope.curState.nearKey = nearKey.idx;
-					return false;
+					 $scope.curState.curPos = pos;
+					 $scope.curState.curPercent = $scope.posPcent(pos);
+					 var p = $scope.rounder($scope.curState.curPercent,100/$scope.options.steps);
+					 var nearKey = $scope.getNearKey(p);
+					 $scope.curState.nearKey = nearKey.idx;
+					 $scope.$apply();
+					 return false;
+				 }
+
+				 $scope.xsetHandle = function(x) {
+					 var pos = $scope.xLeft(x);
+					 $element.css({
+						 left:  pos + 'px'
+					 });
+						 $scope.$apply(function() {
+							 $scope.curState.curPos = pos;
+							 $scope.curState.curPercent = $scope.posPcent(pos);
+						 });
+					 return false;
 				 }
 
 				 $scope.snapCall = function() {
 					 $scope.snapToMark();
-					 return false;
 				 }
 
 				 $scope.snapToMark = function() {
-							var p = Math.max(0,$scope.rounder($scope.curState.curPercent,100/$scope.options.steps));
+							var p = $scope.rounder($scope.curState.curPercent,100/$scope.options.steps);
 							var nearKey = $scope.getNearKey(p);
 							$scope.curState.nearKey = nearKey.idx;
-							$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
-							$scope.curState.curPercent = p;
-							$scope.curState.nearKeyLabel = nearKey.label;
+							//alert(p+" nearKey:"+$scope.curState.nearKey+" track.x:"+$scope.track.x+" curPercent:"+$scope.curState.curPercent+" keyLabel:"+$scope.curState.nearKeyLabel);
+							$scope.$apply(function() {
+								$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
+								$scope.curState.curPercent = p;
+								$scope.curState.nearKeyLabel = nearKey.label;
+							});
 							$element.css({'left':$scope.curState.curPos + 'px'});
 							$scope.focusKey = ("#sk_" + $scope.options.id) + p;
+
 							return false;
 					}
 
 					$scope.getKeyLabel = function(p) {
 						if($scope.keyMarkers.length > 0) {
 							var idx = arraySvce.arrIndexOf($scope.keyMarkers,p,'pos');
+						//	alert(p + " "+$scope.keyMarkers.length+" "+idx+" "+$scope.keyMarkers[idx].label);
+						//	var key = $scope.keyMarkers[idx].label;
 							return idx + 1;
 						}
 						else {
@@ -1132,10 +1161,7 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 
 					}, true);
 
-					$element.ready(function() {
-						//$element.css('left','0px');
-						$scope.snapCall();
-					});
+					//$scope.snapToMark();
 
 				}
 			};
@@ -1696,7 +1722,7 @@ holsteinModule.factory('DataObj',['$rootScope',function($rootScope) {
 						showCurPercent: false,
 						handleColor: '#323854',
 						handleInnerColor: '#fff',
-						lineColor: '#d9d9d9',
+						lineColor: '#85807A',
 						progressColor: '#323854',
 						lineBorder: '#333',
 						markerBgColor: '#fff',
@@ -1723,10 +1749,7 @@ holsteinModule.factory('DataObj',['$rootScope',function($rootScope) {
 					 curPercent: 0,
 				 	 nearKey: 1,
 					 nearKeyLabel: 1,
-					 mouseDown: false,
-					 touchEvents: {
-						 panning:false
-					 }
+					 mouseDown: false
 				 }
 
 			}
@@ -1765,3 +1788,157 @@ holsteinModule.factory('DataObj',['$rootScope',function($rootScope) {
 			return service;
 
 		}]);
+
+    // (by Ben Nadel) A utility class for preloading image objects.
+    holsteinModule.factory(
+            "XPreloader",['$q','$rootScope',function( $q, $rootScope ) {
+                // I manage the preloading of image objects. Accepts an array of image URLs.
+                function Preloader( imageLocations ) {
+                    // I am the image SRC values to preload.
+                    this.imageLocations = imageLocations;
+                    // As the images load, we'll need to keep track of the load/error
+                    // counts when announing the progress on the loading.
+                    this.imageCount = this.imageLocations.length;
+                    this.loadCount = 0;
+                    this.errorCount = 0;
+                    // I am the possible states that the preloader can be in.
+                    this.states = {
+                        PENDING: 1,
+                        LOADING: 2,
+                        RESOLVED: 3,
+                        REJECTED: 4
+                    };
+                    // I keep track of the current state of the preloader.
+                    this.state = this.states.PENDING;
+                    // When loading the images, a promise will be returned to indicate
+                    // when the loading has completed (and / or progressed).
+                    this.deferred = $q.defer();
+                    this.promise = this.deferred.promise;
+                }
+                // ---
+                // STATIC METHODS.
+                // ---
+                // I reload the given images [Array] and return a promise. The promise
+                // will be resolved with the array of image locations.
+                Preloader.preloadImages = function( imageLocations ) {
+                    var preloader = new Preloader( imageLocations );
+                    return( preloader.load() );
+                };
+                // ---
+                // INSTANCE METHODS.
+                // ---
+                Preloader.prototype = {
+                    // Best practice for "instnceof" operator.
+                    constructor: Preloader,
+                    // ---
+                    // PUBLIC METHODS.
+                    // ---
+                    // I determine if the preloader has started loading images yet.
+                    isInitiated: function isInitiated() {
+                        return( this.state !== this.states.PENDING );
+                    },
+                    // I determine if the preloader has failed to load all of the images.
+                    isRejected: function isRejected() {
+                        return( this.state === this.states.REJECTED );
+                    },
+                    // I determine if the preloader has successfully loaded all of the images.
+                    isResolved: function isResolved() {
+                        return( this.state === this.states.RESOLVED );
+                    },
+                    // I initiate the preload of the images. Returns a promise.
+                    load: function load() {
+                        // If the images are already loading, return the existing promise.
+                        if ( this.isInitiated() ) {
+                            return( this.promise );
+                        }
+                        this.state = this.states.LOADING;
+                        for ( var i = 0 ; i < this.imageCount ; i++ ) {
+                            this.loadImageLocation( this.imageLocations[ i ] );
+                        }
+                        // Return the deferred promise for the load event.
+                        return( this.promise );
+                    },
+                    // ---
+                    // PRIVATE METHODS.
+                    // ---
+                    // I handle the load-failure of the given image location.
+                    handleImageError: function handleImageError( imageLocation ) {
+                        this.errorCount++;
+                        // If the preload action has already failed, ignore further action.
+                        if ( this.isRejected() ) {
+                            return;
+                        }
+                        this.state = this.states.REJECTED;
+                        this.deferred.reject( imageLocation );
+                    },
+                    // I handle the load-success of the given image location.
+                    handleImageLoad: function handleImageLoad( imageLocation ) {
+                        this.loadCount++;
+                        // If the preload action has already failed, ignore further action.
+                        if ( this.isRejected() ) {
+                            return;
+                        }
+                        // Notify the progress of the overall deferred. This is different
+                        // than Resolving the deferred - you can call notify many times
+                        // before the ultimate resolution (or rejection) of the deferred.
+                        this.deferred.notify({
+                            percent: Math.ceil( this.loadCount / this.imageCount * 100 ),
+                            imageLocation: imageLocation
+                        });
+                        // If all of the images have loaded, we can resolve the deferred
+                        // value that we returned to the calling context.
+                        if ( this.loadCount === this.imageCount ) {
+                            this.state = this.states.RESOLVED;
+                            this.deferred.resolve( this.imageLocations );
+                        }
+                    },
+                    // I load the given image location and then wire the load / error
+                    // events back into the preloader instance.
+                    // --
+                    // NOTE: The load/error events trigger a $digest.
+                    loadImageLocation: function loadImageLocation( imageLocation ) {
+                        var preloader = this;
+                        // When it comes to creating the image object, it is critical that
+                        // we bind the event handlers BEFORE we actually set the image
+                        // source. Failure to do so will prevent the events from proper
+                        // triggering in some browsers.
+                        var image = $( new Image() )
+                            .load(
+                                function( event ) {
+                                    // Since the load event is asynchronous, we have to
+                                    // tell AngularJS that something changed.
+                                    $rootScope.$apply(
+                                        function() {
+                                            preloader.handleImageLoad( event.target.src );
+                                            // Clean up object reference to help with the
+                                            // garbage collection in the closure.
+                                            preloader = image = event = null;
+                                        }
+                                    );
+                                }
+                            )
+                            .error(
+                                function( event ) {
+                                    // Since the load event is asynchronous, we have to
+                                    // tell AngularJS that something changed.
+                                    $rootScope.$apply(
+                                        function() {
+                                            preloader.handleImageError( event.target.src );
+                                            // Clean up object reference to help with the
+                                            // garbage collection in the closure.
+                                            preloader = image = event = null;
+                                        }
+                                    );
+                                }
+                            )
+                            .prop( "src", imageLocation )
+                        ;
+                    }
+                };
+                // Return the factory instance.
+                return( Preloader );
+            }
+        ]);
+
+
+holsteinModule.value('jwt',{id:'',token:'AIzaSyCT_mh8hi99Zyn6yMuCtUIEmajHRdpFCmo'});

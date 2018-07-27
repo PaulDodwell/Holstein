@@ -63,13 +63,13 @@
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar" uib-collapse="isNavCollapsed">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav">
             <li uib-dropdown><a href="#!" uib-dropdown-toggle>Traits<b class="caret"></b></a>
               <bs-nav-dropdown args="navMenus.traits"></bs-nav-dropdown>
             </li>
             <li><a href="#!ideal-cow" ng-click="isNavCollapsed = true">Ideal Cow</a></li>
             <li><a href="#!locomotion" ng-click="isNavCollapsed = true">Locomotion</a></li>
-            <li><a href="pdf/type_classification_guide.pdf" target="_blank" ng-click="isNavCollapsed = true">Classification Guide</a></li>
+            <li><a href="#!guide" ng-click="isNavCollapsed = true">Classification Guide</a></li>
             <li><a href="#!contacts" ng-click="isNavCollapsed = true">Contacts</a></li>
             <li><a href="#!help" ng-click="isNavCollapsed = true">Help</a></li>
           </ul>
@@ -83,7 +83,8 @@
 
 	<footer class='footer' ng-class="{'sticky_footer':stickyFooter}">
     	<div class='container'>
-   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'2px'}">Development Prototype: Breeze &amp; Freeze Ltd</span></p>
+        <div style="position:relative;height:35px;text-align:right;line-height:70px;border-bottom:2px solid #1C3764;color:#1C3764;"><span style="position:absolute;bottom:-24px;right:72px;">Social Media</span><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div><div class='sm_circle'></div></div>
+   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'6px'}">Dev Prototype: Breeze &amp; Freeze</span></p>
    		</div>
  </footer>
 

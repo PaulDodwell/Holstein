@@ -22,6 +22,7 @@ width:97%;
 clear:both;
 margin:4px 0 20px 0;
 padding:12px 0;
+-webkit-user-select:none;
 }
 
 .slider_box {
@@ -58,12 +59,14 @@ top:4px;
 width:22px;
 height:22px;
 margin-left:-15px;
-background:rgba(255,255,255,0.5);
+background-color:rgba(255,255,255,0.5);
 -webkit-user-select: none;
 -ms-touch-action: none;
-border:1px solid #808080;
+border:3px solid #323854;
 border-radius:22px;
 z-index:10;
+pointer-events:none;
+cursor:pointer;
 }
 
 .bobble {
@@ -75,13 +78,17 @@ z-index:10;
     );
 }
 
+.flat_handle {
+  background-color:#fff;
+}
+
 .slider_handle:hover {
 cursor:w-resize;
 z-index:20;
 }
 
 .handle_hilite {
-  background-color:#6D9473 !important;
+  background-color:#C7BC52;
 }
 
 .slider_mark,.slider_mark_sm {
@@ -187,13 +194,13 @@ transition: all 0.25s linear;
 
 </style>
 <div ng-attr-id="{{ options.id + '_wrapper'}}" class='slider_wrapper'>
-  <div ng-attr-id="{{ options.id }}" class="slider_box {{options.boxClasses}}">
+  <div hm-tap="clickTap($event)"hm-press="clickTap($event)" hm-panstart="panStart($event)" hm-panmove="panMove($event)" hm-panend="panEnd($event)" ng-attr-id="{{ options.id }}" class="slider_box {{options.boxClasses}}">
     <span ng-if="markers.length > 0"><div ng-repeat="marker in markers" class='slider_mark slider_color' ng-class="{'end_marker':marker.pos == 100,'slider_mark_sm':options.markerMin}" style="{{'left:'+marker.pos+'%;background:'+options.markerBgColor+';'}}"></div></span>
     <span ng-if="keyMarkers.length > 0"><div ng-repeat="marker in keyMarkers" class='slider_mark slider_color' ng-class="{'end_marker':marker.pos == 100,'slider_mark_sm':options.markerMin}" style="{{'left:'+marker.pos+'%;background:'+options.markerBgColor+';'}}"></div></span>
     <span ng-if="keyMarkers.length > 0"><div ng-attr-id="{{'sk_' + options.id + '_' + marker.pos }}" ng-repeat="marker in keyMarkers" class='slider_key slideTrans noSelect'  style="{{'left:'+marker.pos+'%;font-size:'+options.keySize+';color:'+options.keyColor+';top:'+options.keyVoffset}}">{{marker.label}}</div></span>
     <div class='slider_line slider_color' style="{{'background:'+options.lineColor+';'}}"></div>
     <div class='slider_line slider_progress' ng-class="{'slideTrans':!curState.mouseDown}" style="background:{{options.progressColor}};width:{{curState.curPercent | number:1}}%;"></div>
-    <div class='slider_handle shadowed bobble' ng-class="{'slideTrans':!curState.mouseDown,'handle_hilite':curState.mouseDown}" style="{{'border-color:'+options.handleColor+';background-color:'+options.handleInnerColor+';'}}" drag-handle></div>
+    <div class='slider_handle flat_handle' ng-class="{'slideTrans':!curState.mouseDown,'handle_hilite':curState.mouseDown}" style="{{'border-color:'+options.handleColor+';background-color:'+options.handleInnerColor+';'}}" drag-handle></div>
     <div class='slider_txt noSelect'></div>
   </div>
 </div>

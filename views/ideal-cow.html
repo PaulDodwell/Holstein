@@ -27,6 +27,7 @@
 }
 h1 {
   padding-left:0;
+  margin-top:4px !important;
 }
 h5 {
   padding-left:12px;
@@ -46,22 +47,23 @@ p {
 <div class='container-fluid'>
 
         <div class='row'>
-          <div class='col-sm-1 col-xs-0'></div>
+          <div class='col-sm-1 col-spacer'></div>
           <div class='col-sm-10' style='padding:0;'><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /></a>Ideal Holstein Cow</h1></div>
-          <div class='col-sm-1 col-xs-0'></div>
+          <div class='col-sm-1 col-spacer'></div>
         </div>
         <div class='row'>
-          <div class='col-sm-1 col-xs-0'></div>
+          <div class='col-sm-1 col-spacer'></div>
           <div ng-controller="SceneControl" class='col-sm-7 wrap_3D' style='padding-right:4px !important;padding-left:4px !important;background-color:{{set3d.hexColorBG}};'>
             <div style='position:relative;width:96%;'>
-              <div class='ctrls_3D noselect'><a ng-click="toggleRotate()"><span ng-show="controls.autoRotate">Stop</span><span ng-show="!controls.autoRotate">Animate</span></a></div>
+              <div class='ctrls_3D noselect'><a ng-click="toggleRotate()"><span ng-show="controls.autoRotate">Stop</span><span ng-show="!controls.autoRotate">Animate</span></a> <a ng-click="resetView()"><span>Reset</span></a></div>
               <div style='margin-top:4px;' cow-3d="cow3D" set-3d="set3d" controls="controls" three-viewport></div>
               <div ng-hide="loadStatus == 'loaded'" class='load_show loading'></div>
             </div>
           </div>
           <div class='col-sm-3'>
               <h2 style='text-align:left;padding-left:12px;'>Ideal Cow</h2>
-              <p>Here is some text about the ideal Holstein cow.</p>
+              <p>Here is some introductory text (to be supplied) about the ideal Holstein cow.</p>
+              <p>N.B. The 3D cow shown here is a temporary low-resolution model for demo purposes.</p>
               <h5><b>Rotating the 3D Holstein</b></h5>
               <p>Hold down left mouse button and move mouse within the frame to rotate the cow in any direction.</p>
               <p>On touch devices just touch and move within the frame to rotate.</p>
@@ -71,7 +73,7 @@ p {
               <p>On Mac touchpad, left-click + 2 fingers to zoom.</p>
               <p>On a keyboard, use the arrow keys to pan and zoom.</p>
           </div>
-          <div class='col-sm-1 col-xs-0'></div>
+          <div class='col-sm-1 col-spacer'></div>
 
        </div>
 

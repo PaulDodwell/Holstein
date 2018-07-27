@@ -6,20 +6,19 @@ angular.module('threeViewer.controllers', ['threeViewer.services'])
     function ($scope, $rootScope, CowFactory, CameraService) {
 
         $scope.set3d = {
-          aspect:1.556,
+          aspect:1.25,
           autoRotate: false,
-          autoRotateSpeed: 2,
+          autoRotateSpeed: 1.5,
           rotateSpeed: 0.17,
           enableDamping: true,
           dampingFactor: 0.23,
-          /*
-          colorBG: 0xe9e1a2,
-          hexColorBG: '#e9e1a2',
-          */
+          enablePan: false,
+          maxDistance:240,
+          minDistance:45,
           colorBG: 0xffffff,
           hexColorBG: '#ffffff',
           opacityBG: 1,
-          camZ: 80
+          camZ: 90
         }
 
         $scope.manager = {};

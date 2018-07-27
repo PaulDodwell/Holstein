@@ -7,46 +7,47 @@ var txtDesc = {
       "But at Holstein UK, this is just the tip of the iceberg. Over the past decade, the Society has built up a portfolio of services designed to improve your breeding decisions along with the quality, profitability and herd-life of your dairy cows."
     ],
     traits: [
-      "Holstein UK is Europe’s largest independent breed society. It offers a range of services to the dairy farming industry targeted at improving the genetics and profitability of the Holstein breed.",
+      "(N.B. Temporary text. Introduction copy needed for traits section if possible here). Holstein UK is Europe’s largest independent breed society. It offers a range of services to the dairy farming industry targeted at improving the genetics and profitability of the Holstein breed.",
       "British Friesians continue to be registered in the herdbook with percentages of Friesian clearly denoted. Breed societies have traditionally been associated with registering births and ancestry, promoting the breed, and increasing the value of your livestock.",
       "But at Holstein UK, this is just the tip of the iceberg. Over the past decade, the Society has built up a portfolio of services designed to improve your breeding decisions along with the quality, profitability and herd-life of your dairy cows."
     ],
     mammary: [
-      "Historically, cattle udders possessed greater similarities to those of deer or elks, being located in a more anterior position and attached solely to the abdominal wall. However increased production selection has altered the anatomical structure, causing the udders centre of gravity to move more posteriorly, with increased suspensory apparatus provided through support tissues attached to the pelvic floor.",
-      "Therefore any udder conformation analysis should comprise of a comprehensive depiction of the suspensory apparatus due to their associations and importance in regards to udder health and cow longevity. Teat quality and position should obtain equal emphasis on both the rear and side views whilst the quantity of udder in relation to the size of animal, stage of lactation and time of inspection are considered.",
-      "A desirable udder should possess a central ligament and fore and rear udder attachments that are wide and strong, with udder size comprising of length and width, not solely depth as the latter is often associated with pendulous udders."
+      "Increased production selection has altered the anatomical structure, causing the udders centre of gravity to move more posteriorly, with increased mammary support provided through tissues attached to the pelvic floor.",
+      "Therefore, any udder conformation analysis should comprise of a comprehensive depiction of udder support due to its association with udder health and cow longevity. Teat quality and position should have equal emphasis on both the rear and side views whilst the quantity of udder in relation to the size of animal, stage of lactation and time of inspection are considered.",
+      "A desirable udder should possess a central ligament, fore and rear udder attachments that are wide and strong, with udder size comprising of height and width, not solely depth as the latter is often associated with pendulous udders."
     ],
     feet_legs: [
-      "Complex cooperative efforts of muscles, tendons, ligaments and bones of the locomotor system enable the functionality of movement. Cattle Legs and Feet also serve as supportive weight-bearing structures; with feet tissues absorbing the majority of movement associated impact.",
-      "Therefore optimum feet and leg conformation consists of straight, distant front legs, proving good chest width for strong heart and capacious lung accommodation, with rear legs desirably strong, straight from the rear view and almost perpendicular from hock to pastern when examined from the side.",
-      "Feet and leg anatomy is closely linked to the cows ability to walk fluidly, which is assessed by the animals locomotion."
+      "Complex cooperative efforts of muscles, tendons, ligaments and bones enable the functionality of movement. Cattle feet and legs also serve as supportive weight-bearing structures; with feet tissues absorbing the majority of movement associated impact.","Therefore, optimum feet and leg conformation consists of rear legs being strong, straight from the rear view and almost perpendicular from hock to pastern when examined from the side.","Feet and leg anatomy is closely linked to the cows ability to walk fluidly, which is assessed by the animals locomotion."
     ],
     body_conformation: [
-      "Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, capacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.",
-      "Body size, form and weight alterations also affect animal movement, by the total space required and the scale of forces exerted in free movement execution. Therefore alterations in body conformation scores have a direct impact on her environmental and spatial requirements."
+      "Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, spacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.","Changes in body size, form and weight also affect animal movement in terms of space requirements and the scale of forces exerted in free movement. Therefore, alterations in body conformation scores have a direct impact on a cows environmental and spatial requirement."
     ],
     dairy_strength: [
-      "Temporary text - Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, capacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.",
+      "Temporary text - WAITING FOR COPY. Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, capacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.",
       "Body size, form and weight alterations also affect animal movement, by the total space required and the scale of forces exerted in free movement execution. Therefore alterations in body conformation scores have a direct impact on her environmental and spatial requirements."
     ]
   },
   traits: {
 	  angularity: {
-          main_text: 'The spring of the ribs or the degree of openness between the ribs.',
+          main_text: 'The openness of the ribcage (spring of the rib) including the degree of openness between the ribs. This is not a true linear trait.',
           scores_text: [
             {
-              score: '1',
+              score: '1-3',
               desc: 'No spring and close ribbed'
             },
+			{
+              score: '4-6',
+              desc: 'Intermediate'
+            },
             {
-              score: '9',
+              score: '7-9',
               desc: 'Well sprung and open ribbed'
             }
           ],
-          footer_text: 'Reference point: When the ribs are tight there is no opening. When the ribs spring apart or expand open, the space between the ribs becomes wider.'
+          footer_text: 'Reference point: Defining ‘spring of the ribs’ is another way of referring to the degree of openness between the ribs. When ribs are tight there is no opening. When the ribs spring apart or expand open, the space between the ribs becomes wider. '
       },
 	  body_depth: {
-          main_text: 'The distance between the top of the spine and the bottom of the barrel as the last rib – The deepest point, independent of stature.',
+          main_text: 'The distance between the top of the spine and the bottom of the barrel at the last rib – The deepest point, independent of stature.',
           scores_text: [
             {
               score: '1-3 = Shallow',
@@ -64,22 +65,22 @@ var txtDesc = {
           footer_text: 'Reference Scale: This measure is optical in relation to the balance of the animal. Ensure scoring is always conducted from the same side, because all cows are deeper on one side than the other.'
       },
       bone_quality: {
-            main_text: 'The descriptive text for bone quality trait',
+            main_text: 'U.K. Research trait.',
             scores_text: [
               {
-                score: '1-3 = Low',
-                desc: ''
+                score: '1-3 = Coarse',
+                desc: 'round, soft bone'
               },
               {
                 score: '4-6 = Intermediate',
                 desc: ''
               },
               {
-                score: '7-9 = High',
-                desc: ''
+                score: '7-9 = Fine',
+                desc: 'flat and hard bone'
               }
             ],
-            footer_text: 'Footer reference text for bone quality trait'
+            footer_text: 'Reference point: Cleanness and flatness of bone quality'
         },
 	  chest_width: {
         main_text: 'Measured from the inside surface between the top of the front legs.',
@@ -89,11 +90,11 @@ var txtDesc = {
             desc: ''
           },
           {
-            score: '4-6 Intermediate',
+            score: '4-6 = Intermediate',
             desc: ''
           },
           {
-            score: '7-9 Wide',
+            score: '7-9 = Wide',
             desc: ''
           }
         ],
@@ -111,14 +112,14 @@ var txtDesc = {
             desc: '(45 degrees)'
           },
           {
-            score: '7-9 Very steep',
+            score: '7-9 = Very steep',
             desc: '(65 degrees)'
           }
         ],
         footer_text: 'If the foot angle is difficult to score because of hoof trimming, bedding, manure etc. it is possible to look at the angle of the hairline. In case of a significant difference the worst/extreme side must be scored.'
       },
 	  fore_udder_attachment: {
-        main_text: 'The strength of the fore udder attachment to the abdominal wall; not a true linear trait.',
+        main_text: 'The strength of the fore udder attachment to the abdominal wall; not a true linear trait - optical.',
         scores_text: [
           {
             score: '1-3 = Weak and loose',
@@ -154,7 +155,7 @@ var txtDesc = {
         footer_text: ''
       },
 	  locomotion: {
-        main_text: 'Locomotion is a qualitative assessment of a cow’s ability to walk normally. Normal locomotion is defined as the animal’s ability to walk with long fluid strides, taking into account the flexibility of the hock and pastern joints, with rear hooves placed in the same sides front foot imprint. Animals whose hooves are placed outside this region are diagnosed as lame. When walking, the use of legs, feet, length and direction of the step. Not a true linear trait.',
+        main_text: 'Locomotion is a qualitative assessment of a cow’s ability to walk normally. Normal locomotion is defined as the animal’s ability to walk with long fluid strides, taking into account the flexibility of the hock and pastern joints, with rear hooves placed in the same sides front foot imprint. Animals whose hooves are placed outside this region are diagnosed lame. When walking, the use of legs, feet, length and direction of the step. Not a true linear trait.',
         scores_text: [
           {
             score: '1-3 = Severe abduction*',
@@ -169,39 +170,39 @@ var txtDesc = {
             desc: 'and Long Stride'
           }
         ],
-        footer_text: '*Abduction – The spreading out of the legs to the side of the body, and away from the medial line (centre of the body).'
+        footer_text: '*Abduction – The spreading out of the legs to the side of the body, and away from the medial line (centre of the body). Should only be scored in herds where cows regularly walk. If that is the case, all cows classified that day should be locomotion scored.'
       },
 	  rear_legs_rear_view: {
-        main_text: 'The angle of the rear leg toes in relation to the medial body line of the animal, considering the distance between the hocks.',
+        main_text: 'The angle of the rear leg toes in relation to the medial body line of the animal, considering the distance between the hocks, as measured from the rear',
         scores_text: [
           {
             score: '1',
-            desc: 'Severely outwardly pointing toes with hocks touching'
+            desc: 'Foot severely angling outwards'
           },
           {
             score: '5',
-            desc: 'Slight toe out with hocks marginally further apar'
+            desc: 'Slight toe out with hocks marginally further apart'
           },
           {
             score: '9',
-            desc: 'Feet and hocks straight/parallel with the medial body line'
+            desc: 'Foot straight and parallel with the medial body line'
           }
         ],
-        footer_text: ''
+        footer_text: 'Ref: 	1 – 45 Degrees and above, 9 – 0-5 degrees, 5 Degrees per point'
       },
       rear_legs_side_view: {
         main_text: 'The angle measured at the front of the hock',
         scores_text: [
           {
-            score: '1-3 Straight',
+            score: '1-3 = Straight',
             desc: '(160 degrees)'
           },
           {
-            score: '4-6 Intermediate',
+            score: '4-6 = Intermediate',
             desc: '(147 degrees)'
           },
           {
-            score: '7-9 Sickle',
+            score: '7-9 = Sickle',
             desc: '(134 degrees)'
           }
         ],
@@ -230,14 +231,14 @@ var txtDesc = {
         footer_text: 'To obtain population distribution it is recommended that 4 represents the mid-point of the quarter.'
       },
 	  rear_udder_height: {
-        main_text: 'The distance between the bottom of the vulva (pin bone) and the milk secreting tissue, scored in relation to the height of the animal.',
+        main_text: 'The distance between the bottom of the vulva (pin bone) and the milk secreting tissue, which is scored in relation to the height of the animal.',
         scores_text: [
           {
             score: '1-3 = Very low',
             desc: ''
           },
           {
-            score: '4-6 Intermediate',
+            score: '4-6 = Intermediate',
             desc: ''
           },
           {
@@ -248,7 +249,7 @@ var txtDesc = {
         footer_text: 'Measured on a scale between the bottom of the vulva and the hock. 1= 21cm, 9= 39cm (2cm per point)'
       },
 	   rear_udder_width: {
-        main_text: 'The width of the milk secreting tissue at the top of the rear udder.',
+        main_text: 'Measured at the top of the rear udder and measures the width of the milk secreting tissue (mammary).',
         scores_text: [
           {
             score: '1 = Very narrow',
@@ -281,7 +282,7 @@ var txtDesc = {
               desc: '(-12cm)'
             }
           ],
-          footer_text: 'Reference point: from 1(+4cm) remove 2 point for every score.'
+          footer_text: 'Reference point: from linear score 1(+4cm) remove 2 point for every score.'
       },
 	  rump_width: {
           main_text: 'The distance between the most posterior point of the pin bones.',
@@ -302,7 +303,7 @@ var txtDesc = {
           footer_text: 'Reference Scale: 10cm – 26cm; 2cm per point.'
       },
 	  stature: {
-          main_text: 'Heifers are measured from the top of the spine in between the hips to the ground, second lactation+ cows are measured from the withers.',
+          main_text: 'Heifers are measured from the top of the spine in between the hips to the ground, second lactation+ cows are measured from the withers. Precise measurement in centimetres/inches, or linear scale:',
           scores_text: [
             {
               score: '1 = Short',
@@ -371,11 +372,11 @@ var txtDesc = {
             desc: ''
           },
           {
-            score: '9 = Shallow',
+            score: '9 = Shallow (22cm above the hocks)',
             desc: ''
           }
         ],
-        footer_text: 'Reference scale: 2 = (0cm); 3cm per point'
+        footer_text: 'Reference scale: 2 = level (0cm); 3cm per point'
       },
 	    udder_support: {
         main_text: 'The depth of the cleft/ligament, measured at the base of the rear udder.',
@@ -420,22 +421,22 @@ var txtDesc = {
         footer_text: ''
       },
       udder_texture: {
-          main_text: 'This is the descriptive text for udder texture.',
+          main_text: 'The texture and veination of the udder.',
           scores_text: [
             {
-              score: '1-3 = texture 1',
+              score: '1 = Thick heavy meaty texture',
               desc: ''
             },
             {
-              score: '4-6 = texture 2',
+              score: '5 = Intermediate',
               desc: ''
             },
             {
-              score: '7-9 = texture 3',
+              score: '9 = Silky Texture with vein definition',
               desc: ''
             }
           ],
-          footer_text: 'This is the footer text for udder texture'
+          footer_text: ''
         }
     }
 
@@ -481,7 +482,7 @@ var navMenus = {
             txtColor:'#333',
             target: {
               type: 'url',
-              view: 'guide',
+              view: '',
               route: 'pdf/type_classification_guide.pdf'
               }
           },
@@ -1146,22 +1147,24 @@ var navMenus = {
 var navOpts = {
   mainWheel: true,
   viewBoxSize: '0 0 800 800',
+  scaleFactor: 0.6,
+  minHeight: 400,
   x: 400,
   y: 400,
+  innerCircleR: 120,
+  outerCircleR: 380,
+  activeSliceR: 380,
   fill: '#eee',
   stroke: '#eee',
   strokeWidth: 0,
   segStrokeWidth: 4,
   items: null,
   startAngle:-Math.PI/2,
-  innerCircleR: 120,
-  outerCircleR: 380,
-  activeSliceR: 380,
   activeSliceIdx: 3,
   activeSliceFill: '#a00',
   navTxtTitleColor: '#fff',
   navTxtTitleSize: '1.8em',
-  defaultCenterImg: 'img/Trait_17_00035.jpg',
+  defaultCenterImg: 'img/center_cow.png',
   backArrowImg: 'img/icons/back_arrow.png',
   rotate: false,
   showSelectMarker: false,
@@ -1213,7 +1216,7 @@ var xideal_cow = {
 
 var ideal_cow = {
   path: 'data/v_low_res_200718.json',
-  xOffset: 0,
+  xOffset: -5,
   yOffset: -24,
   zOffset: 0,
   xRot: 0,

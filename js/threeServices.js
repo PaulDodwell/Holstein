@@ -13,9 +13,9 @@ angular.module('threeViewer.services', [])
     // Returns a single instance of a camera.  Consumed by directive and controls.
     .service('CameraService', function () {
         // default values for camera
-        var viewAngle = 45;
+        var viewAngle = 35;
         //var aspectRatio = window.innerWidth / window.innerHeight;
-        var aspectRatio = 14 / 9;
+        var aspectRatio = 12 / 9;
         var near = 0.1
         var far = 15000;
 
@@ -43,7 +43,6 @@ angular.module('threeViewer.services', [])
 
             ModelDataService.getData('data/model1.json').then(function (dataResponse) {
 
-              alert('rsp: '+JSON.stringify(dataResponse.data));
                 var splinePoints = [];
                 var path = dataResponse.data;
 
@@ -138,10 +137,11 @@ angular.module('threeViewer.services', [])
                   */
                   SceneService.scene.add(zMesh);
 
+                  loadLightAmbient(SceneService.scene);
                   loadLight1(SceneService.scene);
                   loadLight2(SceneService.scene);
-                  loadLight3(SceneService.scene);
-                  loadLight4(SceneService.scene);
+                  //loadLight3(SceneService.scene);
+                  //loadLight4(SceneService.scene);
 
               	};
 
@@ -162,15 +162,21 @@ angular.module('threeViewer.services', [])
 
               	}
 
+                var loadLightAmbient = function(scene) {
+                  var light1 = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
+                  scene.add( light1 );
+                  return;
+                }
+
                 var loadLight1 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xffffff, 0.7 );
+              		var light1 = new THREE.DirectionalLight( 0xd9d9d9, 0.5 );
               		light1.position.set(-1, 1, 0 );
               		scene.add( light1 );
                   return;
               	}
 
                 var loadLight2 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xffffff, 0.7 );
+              		var light1 = new THREE.DirectionalLight( 0xd9d9d9, 0.5 );
               		light1.position.set( 1, -1, 0 );
               		scene.add( light1 );
                   return;

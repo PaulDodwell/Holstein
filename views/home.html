@@ -49,15 +49,15 @@
   }
   .menu_text_wrapper p {
       text-align:left;
-      font-size:0.9em;
   }
+
 </style>
 <div class='container-fluid'>
 
         <div class='row'>
 
           <div class='col-sm-7 col-sm-push-5 wheel_outer'>
-              <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" start-menu="'main'" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText" slider-state="sliderState[0]"></circle-nav></div>
+              <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText"></circle-nav></div>
           </div>
           <div class='col-sm-5 col-sm-pull-7'>
               <menu-desc menu-state="menuState" parent-menu="parentMenu" content="navMenus[menuState.inner]"></menu-desc>
