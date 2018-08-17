@@ -2,11 +2,9 @@
 
 html {
 	/*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
-	font-family:'Open Sans', Arial, Helvetica, sans-serif;
-	font-size:16px;
+	font-family:'Lato', Arial, Helvetica, sans-serif !important;
+	font-size:14px ;
 	color:#666;
-	background: url(../img/bg1.png) no-repeat center top fixed;
- 	background-size: cover;
 	position: relative;
 	min-height: 100%;
 }
@@ -157,18 +155,21 @@ select {
 }
 
 .back_link {
-	font-size:2em;
+	/*font-size:2em;*/
 	margin-right:12px;
 	height:36px;
 }
 a.back_link {
 	text-decoration:none;
+	color:#1c3764;
+	line-height:2em;
+	cursor:pointer;
 }
 .back_link img {
 	display:inline-block;
 	height:36px;
 	width:auto;
-	margin-bottom:-10px;
+	margin-bottom:2px;
 	opacity:0.6;
 }
 .back_link img:hover {
@@ -500,20 +501,20 @@ h2 {
 @media screen and (min-width: 1200px) {
 
 	h1 {
-		font-size:2em;
+		font-size:1.9em;
 	}
 
 	h2 {
-		font-size:1.6em;
+		font-size:1.5em;
 	}
 
 	p {
-		font-size:1.2em;
+		font-size:1.1em;
 	}
 
 	.menu_text_wrapper {
 		padding-left:120px !important;
-		padding-top:60px !important;
+		padding-top:32px !important;
 	}
 
 }
@@ -521,15 +522,15 @@ h2 {
 @media screen and (min-width: 1600px) {
 
 	h1 {
-		font-size:2.2em;
+		font-size:2.1em;
 	}
 
 	h2 {
-		font-size:2em;
+		font-size:1.9em;
 	}
 
 	p {
-		font-size:1.4em;
+		font-size:1.3em;
 	}
 
 	.header-logo {
@@ -580,15 +581,16 @@ table, tr {
 	/*color:#4ab145;*/
 }
 
+.wheel_wrapper {
+	top:30px;
+	height:440px;
+	margin-bottom:36px;
+}
+
 }
 
 
 @media screen and (max-width: 767px) {
-
-.wheel_wrapper {
-	top:30px;
-	height:440px;
-}
 
 html {
 	font-size:12px;
@@ -617,6 +619,7 @@ html {
 	.wheel_wrapper {
 		top:2px;
 		height:400px;
+		margin-bottom:12px;
 	}
 
 	.wheel_outer {
@@ -719,29 +722,9 @@ html {
     display: block;
 }
 
-.dev_list tr.ng-enter, .dev_list tr.ng-leave {
-  transition: all 0.3s linear;
-  transform:translateX(-20px);
-  opacity: 0;
-}
-
-.dev_list tr.ng-leave,.dev_list tr.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.dev_list tr.ng-enter,.dev_list tr.ng-leave.ng-leave-active {
-  opacity: 0;
-}
-
-.dev_list tr.ng-enter-stagger {
-	transition-delay:0.1s;
- 	transition-duration:0;
-}
-
-
 .fader.ng-hide, .fader.ng-show {
   transition: 1s cubic-bezier(0.5, 0.1, 0.25, 1) all;
-	transition: opacity 0.5s linear;
+	/*transition: opacity 0.5s linear;*/
 }
 
 .fader.ng-hide, .fader.ng-show.ng-show-active {

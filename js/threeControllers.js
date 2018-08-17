@@ -18,7 +18,7 @@ angular.module('threeViewer.controllers', ['threeViewer.services'])
           colorBG: 0xffffff,
           hexColorBG: '#ffffff',
           opacityBG: 1,
-          camZ: 90
+          camZ: 100
         }
 
         $scope.manager = {};
@@ -26,6 +26,7 @@ angular.module('threeViewer.controllers', ['threeViewer.services'])
         $scope.controls = {};
 
         $scope.addModel = function () {
+            //CowFactory.clearScene();
             CowFactory.addModel($scope.cow3D);
         }
 

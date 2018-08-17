@@ -28,6 +28,9 @@
     border:2px solid rgba(255,255,255,0.5);
     pointer-events:auto;
     cursor:pointer;
+    background-repeat:no-repeat;
+    background-size:34px 34px;
+    background-position:5px;
   }
   .side_tab:hover {
     background-color:#ccc !important;
@@ -42,7 +45,7 @@
     text-align:right;
   }
   .tabs_hidden {
-    right:-190px;
+    right:-173px;
   }
   .tabs_active {
     right:0;
@@ -56,7 +59,7 @@
 </style>
 <div class='side_tabs_wrapper'>
 <div class="side_tabs slideTrans" ng-class="{'tabs_active':active,'tabs_hidden':!active}">
-  <div class="side_tab" ng-repeat="tab in args.items" style="background:{{tab.color}};" ng-click="doTabs(tab.target); $event.stopPropagation();">
+  <div class="side_tab" ng-repeat="tab in args.items" style="background-color:{{tab.color}};background-image:url({{tab.icon}})" ng-click="doTabs(tab.target); $event.stopPropagation();">
     <div class="side_tab_txt" style="color:{{tab.txtColor}};">{{tab.title}}</div>
   </div>
 </div>

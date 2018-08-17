@@ -41,6 +41,7 @@
       overflow:hidden;
   }
   .menu_text_wrapper h1 {
+      color:#1c3764;
       text-align:left;
       margin-top:0;
   }
@@ -52,17 +53,17 @@
   }
 
 </style>
+
 <div class='container-fluid'>
 
         <div class='row'>
 
-          <div class='col-sm-7 col-sm-push-5 wheel_outer'>
+          <div class='col-md-7 col-md-push-5 wheel_outer'>
               <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText"></circle-nav></div>
           </div>
-          <div class='col-sm-5 col-sm-pull-7'>
+          <div class='col-md-5 col-md-pull-7'>
               <menu-desc menu-state="menuState" parent-menu="parentMenu" content="navMenus[menuState.inner]"></menu-desc>
           </div>
-
 
        </div>
 

@@ -216,7 +216,17 @@ holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$w
 
 	$scope.tritems = $scope.navMenus[$scope.viewData].items;
 	$scope.viewData = $scope.navMenus[$scope.viewData].name;
-	$scope.targetData = $scope.navMenus[$scope.viewData].name
+	$scope.targetData = $scope.navMenus[$scope.viewData].name;
+
+	var trTypes = $scope.navMenus['traits'].items;
+	var trIdx = 0;
+	for(var i=0;i<trTypes.length;i++) {
+		if(trTypes[i].target.innerMenu == $scope.viewData) {
+			trIdx = i;
+		}
+	}
+
+	$scope.trType = trTypes[trIdx];
 
 	$scope.currState = {
 		selected: (typeof $routeParams.trait !== 'undefined') && $routeParams.trait ? $routeParams.trait : null,
@@ -246,6 +256,8 @@ holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','Dat
 	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
 	$scope.sliderArgs.keyNames = $scope.keyNames;
 	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+	$scope.sliderState.nearKey = $scope.currState.item.standard_score ? $scope.currState.item.standard_score : 1;
+
 
 	$scope.$watch('sliderState',function(val) {
 		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
@@ -280,7 +292,7 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 		args:$scope.navMenus['locomotion'].items[0]
 	}
 
-	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':13,'label':'2'},{'pos':25,'label':'3'},{'pos':38,'label':'4'},{'pos':50,'label':'5'},{'pos':63,'label':'6'},{'pos':75,'label':'7'},{'pos':88,'label':'8'},{'pos':100,'label':'9'}];
+	$scope.keyNames =  [{'pos':0,'label':'1'},{'pos':50,'label':'5'},{'pos':100,'label':'9'}];
 
 	$scope.sliderArgs = [];
 	$scope.sliderState = [];
@@ -289,6 +301,7 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
 	$scope.sliderArgs.keyNames = $scope.keyNames;
 	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
+	$scope.sliderState.nearKey = $scope.locomotion.standard_score ? $scope.locomotion.standard_score : 1;
 
 	$scope.videoSrc = {
 		src: 'locomotion_1.mp4',
@@ -302,10 +315,10 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 	$scope.$watch('sliderState',function(val) {
 		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
 		$scope.nKey = parseInt(val.nearKey);
-		if($scope.nKey > 6) {
+		if($scope.nKey > 2) {
 			$scope.videoSrc.src = 'locomotion_3.mp4';
 		}
-		else if($scope.nKey > 3) {
+		else if($scope.nKey > 1) {
 			$scope.videoSrc.src = 'locomotion_2.mp4';
 		}
 		else  {
@@ -1057,21 +1070,35 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 					return false;
 				 }
 
-				 $scope.snapCall = function() {
-					 $scope.snapToMark();
+				 $scope.snapCall = function(k) {
+					 if(typeof k !== 'undefined') {
+						 $scope.snapToMark(k);
+					 }
+					 else {
+						 $scope.snapToMark();
+					 }
 					 return false;
 				 }
 
-				 $scope.snapToMark = function() {
-							var p = Math.max(0,$scope.rounder($scope.curState.curPercent,100/$scope.options.steps));
-							var nearKey = $scope.getNearKey(p);
-							$scope.curState.nearKey = nearKey.idx;
-							$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
-							$scope.curState.curPercent = p;
-							$scope.curState.nearKeyLabel = nearKey.label;
-							$element.css({'left':$scope.curState.curPos + 'px'});
-							$scope.focusKey = ("#sk_" + $scope.options.id) + p;
-							return false;
+				 $scope.snapToMark = function(k) {
+					  var p = null;
+					  var nearKey = null;
+
+						if(typeof k !== 'undefined') {
+								p = $scope.getKeyPos(k);
+						}
+						else {
+								p = Math.max(0,$scope.rounder($scope.curState.curPercent,100/$scope.options.steps));
+						}
+
+						nearKey = $scope.getNearKey(p);
+						$scope.curState.nearKey = nearKey.idx;
+						$scope.track.x = $scope.curState.curPos = $scope.pcentPos(p);
+						$scope.curState.curPercent = p;
+						$scope.curState.nearKeyLabel = nearKey.label;
+						$element.css({'left':$scope.curState.curPos + 'px'});
+						$scope.focusKey = ("#sk_" + $scope.options.id) + p;
+						return false;
 					}
 
 					$scope.getKeyLabel = function(p) {
@@ -1097,6 +1124,14 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 						else {
 							return 'unknown';
 						}
+					}
+
+					$scope.getKeyPos = function(k) {
+						if($scope.keyMarkers.length > 0) {
+							var pos = $scope.keyMarkers[k-1].pos;
+							return pos;
+						}
+						return false;
 					}
 
 					$scope.rounder = function (number,to) {
@@ -1133,8 +1168,7 @@ holsteinModule.directive('sliderCtrl',['$rootScope','$window','$location','$docu
 					}, true);
 
 					$element.ready(function() {
-						//$element.css('left','0px');
-						$scope.snapCall();
+						$scope.snapCall($scope.curState.nearKey);
 					});
 
 				}
@@ -1207,6 +1241,16 @@ holsteinModule.directive('locomotionVideo', ['$rootScope','$location','ApiSvce',
         templateUrl: 'html/locomotion_video.html',
 				controller: function($scope, $element) {
 						$scope.show = true;
+
+						$scope.getVidDimensions = function () {
+							//return { 'h': $element.find("video")[0].clientHeight, 'w': $element.find("video")[0].clientWidth };
+							return { 'h': $element[0].querySelector('.vid_wrap').clientHeight, 'w': $element[0].querySelector('.vid_wrap').clientWidth };
+							element[0].querySelector('.multi-files')
+						};
+
+						$scope.$watch($scope.getVidDimensions, function (newValue, oldValue) {
+								$scope.vidHeight =  Math.round($scope.getVidDimensions().w * 0.5625);
+						}, true);
 				}
     }
 }]);
@@ -1251,6 +1295,8 @@ holsteinModule.directive('traitDesc', [function () {
         restrict: 'E',
 				replace: true,
 				scope: {
+					parentMenu: '=',
+					args: '=',
 					content: '='
 				},
         templateUrl: 'html/trait_desc.html',

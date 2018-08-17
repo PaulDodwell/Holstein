@@ -8,6 +8,9 @@
     <tr ng-repeat="score in content.scores_text"><td></td><td>{{score.score}}</td><td>{{score.desc}}</td></tr>
   </table>
 
-  <div class='footer_text'><p>{{content.footer_text}}</p></div>
+  <div class='footer_text'>
+    <p>{{content.footer_text}}</p>
+    <p style="background-color:{{parentMenu.color}};color:{{parentMenu.txtColor}};padding:10px;border-radius:12px;margin-top:24px;">Holstein Breed Standard Score for {{args.title}}: <b>{{args.standard_score}}</b></p>
+  </div>
 
 </div>

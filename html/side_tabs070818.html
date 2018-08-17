@@ -1,0 +1,63 @@
+<style>
+  .side_tabs_wrapper {
+    position:absolute;
+    right:0;
+    /*top:200px;*/
+    bottom:-400px;
+    width:220px;
+    min-height:320px;;
+    overflow:hidden;
+    /*border:1px solid #eee;*/
+    pointer-events:none;
+    z-index:10;
+  }
+  .side_tabs {
+    position:absolute;
+    top:0;
+    width:220px;
+    min-height:70px;;
+    overflow:hidden;
+  /*  border:1px solid #dee;*/
+  }
+  .side_tab {
+    width:100%;
+    height:50px;
+    margin:12px 0;
+    border-top-left-radius:12px;
+    border-bottom-left-radius:12px;
+    border:2px solid rgba(255,255,255,0.5);
+    pointer-events:auto;
+    cursor:pointer;
+  }
+  .side_tab:hover {
+    background-color:#ccc !important;
+  }
+  .side_tab_txt {
+    padding:12px 12px;
+    font-size:1.1em;
+    font-weight:bold;
+    color:#fff;
+    width:96%;
+    padding-right:4%;
+    text-align:right;
+  }
+  .tabs_hidden {
+    right:-190px;
+  }
+  .tabs_active {
+    right:0;
+  }
+  .slideTrans {
+  	-webkit-transition: all 0.3s ease-in-out;
+  	-moz-transition: all 0.3s ease-in-out;
+  	-ms-transition: all 0.3s ease-in-out;
+  	transition: all 0.3s ease-in-out;
+  }
+</style>
+<div class='side_tabs_wrapper'>
+<div class="side_tabs slideTrans" ng-class="{'tabs_active':active,'tabs_hidden':!active}">
+  <div class="side_tab" ng-repeat="tab in args.items" style="background-color:{{tab.color}};" ng-click="doTabs(tab.target); $event.stopPropagation();">
+    <div class="side_tab_txt" style="color:{{tab.txtColor}};">{{tab.title}}</div>
+  </div>
+</div>
+</div>

@@ -75,6 +75,58 @@ angular.module('threeViewer.services', [])
 
         var zMesh = {};
 
+        this.clearScene = function(renderer) {
+          if(SceneService.scene.children.length > 0) {
+            SceneService.scene.children.forEach(function(v,i) {
+              console.log('removing '+v.name);
+              //SceneService.scene.remove(v);
+              disposeNode(v);
+            });
+
+          }
+
+          function disposeNode(node) {
+             if (node instanceof THREE.Mesh) {
+               if (node.geometry) {
+                 node.geometry.dispose();
+                 node.geometry = undefined; // fixed problem
+               }
+
+               if (node.material) {
+                 if (node.material instanceof THREE.MeshFaceMaterial || node.material instanceof THREE.MultiMaterial) {
+                   node.material.materials.forEach( function(mtrl, idx) {
+                     if (mtrl.map) mtrl.map.dispose();
+                     if (mtrl.lightMap) mtrl.lightMap.dispose();
+                     if (mtrl.bumpMap) mtrl.bumpMap.dispose();
+                     if (mtrl.normalMap) mtrl.normalMap.dispose();
+                     if (mtrl.specularMap) mtrl.specularMap.dispose();
+                     if (mtrl.envMap) mtrl.envMap.dispose();
+
+                     mtrl.dispose();
+                     mrtl = undefined; // fixed problem
+                   } );
+                 }
+                 else {
+                   if (node.material.map) node.material.map.dispose();
+                   if (node.material.lightMap) node.material.lightMap.dispose();
+                   if (node.material.bumpMap) node.material.bumpMap.dispose();
+                   if (node.material.normalMap) node.material.normalMap.dispose();
+                   if (node.material.specularMap) node.material.specularMap.dispose();
+                   if (node.material.envMap) node.material.envMap.dispose();
+
+                   node.material.dispose();
+                   node.material = undefined; // fixed problem
+                 }
+               }
+             }
+             console.log('node before removal: ', node);
+             SceneService.scene.remove( node );
+             renderer.dispose(); // ***EDIT*** improved even memory more original scene heap is 12.4 MB; add objects increases to 116 MB or 250 MB (different models), clearing always brings down to 13.3 MB ... there still might be some artifacts.
+             node = undefined; // unnecessary
+           }
+
+        }
+
         this.moveModel = function(pos) {
           if(zMesh.hasOwnProperty('position')) {
             zMesh.position.set(pos.xOffset, pos.yOffset, pos.zOffset );
@@ -114,11 +166,13 @@ angular.module('threeViewer.services', [])
 
               	var createMesh = function( geometry,materials)	{
 
-              		geometry.computeVertexNormals();
+                  //materials[0].normalScale = new THREE.Vector2(1,1);
+                  //geometry.computeVertexNormals();
 
               		zMesh = new THREE.Mesh( geometry,new THREE.MeshFaceMaterial( materials ));
-              		zMesh.name='Ideal Holstein Cow';
-              		zMesh.shading = THREE.SmoothShading;
+              		zMesh.name='cow';
+              		//zMesh.shading = THREE.FlatShading;
+                  zMesh.shading = THREE.SmoothShading;
               		zMesh.overdraw = true;
               		zMesh.needsUpdate = true
 
@@ -135,13 +189,9 @@ angular.module('threeViewer.services', [])
               		bbox.update();
               		SceneService.scene.add( bbox );
                   */
-                  SceneService.scene.add(zMesh);
+                  //clearScene();
 
-                  loadLightAmbient(SceneService.scene);
-                  loadLight1(SceneService.scene);
-                  loadLight2(SceneService.scene);
-                  //loadLight3(SceneService.scene);
-                  //loadLight4(SceneService.scene);
+                  SceneService.scene.add(zMesh);
 
               	};
 
@@ -162,41 +212,9 @@ angular.module('threeViewer.services', [])
 
               	}
 
-                var loadLightAmbient = function(scene) {
-                  var light1 = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
-                  scene.add( light1 );
-                  return;
-                }
-
-                var loadLight1 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xd9d9d9, 0.5 );
-              		light1.position.set(-1, 1, 0 );
-              		scene.add( light1 );
-                  return;
-              	}
-
-                var loadLight2 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xd9d9d9, 0.5 );
-              		light1.position.set( 1, -1, 0 );
-              		scene.add( light1 );
-                  return;
-              	}
-
-                var loadLight3 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xffffff, 0.7 );
-              		light1.position.set(-1, -1, 0 );
-              		scene.add( light1 );
-                  return;
-              	}
-
-                var loadLight4 = function(scene) {
-              		var light1 = new THREE.DirectionalLight( 0xffffff, 0.7  );
-              		light1.position.set( 1, 1, 0 );
-              		scene.add( light1 );
-                  return;
-              	}
-
-		            loader.load( model, createMesh );
+                if(typeof SceneService.scene.getObjectByName( "cow" ) == 'undefined') {
+		                loader.load( model, createMesh );
+                  }
 
             });
 
