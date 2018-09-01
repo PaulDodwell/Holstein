@@ -2,15 +2,22 @@
 
   <div class='main_text'><p>{{content.main_text}}</p></div>
 
-  <p><strong>Linear Breakdown</strong></p>
-
   <table class='scores_text'>
+    <p><strong>Linear Breakdown</strong></p>
     <tr ng-repeat="score in content.scores_text"><td></td><td>{{score.score}}</td><td>{{score.desc}}</td></tr>
   </table>
 
   <div class='footer_text'>
     <p>{{content.footer_text}}</p>
-    <p style="background-color:{{parentMenu.color}};color:{{parentMenu.txtColor}};padding:10px;border-radius:12px;margin-top:24px;">Holstein Breed Standard Score for {{args.title}}: <b>{{args.standard_score}}</b></p>
+  </div>
+
+  <div class='advice_text'>
+    <p><strong>Advice &amp; Guidance</strong></p>
+    <p>{{content.advice}}</p>
+  </div>
+
+  <div class='standard_score_text'>
+    <p style="background-color:{{parentMenu.color}};color:{{parentMenu.txtColor}};padding:10px;border-radius:12px;margin-top:24px;">Holstein Breed Standard Score for {{args.title}}: <span style='padding-left:6px;'><b>{{args.standard_score}}</b></span></p>
   </div>
 
 </div>

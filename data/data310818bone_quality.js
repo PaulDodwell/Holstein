@@ -10,9 +10,9 @@ var txtDesc = {
     },
     traits: {
       main_text: [
-        "The Linear assessment involves the scoring of 21 individual traits on a scale of 1-9, describing the degree of the trait, rather than its desirability.",
-        "Each linear trait is considered when devising an score for the relevant composite.",
-        "Therefore, the navigation of the Virtual Cow has been designed to aid the understanding of which composite each trait is associated with."
+        "(N.B. Temporary text. Introduction copy needed for traits section if possible here). Holstein UK is Europe’s largest independent breed society. It offers a range of services to the dairy farming industry targeted at improving the genetics and profitability of the Holstein breed.",
+        "British Friesians continue to be registered in the herdbook with percentages of Friesian clearly denoted. Breed societies have traditionally been associated with registering births and ancestry, promoting the breed, and increasing the value of your livestock.",
+        "But at Holstein UK, this is just the tip of the iceberg. Over the past decade, the Society has built up a portfolio of services designed to improve your breeding decisions along with the quality, profitability and herd-life of your dairy cows."
       ]
     },
     mammary: {
@@ -68,7 +68,7 @@ var txtDesc = {
       "Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, spacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.","Changes in body size, form and weight also affect animal movement in terms of space requirements and the scale of forces exerted in free movement. Therefore, alterations in body conformation scores have a direct impact on a cows environmental and spatial requirement."],
 		sub_text: [
         {
-          title: "How does Linear Scale compare with Bull proofs?" ,
+          title: "How does the Linear Scale compare with Bull proofs?" ,
     		  body: [
     			"Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
     			"The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
@@ -92,7 +92,7 @@ var txtDesc = {
       ],
       sub_text: [
           {
-            title: "How does Linear Scale compare with Bull proofs?" ,
+            title: "How does the Linear Scale compare with Bull proofs?" ,
       		  body: [
       			"Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
 				"The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
@@ -964,9 +964,9 @@ var navMenus = {
             },
             {
               idx: 3,
-              title: '',
-              name: '',
-              content: '',
+              title: 'Bone Quality',
+              name: 'bone_quality',
+              content: txtDesc.traits.bone_quality,
               icon: 'img/icons/icon_blank.png',
               color: '#D9D9D9',
               txtColor: '#1C3764',
@@ -975,10 +975,9 @@ var navMenus = {
               img_path: 'img/trait',
               standard_score: 7,
               target: {
-                  type: 'blank',
+                  type: 'view',
                   view: 'traits',
                   route: 'feet_legs/bone_quality'
-
                 }
             },
             {

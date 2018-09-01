@@ -91,6 +91,10 @@ select {
 	color:rgba(0,173,207,1);
 }
 
+.dark_blue {
+	color:#1c3764 !important;
+}
+
 .bdr {
 	border:1px solid #000;
 }
@@ -154,22 +158,36 @@ select {
 	background-color:rgba(255,255,255,0.8);
 }
 
+.rotate90CW {
+  -ms-transform: rotate(90deg) !important; /* IE 9 */
+  -webkit-transform: rotate(90deg) !important; /* Safari */
+  transform: rotate(90deg) !important;
+}
+
+.rotate90CCW {
+  -ms-transform: rotate(-90deg) !important; /* IE 9 */
+  -webkit-transform: rotate(-90deg) !important; /* Safari */
+  transform: rotate(-90deg) !important;
+}
+
 .back_link {
 	/*font-size:2em;*/
 	margin-right:12px;
 	height:36px;
 }
 a.back_link {
+	display:inline-block;
 	text-decoration:none;
 	color:#1c3764;
-	line-height:2em;
+	line-height:2.1em;
 	cursor:pointer;
+	margin-top:-12px;
 }
 .back_link img {
 	display:inline-block;
-	height:36px;
+	height:34px;
 	width:auto;
-	margin-bottom:2px;
+	margin-bottom:4px;
 	opacity:0.6;
 }
 .back_link img:hover {
@@ -182,7 +200,7 @@ label {
 
 table, tr {
   width:90%;
-	font-size:1.2em;
+	font-size:1em;
 }
 
 td {
@@ -206,6 +224,10 @@ td {
 }
 
 /*bootstrap overrides*/
+
+a {
+	color:#22507f !important;
+}
 
 .nav {
 	z-index:100;
@@ -238,12 +260,13 @@ td {
 }
 
 .dropdown-menu li {
-	margin-top:4px !important;
+	margin-top:1px !important;
+	height:30px !important;
 }
 
 .dropdown-menu li a {
 	padding-top:4px !important;
-	padding-bottom:4px !important;
+	padding-bottom:1px !important;
 }
 
 /* Wheel menu styles*/
@@ -547,15 +570,30 @@ h2 {
 	}
 
 	.wheel_wrapper {
-		top:120px;
+		top:80px;
 	}
 
 	.menu_text_wrapper {
-		margin-top:120px !important;
+		margin-top:40px !important;
 	}
 
 }
 
+@media screen and (max-width: 1200px) {
+
+	h1 {
+		font-size:1.6em;
+	}
+
+	a.back_link {
+		line-height:2.4em;
+	}
+
+	.back_link img {
+		height:30px;
+	}
+
+}
 
 @media screen and (max-width: 1024px) {
 
@@ -565,6 +603,18 @@ html {
 
 table, tr {
 	font-size: 1em !important;
+}
+
+h1 {
+	font-size:1.6em;
+}
+
+.back_link img {
+	height:30px;
+}
+
+a.back_link {
+	line-height:2.4em;
 }
 
 }
@@ -634,7 +684,7 @@ html {
 	.back_link img {
 		height:24px;
 		margin-right:0;
-		margin-bottom:-4px;
+		margin-bottom:4px;
 	}
 
 	h1 {

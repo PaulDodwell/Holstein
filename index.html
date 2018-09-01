@@ -25,6 +25,7 @@
 	  <script src="js/angular.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
 	  <script src="js/ngDialog.min.js"></script>
     <script src="js/hammer.min.js"></script>
     <script src="js/angular.hammer.js"></script>
@@ -57,7 +58,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#!home" ng-click="isNavCollapsed = true"><img class='header-logo' src='img/icons/holstein-logo.png' /></a>
+          <a class="navbar-brand" href="#!menu/main" ng-click="isNavCollapsed = true"><img class='header-logo' src='img/icons/holstein-logo.png' /></a>
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar" uib-collapse="isNavCollapsed">
@@ -81,7 +82,7 @@
 
 	<footer class='footer' ng-class="{'sticky_footer':stickyFooter}">
     	<div class='container'>
-   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'2px'}">Development Prototype: Breeze &amp; Freeze Ltd</span></p>
+   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'2px'}">&copy; Copyright Holstein UK 2018 - Developed by Breeze &amp; Freeze Ltd</span></p>
    		</div>
  </footer>
 

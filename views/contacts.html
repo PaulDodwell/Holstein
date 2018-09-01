@@ -2,11 +2,18 @@
 <div class='main_content  container-fluid'>
 
         <div class='row'>
-          <div class="col-12"><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> CONTACTS PAGE</a></h1></div>
+          <div class="col-12"><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> CONTACTS</a></h1></div>
         </div>
         <div class='row'>
             <div class='col-sm-8 col xs-12'>
-              <div class='col-sm-12' style='text-align:center'><h3> coming soon - to be supplied</h3></div>
+              <div class='col-md-6'>
+                  <div ng-repeat="contact in contacts" style='margin:3em auto;padding-left:24px;'>
+                    <h4 class='dark_blue'>{{contact.name}}</h4>
+                    <p>Email: <strong> <a href='mailto:{{contact.email}}'> {{contact.email}}</a></strong></p>
+                    <p>Telephone: <strong> <a href='tel:{{contact.tel}}'> {{contact.tel}}</a></strong></p>
+                    <p ng-if="contact.desc.length > 0">{{contact.desc}}</p>
+                  </div>
+              </div>
             </div>
           <div class='col-sm-2 col xs-0'></div>
         </div>

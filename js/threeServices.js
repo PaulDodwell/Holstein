@@ -142,21 +142,28 @@ angular.module('threeViewer.services', [])
 
                 var manager = new THREE.LoadingManager();
 
+                manager.onStart = function ( item, loaded, total ) {
+                  $rootScope.$apply(function() {
+                    $rootScope.load3D.status = 'loading';
+                    $rootScope.load3D.items = loaded;
+                  });
+                  console.log(item, loaded, total);
+                };
                 manager.onProgress = function (item, loaded, total) {
                   $rootScope.$apply(function() {
-                    $rootScope.loadStatus = 'loading';
+                    $rootScope.load3D.items = loaded;
                   });
                   console.log(item, loaded, total);
                 };
                 manager.onLoad = function () {
                   $rootScope.$apply(function() {
-                    $rootScope.loadStatus = 'loaded';
+                    $rootScope.load3D.status = 'loaded';
                   });
                   console.log('all items loaded');
                 };
                 manager.onError = function () {
                   $rootScope.$apply(function() {
-                    $rootScope.loadStatus = 'load error';
+                    $rootScope.load3D.status = 'load error';
                   });
                   console.log('there has been an error');
                 };

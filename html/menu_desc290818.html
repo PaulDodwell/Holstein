@@ -1,0 +1,11 @@
+<div class='menu_text_wrapper'>
+
+  <div class='main_text' ng-show="!(menuState.inner == 'main')"><h1><a class='back_link' ng-click="menuBack();sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> {{content.desc.heading}}</a></h1></div>
+  <div class='main_text' ng-show="menuState.inner == 'main'"><h1>{{content.desc.heading}}</h1></div>
+  <p ng-repeat="para in content.desc.paras.main_text">{{para}}</p>
+  <div ng-repeat="sub in content.desc.paras.sub_text">
+    <p><b>{{sub.title}}</b></h4>
+    <p style='font-size:1em;' ng-repeat="sub_para in sub.body" ng-bind-html="sub_para"></p>
+  </div>
+
+</div>

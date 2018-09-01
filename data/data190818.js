@@ -10,9 +10,9 @@ var txtDesc = {
     },
     traits: {
       main_text: [
-        "The Linear assessment involves the scoring of 21 individual traits on a scale of 1-9, describing the degree of the trait, rather than its desirability.",
-        "Each linear trait is considered when devising an score for the relevant composite.",
-        "Therefore, the navigation of the Virtual Cow has been designed to aid the understanding of which composite each trait is associated with."
+        "(N.B. Temporary text. Introduction copy needed for traits section if possible here). Holstein UK is Europe’s largest independent breed society. It offers a range of services to the dairy farming industry targeted at improving the genetics and profitability of the Holstein breed.",
+        "British Friesians continue to be registered in the herdbook with percentages of Friesian clearly denoted. Breed societies have traditionally been associated with registering births and ancestry, promoting the breed, and increasing the value of your livestock.",
+        "But at Holstein UK, this is just the tip of the iceberg. Over the past decade, the Society has built up a portfolio of services designed to improve your breeding decisions along with the quality, profitability and herd-life of your dairy cows."
       ]
     },
     mammary: {
@@ -23,19 +23,19 @@ var txtDesc = {
       ],
       sub_text: [
           {
-            title: "How does Linear Scale compare with Bull proofs?" ,
+            title: "How does the Linear Scale compare with Bull proofs?" ,
       		  body: [
               "Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
               "The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
-              "If a breeder wishes to increase his herds average teat length score from 4 and produce offspring to the breed standard 5, then a bull with a PTA of +3 is required. Please note that in some cases it may take several generations to achieve the desired result."
+              "If a breeder wishes to increase his herd average score for rear leg side from 4 for rear leg side to 5 then he would need to use a +3.5 bull to achieve this in one generation. Alternatively, 2 generations of using bulls that score at least +1.75."
       			]
           },
       		{
             title: "Defects",
       		  body: [
               "During the assessment of this composite the following defects are also recorded if present in the animal:",
-              "<ul><li>Bulgy Fore Udder</li><li>Unbalanced</li><li>Fleshy</li><li>Lacks Capacity</li><li>Webbed Teat</li><li>Funnelled Teat</li><li>Pencil Teat</li><li>Concave Teat</li></ul>",
-              "For further explanations of each defect please visit <a href='http://www.nbdc.uk' target='_blank'>www.nbdc.uk</a>"
+              "Bulgy Fore Udder, Unbalanced, Fleshy, Lacks Capacity, Webbed Teat, Funnelled Teat, Pencil Teat, Concave Teat",
+              "For further explanations of each defect please visit www.nbdc.uk"
       			]
           }
         ]
@@ -50,15 +50,15 @@ var txtDesc = {
       		  body: [
               "Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
               "The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
-              "If a breeder wishes to increase his herd average score for rear leg side from 4 to 5, then he would need to use a +3.5 bull to achieve this in one generation. Alternatively, 2 generations of using bulls that score at least +1.75."
+              "If a breeder wishes to increase his herd average score for rear leg side from 4 for rear leg side to 5 then he would need to use a +3.5 bull to achieve this in one generation. Alternatively, 2 generations of using bulls that score at least +1.75."
       			]
           },
       		{
             title: "Defects",
       		  body: [
               "During the assessment of this composite the following defects are also recorded if present in the animal:",
-              "<ul><li>Cramping</li><li>Weak Pasterns</li><li>Front Toe Out</li><li>Open Toes</li><li>Uneven Toes</li></ul>",
-              "For further explanations of each defect please visit <a href='http://www.nbdc.uk' target='_blank'>www.nbdc.uk</a>"
+              "Cramping, Weak Pasterns, Front Toe Out, Open Toes, Uneven Toes",
+              "For further explanations of each defect please visit www.nbdc.uk"
       			]
           }
         ]
@@ -68,7 +68,7 @@ var txtDesc = {
       "Holsteins have long been recognised for their body capacity and dairyness, resulting from well-sprung open ribs and unique combinations of body depth and angularity, enabling strong, spacious organ accommodation and vast forage consumption and processing for intense milk production sustainability.","Changes in body size, form and weight also affect animal movement in terms of space requirements and the scale of forces exerted in free movement. Therefore, alterations in body conformation scores have a direct impact on a cows environmental and spatial requirement."],
 		sub_text: [
         {
-          title: "How does Linear Scale compare with Bull proofs?" ,
+          title: "How does the Linear Scale compare with Bull proofs?" ,
     		  body: [
     			"Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
     			"The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
@@ -79,8 +79,8 @@ var txtDesc = {
           title: "Defects",
     		  body: [
     				 "During the assessment of this composite the following defects are also recorded if present in the animal:",
-    				"<ul><li>Inset Tail Head</li><li>Advanced Anus</li><li>High Tailhead</li><li>Wry Tail</li><li>Weak Loin</li><li>Weak Back</li><li>Weak in Crops</li><li>Weak / Undershot Jaw</li></ul>",
-    				"For further explanations of each defect please visit <a href='http://www.nbdc.uk' target='_blank'>www.nbdc.uk</a>"
+    				"Inset Tail Head, Advanced Anus, High Tailhead, Wry Tail, Weak Loin, Weak Back, Weak in Crops, Weak / Undershot Jaw",
+    				"For further explanations of each defect please visit www.nbdc.uk"
     				 ]
         }
       ]
@@ -92,7 +92,7 @@ var txtDesc = {
       ],
       sub_text: [
           {
-            title: "How does Linear Scale compare with Bull proofs?" ,
+            title: "How does the Linear Scale compare with Bull proofs?" ,
       		  body: [
       			"Bull proofs describe the genetic value for sire type traits. These genetic traits, also known as PTA’s, are scored on an approximate -3 to +3 scale. Linear scores are phenotypic (physical) measures of the same traits and can be used in conjunction with bull PTA’s when making breeding decisions.",
 				"The amount which a bull PTA will influence the offspring depends on the heritability of the individual trait. For example, a bull with a PTA of +2 for stature will be expected to increase the phenotypic linear score by 1point (3cm) on average. By comparison a bull with a chest width PTA of +2 would only increase the linear by 0.5 point (1cm). This is because chest width is less heritable than stature, in other words, more of the variation in classification scores is due to the effect of the environment than the genetics.",
@@ -119,7 +119,7 @@ var txtDesc = {
               desc: 'Well sprung and open ribbed'
             }
           ],
-          advice: 'Scores 5-8 provide an acceptable range. An extremely angular animal (9) often has higher milk production and lacks the ability to maintain its condition. Lower angularity animals (1-3) lack dairy character and may have lower milk production.',
+          advice: '',
           footer_text: 'Reference point: Defining ‘spring of the ribs’ is another way of referring to the degree of openness between the ribs. When ribs are tight there is no opening. When the ribs spring apart or expand open, the space between the ribs becomes wider. '
 
       },
@@ -139,7 +139,7 @@ var txtDesc = {
               desc: ''
             }
           ],
-          advice: 'Scores 4-7 provide an acceptable range. Young deeper bodied heifers (scores 8-9) tend to have fertility problems, whilst shallow bodied animals (scores 1-3) often lack dairy character and the ability to consume large amounts of forage.',
+          advice: '',
           footer_text: 'Reference Scale: This measure is optical in relation to the balance of the animal. Ensure scoring is always conducted from the same side, because all cows are deeper on one side than the other.'
       },
       bone_quality: {
@@ -158,7 +158,7 @@ var txtDesc = {
                 desc: 'flat and hard bone'
               }
             ],
-            advice: 'Score 5-8 provide an acceptable range. An animal with dairy frailty often has flat, flinty bone (score 9) which is too fine and not desirable. Bone quality of below score 4 is often associated with an animal that lacks dairy character and is susceptible to hock swellings and abrasions.',
+            advice: '',
             footer_text: 'Reference point: Cleanness and flatness of bone quality'
         },
 	  chest_width: {
@@ -177,7 +177,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. Wider chests (scores 8-9) may result in an animal lacking dairy character. A narrow chest (scores 1-3) can result in dairy frailty, where the animal often has weak crops, a narrow muzzle and their front feet toeing out. This can cause curling and excessive growth of the inside claw of the hoof.',
+        advice: '',
         footer_text: 'Reference Scale: 13cm – 29cm; 2cm per point'
       },
 	  foot_angle: {
@@ -196,7 +196,7 @@ var txtDesc = {
             desc: '(65 degrees)'
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. The steeper the foot angle (scores 8-9) often has a straighter side view of the leg (score 1-3) and reduced spring in movement to absorb movement associated impact. When the foot angle is lower (scores 1-3) the leg set is often more sickled (scores 7-9) and there is often reduced foot tissue for absorbing movement impact. Open toed animals often have a lower foot angle.',
+        advice: '',
         footer_text: 'If the foot angle is difficult to score because of hoof trimming, bedding, manure etc. it is possible to look at the angle of the hairline. In case of a significant difference the worst/extreme side must be scored.'
       },
 	  fore_udder_attachment: {
@@ -215,7 +215,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 6-8 provide an acceptable range. An extremely well attached FU (score 9) may result in an animal lacking dairy character and milk production. A loose FU may have an impact on the animal’s herd life.',
+        advice: '',
         footer_text: 'If the udder is healthy, but a significant difference in attachment is seen on either side, then the worst side must be scored.'
       },
 	  front_teat_placement: {
@@ -234,7 +234,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. Teats placed in the centre or just inside of centre are desirable (scores 5-7). Teats placed on the outside of the quarter (scores 1-3) may become difficult to milk if the central ligament weakens.',
+        advice: '',
         footer_text: ''
       },
 	  locomotion: {
@@ -253,7 +253,7 @@ var txtDesc = {
             desc: 'and Long Stride'
           }
         ],
-        advice: 'Scores 6-9 provide an acceptable range. Higher the locomotion the better, but this may be affected by the rump structure and leg set of the animal.',
+        advice: '',
         footer_text: '*Abduction – The spreading out of the legs to the side of the body, and away from the medial line (centre of the body). Should only be scored in herds where cows regularly walk. If that is the case, all cows classified that day should be locomotion scored.'
       },
 	  rear_legs_rear_view: {
@@ -272,7 +272,7 @@ var txtDesc = {
             desc: 'Foot straight and parallel with the medial body line'
           }
         ],
-        advice: 'Scores 5-8 provide an acceptable range. Straighter legs as seen from the side view (scores 8-9), often results in the rear view being more parallel with the medial line. If the leg is very sickled on the side view (8-9) this often results in severe toe angling outwards and hocks touching (1-3). An average leg set is preferred, in this instance the toe angles out slightly which aids locomotion.',
+        advice: '',
         footer_text: 'Ref: 	1 – 45 Degrees and above, 9 – 0-5 degrees, 5 Degrees per point'
       },
       rear_legs_side_view: {
@@ -291,7 +291,7 @@ var txtDesc = {
             desc: '(134 degrees)'
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. Very straight legs (scores 1-3) often have below average locomotion depending on their rump structure.',
+        advice: '',
         footer_text: 'In the case of a significant difference between sides, the worst/extreme side must be scored.'
       },
 	  rear_teat_placement: {
@@ -314,7 +314,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. If the teats become too close to the centre of the quarter (scores 8-9) they may become difficult to milk, especially if the animal has a well-defined central ligament (scores 8-9).',
+        advice: '',
         footer_text: 'To obtain population distribution it is recommended that 4 represents the mid-point of the quarter.'
       },
 	  rear_udder_height: {
@@ -333,7 +333,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 6-8 provide an acceptable range. Generally speaking, the higher the rear udder, the higher the production.  Lower the rear udders often results in the animal lacking dairy character and milk production.',
+        advice: '',
         footer_text: 'Measured on a scale between the bottom of the vulva and the hock. 1= 21cm, 9= 39cm (2cm per point)'
       },
 	   rear_udder_width: {
@@ -352,7 +352,7 @@ var txtDesc = {
             desc: '(24cm wide)'
           }
         ],
-        advice: 'Scores 6-8 provide an acceptable range. The width of the animal’s rump and rump angle can affect the height and width of the rear udder. High wide rear udders often have a wider rump (scores 7-9) and less of a slope (scores 1-3). However, if you have a wide rear udder with a narrow rump you may see below average locomotion in that animal, as she has to walk around the udder. A narrow rump often results in a narrower rear udder.',
+        advice: '',
         footer_text: 'Reference Scale: 2cm per point'
       },
       rump_angle: {
@@ -371,7 +371,7 @@ var txtDesc = {
               desc: '(-12cm)'
             }
           ],
-          advice: 'Scores 3-6 provide an acceptable range. Please see rump width.',
+          advice: '',
           footer_text: 'Reference point: from linear score 1(+4cm) remove 2 point for every score.'
       },
 	  rump_width: {
@@ -390,7 +390,7 @@ var txtDesc = {
               desc: ''
             }
           ],
-          advice: 'Scores 5-7 provide an acceptable range. If the rump is too wide (scores 8-9) this often results in the animal having high pins (scores 1-2) and the thurl bone moving to the posterior of the pelvis. Inset tails are often associated with this type of rump and the locomotion can be below average. If the rump is too narrow (scores 1-3) this may result in the thurl bone moving to the anterior of the pelvis and the rump having a greater slope (scores 7-9). The pelvis may narrow causing a higher tail head and possible calving difficulties.',
+          advice: '',
           footer_text: 'Reference Scale: 10cm – 26cm; 2cm per point.'
       },
 	  stature: {
@@ -409,7 +409,7 @@ var txtDesc = {
               desc: '(160cm)'
             }
           ],
-          advice: 'Scores 4-7 provide an acceptable stature range. However, the size of the animal required depends entirely on your personal preference and farming system. It is important that the other body traits are in proportion to the stature of the animal.',
+          advice: '',
           footer_text: 'Reference Scale: 136 cm – 160 cm; 3cm per point.'
       },
 	   teat_length: {
@@ -428,7 +428,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 4-7 provide an acceptable range. Having the teats too short (scores 1-2) can cause problems keeping the milking unit on the animal. If teats are too long (score 9) there can be a problem with other cows standing on them.',
+        advice: '',
         footer_text: 'Reference Scale: 1cm per point by front teat and 0.75cm by rear teat'
       },
 	  teat_placement_side_view: {
@@ -447,7 +447,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 5-7 provide an acceptable range. If the teat side spread is too wide (scores 8-9) this may result in the teat being placed too far back on the quarter, causing a milking problem. A close side spread (scores 1-3) may be due to the fact the udder lacks length and capacity.',
+        advice: '',
         footer_text: 'This measure is unique to the UK.'
       },
 	  udder_depth: {
@@ -470,7 +470,7 @@ var txtDesc = {
             desc: ''
           }
         ],
-        advice: 'Scores 5-8 provide an acceptable range. A very shallow udder (score 9) often means this animal lacks dairy character and milk production through lack of capacity in the udder. A deep udder (scores 1-4) generally have a negative effect on the animal’s herd life.',
+        advice: '',
         footer_text: 'Reference scale: 2 = level (0cm); 3cm per point'
       },
 	    udder_support: {
@@ -513,7 +513,7 @@ var txtDesc = {
             desc: '(-6cm)'
           }
         ],
-        advice: 'Scores 5-8 provide an acceptable range. A well-defined central ligament is needed to ensure that the teat placement remains central. An extremely defined ligament can result in difficulties to milk the animal if the rear teat placement is on the inside of the quarter (score 9).',
+        advice: '',
         footer_text: ''
       },
       udder_texture: {
@@ -532,10 +532,11 @@ var txtDesc = {
               desc: ''
             }
           ],
-          advice: 'Scores 6-8 provide an acceptable range. An animal with dairy character usually has a higher udder texture score (scores 6-9). Below score 5 the animal often lacks dairy character.',
+          advice: '',
           footer_text: ''
-      }
+        }
     }
+
 }
 
 
@@ -753,7 +754,7 @@ var navMenus = {
               txtColor: '#fff',
               main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
-              standard_score: 8,
+              standard_score: 1,
               target: {
                   type: 'view',
                   view: 'traits',
@@ -964,21 +965,20 @@ var navMenus = {
             },
             {
               idx: 3,
-              title: '',
-              name: '',
-              content: '',
+              title: 'Bone Quality',
+              name: 'bone_quality',
+              content: txtDesc.traits.bone_quality,
               icon: 'img/icons/icon_blank.png',
               color: '#D9D9D9',
               txtColor: '#1C3764',
               vid_src: 'video/test1.mp4',
               main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
-              standard_score: 7,
+              standard_score: 1,
               target: {
-                  type: 'blank',
+                  type: 'view',
                   view: 'traits',
                   route: 'feet_legs/bone_quality'
-
                 }
             },
             {
@@ -992,7 +992,7 @@ var navMenus = {
               vid_src: 'video/test1.mp4',
               main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
-              standard_score: 7,
+              standard_score: 5,
               target: {
                   type: 'view',
                   view: 'traits',
@@ -1229,20 +1229,7 @@ var navMenus = {
 
 };
 
-var contacts = [
-  {
-    name: "Membership Services",
-    email: "info@holstein-uk.org",
-    tel: "01923 695200",
-    desc: null
-  },
-  {
-    name: "NBDC",
-    email: "info@nbdc.uk",
-    tel: "01923 695235",
-    desc: null
-  }
-];
+
 
 var navOpts = {
   mainWheel: true,
@@ -1305,7 +1292,6 @@ var sideTabs = [
 
 var ideal_cow = {
   path: 'data/lores_baked7.json',
-  normal_map: 'data/hilo_holstein_normal_map.jpg',
   xOffset: -4,
   yOffset: -25,
   zOffset: 0,

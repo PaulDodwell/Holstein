@@ -7,12 +7,11 @@ holsteinModule.config(function($routeProvider) {
 
 			$routeProvider
 				  .when("/", {
-						templateUrl : "views/menu.html",
-						controller : "menuCtrl"
+						templateUrl : "views/home.html"
 				  })
-					.when("/menu/:data", {
-						templateUrl : "views/menu.html",
-						controller : "menuCtrl"
+					.when("/home", {
+						templateUrl : "views/home.html",
+						controller : "homeCtrl"
 				  })
 				  .when("/guide", {
 						templateUrl : "views/guide.html",
@@ -52,10 +51,10 @@ holsteinModule.run(['$rootScope','$location','$routeParams', function($rootScope
 		$rootScope.dialog = null;
 		$rootScope.curIdx = 0;
 		$rootScope.navActive = $location.path();
-
+		//console.log('Current route name: ' + $location.path());
 		$rootScope.menuState = {
 			inner: 'main',
-			outer: 'main'
+			outer: 'main',
 		}
 
 		$rootScope.load3D = {
@@ -64,8 +63,10 @@ holsteinModule.run(['$rootScope','$location','$routeParams', function($rootScope
 		}
 
 		$rootScope.$on('$routeChangeSuccess', function(e, current, pre) {
-		  console.log('Current route name: ' + $location.path());
+		  console.log('Current route name: ' + $location.path() + JSON.stringify(current));
 		  $rootScope.navActive = $location.path();
+		  // Get all URL parameter
+		  //console.log($routeParams);
 		});
 
 }]);
@@ -148,7 +149,7 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$document
 
 		$scope.$watch('menuState',function(val) {
 			$scope.parentMenu = $scope.navMenus[val.inner].parent ? $scope.navMenus[val.inner].parent : 'main';
-		},true);
+		},true)
 
 		$scope.initApp = function() {
 			console.log('INIT APP');
@@ -174,31 +175,33 @@ holsteinModule.controller('mainCtrl',['$scope','$rootScope','$window','$document
 	}// end mainCtrl
 
 
-holsteinModule.controller('navCtrl',['$scope','$rootScope','$routeParams','$location',function ($scope, $rootScope, $routeParams, $location) {
+holsteinModule.controller('navCtrl',['$scope','$rootScope','$location','$routeParams',function ($scope, $rootScope, $location, $routeParams) {
 	$scope.isNavCollapsed = true;
 	$scope.isCollapsed = false;
 	$scope.isCollapsedHorizontal = false;
+
+	$scope.goLoc = function(view,data) {
+		var path = view + "/" + data;
+		alert(path);
+		$location.path(path);
+	}
 }]);
 
-holsteinModule.controller('menuCtrl',['$scope','$rootScope','$routeParams','$location',function ($scope, $rootScope, $routeParams, $location) {
-
-	$scope.viewData = $routeParams.data ? $routeParams.data : 'main';
-
-	$scope.goMenu = function(inner,outer) {
-		//alert('go: '+inner);
-		$rootScope.menuState.inner = inner;
-		$rootScope.menuState.outer = outer;
-	};
-
-	$scope.goMenu($scope.viewData,'main');
-
+holsteinModule.controller('homeCtrl',['$scope','$rootScope','$routeParams',function ($scope, $rootScope, $routeParams) {
+	$scope.viewData = $routeParams.data;
+	$rootScope.menuState = {
+		inner: 'main',
+		outer: 'main'
+	}
 }]);
 
 holsteinModule.controller('guideCtrl',['$scope','$rootScope','$routeParams',function ($scope, $rootScope, $routeParams) {
-	//
+	$scope.viewData = $routeParams.data;
 }]);
 
 holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','$window','PreLoader',function ($scope, $rootScope, $routeParams, $window, preLoader) {
+
+	$scope.viewData = $routeParams.data;
 
 	$scope.sideBars.show = false;
 
@@ -210,6 +213,7 @@ holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','$wi
 		$window.location.reload();
 	}
 
+
 	$scope.imgList = [$scope.cow3D.normal_map];
 	preLoader.preloadImages( $scope.imgList );
 
@@ -217,7 +221,6 @@ holsteinModule.controller('idealCtrl',['$scope','$rootScope','$routeParams','$wi
 
 holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$window','ArraySvce',function ($scope, $rootScope, $routeParams, $window, arraySvce) {
 	$scope.viewData = $routeParams.data;
-
 	$scope.tritems = [];
 
 	$scope.tritems = $scope.navMenus[$scope.viewData].items;
@@ -243,7 +246,7 @@ holsteinModule.controller('traitsCtrl',['$scope','$rootScope','$routeParams','$w
 		if(val) {
 			var i = arraySvce.arrIndexOf($scope.tritems,val,'name');
 			$scope.currState.item = $scope.tritems[i];
-			//$location.path('/traits/'+$scope.targetData+"/"+$scope.currState.item.name);
+			$location.path('/traits/'+$scope.targetData+"/"+$scope.currState.item.name);
 		}
 	});
 
@@ -289,19 +292,10 @@ holsteinModule.controller('traitCtrl',['$scope','$rootScope','$routeParams','Dat
 
 }]);
 
-holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams','DataObj','ArraySvce',function ($scope, $rootScope, $routeParams, dataObj, arraySvce) {
+holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams','DataObj',function ($scope, $rootScope, $routeParams, dataObj) {
+	$scope.viewData = $routeParams.data;
 
 	$scope.sideBars.show = true;
-
-	var trTypes = $scope.navMenus['traits'].items;
-	var trIdx = 0;
-	for(var i=0;i<trTypes.length;i++) {
-		if(trTypes[i].target.innerMenu == 'feet_legs') {
-			trIdx = i;
-		}
-	}
-
-	$scope.trType = trTypes[trIdx];
 
 	$scope.locomotion = {
 		args:$scope.navMenus['locomotion'].items[0]
@@ -316,10 +310,7 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 	$scope.sliderState = JSON.parse(JSON.stringify(dataObj.sliderState()));
 	$scope.sliderArgs.keyNames = $scope.keyNames;
 	$scope.sliderState.curPos = $scope.sliderArgs.minOffset;
-
-	var i = arraySvce.arrIndexOf($scope.keyNames,$scope.locomotion.args.standard_score,'label') + 1;
-	$scope.sliderState.nearKey = i ? i : 1;
-	//$scope.sliderState.nearKey = $scope.locomotion.args.standard_score ? $scope.locomotion.args.standard_score : 1;
+	$scope.sliderState.nearKey = $scope.locomotion.standard_score ? $scope.locomotion.standard_score : 1;
 
 	$scope.videoSrc = {
 		src: 'locomotion_1.mp4',
@@ -328,7 +319,7 @@ holsteinModule.controller('locomotionCtrl',['$scope','$rootScope','$routeParams'
 		src3: 'locomotion_3.mp4'
 	}
 
-	$scope.nKey = 3;
+	$scope.nKey = 1;
 
 	$scope.$watch('sliderState',function(val) {
 		console.log("Slider State pos:"+val.curPos+" nearKey:"+val.nearKey+" label:"+val.nearKeyLabel);
@@ -378,7 +369,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 					var iconShow = $scope.menus[$rootScope.menuState.inner].icons_show;
 					//var parentMenu = $scope.menus[$rootScope.menuState.inner].parent;
 
-					//console.log('circleNav - iconShow: '+iconShow+' menuState: '+$rootScope.menuState.inner);
+					console.log('circleNav - iconShow: '+iconShow+' menuState: '+$rootScope.menuState.inner);
 
 					var iconAttr = {
 						size: 90,
@@ -387,17 +378,6 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 						ttlOffsetY: -40,
 						ttlOffsetX: -20
 					};
-
-
-					var delay = 20;
-
-					$scope.lastClick = 0;
-
-					$scope.$watch(function() {
-						return $scope.lastClick;
-					},function(val){
-						console.log('lastclick='+val);
-					})
 
 					$scope.viewBoxSize = (typeof $scope.args.viewBoxSize != "undefined" && $scope.args.viewBoxSize) ? $scope.args.viewBoxSize : '0 0 400 400';
 
@@ -447,10 +427,8 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 							$scope.centerImg.mousedown(function(e) {
 								e.preventDefault();
-								var route = $scope.menus[$rootScope.menuState.inner].parent ? $scope.menus[$rootScope.menuState.inner].parent : 'main'
-								var path = "/menu/" + route;
-								$location.path(path);
-								$scope.$apply(function() {});
+								//alert($scope.menus[$rootScope.menuState.inner].parent);
+								$scope.goMenu($scope.menus[$rootScope.menuState.inner].parent, $rootScope.menuState.inner);
 							});
 
 							$scope.navWheel.add($scope.centerImg);
@@ -469,10 +447,8 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						$scope.backArrow.mousedown(function(e) {
 							e.preventDefault();
-							var route = $scope.menus[$rootScope.menuState.inner].parent ? $scope.menus[$rootScope.menuState.inner].parent : 'main'
-							var path = "/menu/" + route;
-							$location.path(path);
-							$scope.$apply(function() {});
+							//alert($scope.menus[$rootScope.menuState.inner].parent);
+							$scope.goMenu($scope.menus[$rootScope.menuState.inner].parent, $rootScope.menuState.inner);
 						});
 
 						$scope.navWheel.add($scope.backArrow);
@@ -629,8 +605,7 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						$scope.titles[idx].mousedown(function(e) {
 							e.preventDefault();
-							//alert("2");
-							//$scope.segSelect(idx,true);
+							$scope.segSelect(idx,true);
 						});
 
 						$scope.legends[idx].add($scope.titles[idx]);
@@ -862,11 +837,9 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 
 						switch(target.type) {
 								case "menu":
-										var path = "/menu/" + $scope.items[idx].target.innerMenu;
-										//alert(path);
-										$location.path(path);
-										$scope.$apply(function() {});
-										//alert($location.path());
+										//var path = "home/menu/" + $rootScope.menuState.inner;
+										//$location.path(path);
+										$scope.goMenu($scope.items[idx].target.innerMenu, $scope.items[idx].target.outerMenu);
 										break;
 								case "view":
 										var path = target.view + "/" + target.route;
@@ -880,13 +853,10 @@ holsteinModule.directive('circleNav', ['$window','$rootScope','$location','Array
 										},10);
 										break;
 								case "blank":
-									//do nothing
+								//do nothing
 										break;
 								default:
-									var path = "/menu/main";
-									$location.path(path);
-									$scope.$apply(function() {});
-								//	$scope.goMenu('main','main');
+									$scope.goMenu('main','main');
 						}
 						$scope.sideBars.active = false;
 					}
@@ -1265,10 +1235,6 @@ holsteinModule.directive('locomotionVideo', ['$rootScope','$location','ApiSvce',
         templateUrl: 'html/locomotion_video.html',
 				controller: function($scope, $element) {
 						$scope.show = true;
-						$scope.menuBack = function() {
-							var path="menu/" + $scope.parentMenu.target.innerMenu;
-							$location.path(path);
-						}
 
 						$scope.getVidDimensions = function () {
 							//return { 'h': $element.find("video")[0].clientHeight, 'w': $element.find("video")[0].clientWidth };
@@ -1305,12 +1271,7 @@ holsteinModule.directive('traitFullImg', ['$rootScope','$location','ApiSvce',fun
 
 						$scope.sitePath = $rootScope.sitePath;
 						$scope.img_src = $scope.args.img_path  + "/" + $scope.args.name + "_0" + $scope.sliderState.nearKey + ".png";
-
-						$scope.menuBack = function() {
-							var path="menu/" + $scope.parentMenu.target.innerMenu;
-							$location.path(path);
-						}
-
+						//alert(JSON.stringify($scope.sliderArgs));
 						apiSvce.exists($scope.img_src).then(function successCallback(response) {
 							$scope.imgStatus.exists = true;
 							$scope.imgStatus.init = true;
@@ -1339,7 +1300,7 @@ holsteinModule.directive('traitDesc', [function () {
     }
 }]);
 
-holsteinModule.directive('menuDesc', ['$location', function ($location) {
+holsteinModule.directive('menuDesc', [function () {
     return {
         restrict: 'E',
 				replace: true,
@@ -1350,22 +1311,7 @@ holsteinModule.directive('menuDesc', ['$location', function ($location) {
 				},
         templateUrl: 'html/menu_desc.html',
 				controller: function($scope, $element) {
-					$scope.subParaState = {};
-					if($scope.content.desc.paras.sub_text) {
-						for(var i=0;i<$scope.content.desc.paras.sub_text.length;i++) {
-							$scope.subParaState[$scope.content.desc.paras.sub_text[i].title] = false;
-						}
-					}
-
-					$scope.subParaToggle = function(t) {
-						//alert(t+" "+$scope.subParaState[t]);
-						$scope.subParaState[t] = !$scope.subParaState[t];
-					}
-
-					$scope.menuBack = function() {
-						var path="menu/" + $scope.parentMenu;
-						$location.path(path);
-					}
+					//
 				}
     }
 }]);
@@ -1404,7 +1350,7 @@ holsteinModule.directive('sideTabs', ['$location','$rootScope', function ($locat
 
 					$scope.doTabs = function(target) {
 						if($scope.active === true) {
-							$scope.goTarget(target.innerMenu);
+							$scope.goTarget(target);
 						}
 						else {
 							$scope.active = true;
@@ -1413,9 +1359,9 @@ holsteinModule.directive('sideTabs', ['$location','$rootScope', function ($locat
 
 					$scope.goTarget = function(target) {
 						$scope.active = false;
-					  var path = "/menu/" + target;
-						//alert(path);
+					  var path = "/";
 						$location.path(path);
+						$rootScope.menuState.inner = target.innerMenu;
 					}
 
 				}
@@ -1434,16 +1380,14 @@ holsteinModule.directive('bsNavDropdown', ['$location','$rootScope', function ($
 					//alert('dropdown data: ' + JSON.stringify($scope.args));
 
 					$scope.targetHref = function(target) {
-						var path = "#!/menu/" + target.innerMenu;
+						var path = "#!" + target.view + "/" + target.route;
 						return path;
 					}
 
 					$scope.goTarget = function(target) {
-						//alert($location.path());
-						var path = "/menu/" + target.innerMenu;
-						//alert(path);
+					  var path = "/";
 						$location.path(path);
-						alert("goTarget: "+$location.path());
+						$rootScope.menuState.inner = target.innerMenu;
 					}
 
 				}

@@ -1,0 +1,86 @@
+
+<style>
+
+  .seg_title {
+    font-weight:'bold';
+  }
+
+  .seg_title:hover {
+    cursor:pointer;
+  }
+
+  .nav_seg,.center_img,.back_arrow {
+    pointer-events:auto !important;
+    cursor:pointer;
+  }
+
+  .nav_seg:hover {
+    cursor:pointer;
+  }
+
+  .outer_seg_title {
+
+  }
+  .center_circle,.center_img {
+
+  }
+  /*
+  .wheel_wrapper {
+    position:relative;
+    top:72px;
+    height:400px;
+  }
+  */
+  .menu_title {
+      margin-top:72px
+  }
+  .menu_text_wrapper {
+      padding:0 12px 12px 12px;
+      margin-top:60px;
+      min-height:0;
+      overflow:hidden;
+  }
+  .menu_text_text_wrapper {
+
+  }
+  .menu_text_wrapper p {
+      text-align:left;
+  }
+  .main_text {
+    margin-bottom:18px;
+  }
+  .main_text h1 {
+    color:#1c3764;
+    text-align:left;
+    margin-top:0;
+  }
+  .sub_para {
+    min-height:1px;
+    overflow:hidden;
+    padding:0 0 0 12px;
+
+  }
+  .sub_para_open {
+    max-height:2000px;
+    margin-bottom:12px;
+  }
+  .sub_para_closed {
+    max-height:0
+  }
+
+</style>
+
+<div class='container-fluid'>
+
+        <div class='row'>
+
+          <div class='col-md-7 col-md-push-5 wheel_outer'>
+              <div class='wheel_wrapper'><circle-nav args="navOpts" menus="navMenus" side-bars="sideBars" menu-state="menuState" curr-nav-content="currNavText"></circle-nav></div>
+          </div>
+          <div class='col-md-5 col-md-pull-7'>
+              <menu-desc menu-state="menuState" parent-menu="parentMenu" content="navMenus[menuState.inner]"></menu-desc>
+          </div>
+
+       </div>
+
+</div>

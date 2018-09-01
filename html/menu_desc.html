@@ -1,7 +1,11 @@
 <div class='menu_text_wrapper'>
 
-  <div class='main_text' ng-show="!(menuState.inner == 'main')"><h1><a class='back_link' ng-click="menuState.inner=parentMenu;sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> {{content.desc.heading}}</a></h1></div>
+  <div class='main_text' ng-show="!(menuState.inner == 'main')"><h1><a class='back_link' ng-click="menuBack();sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> {{content.desc.heading}}</a></h1></div>
   <div class='main_text' ng-show="menuState.inner == 'main'"><h1>{{content.desc.heading}}</h1></div>
-  <p ng-repeat="para in content.desc.paras">{{para}}</p>
+  <p ng-repeat="para in content.desc.paras.main_text">{{para}}</p>
+  <div ng-repeat="sub in content.desc.paras.sub_text">
+    <p style='cursor:pointer' class='dark_blue' ng-click="subParaToggle(sub.title)"><b>{{sub.title}}</b> <img class='slideTrans' ng-class="{rotate90CW:subParaState[sub.title]}" style="display:inline-block;height:1em;width:auto;margin-left:6px" src='img/arrowR.png' alt='>' /></p>
+    <div class='sub_para sub_para_closed slideTrans' ng-class="{sub_para_open:subParaState[sub.title],sub_para_closed:!subParaState[sub.title]}"<p style='font-size:1em;' ng-repeat="sub_para in sub.body" ng-bind-html="sub_para"></p></div>
+  </div>
 
 </div>
