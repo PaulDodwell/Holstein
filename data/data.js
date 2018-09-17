@@ -11,7 +11,7 @@ var txtDesc = {
     traits: {
       main_text: [
         "The Linear assessment involves the scoring of 21 individual traits on a scale of 1-9, describing the degree of the trait, rather than its desirability.",
-        "Each linear trait is considered when devising an score for the relevant composite.",
+        "Each linear trait is considered when devising a score for the relevant composite.",
         "Therefore, the navigation of the Virtual Cow has been designed to aid the understanding of which composite each trait is associated with."
       ]
     },
@@ -559,7 +559,6 @@ var navMenus = {
         {
             idx: 0,
             title: 'Traits',
-            content: 'Traits text content',
             icon: 'img/icons/icon_traits_wh.png',
             color: '#1C3764',
             txtColor:'#fff',
@@ -572,7 +571,6 @@ var navMenus = {
           {
             idx: 1,
             title: 'Guide',
-            content: 'Guide text content',
             icon: 'img/icons/icon_guide_bl.png',
             color: '#9FABCD',
             txtColor:'#333',
@@ -585,7 +583,6 @@ var navMenus = {
           {
             idx: 2,
             title: 'Ideal Cow',
-            content: 'Ideal Cow text content',
             icon: 'img/icons/icon_ideal_cow_wh.png',
             color: '#C7BC52',
             txtColor:'#fff',
@@ -610,7 +607,6 @@ var navMenus = {
         {
           idx: 0,
           title: 'Mammary',
-          content: 'Mammary text content',
           icon: 'img/icons/icon_mammary_wh.png',
           color: '#1C3764',
           txtColor: '#fff',
@@ -623,7 +619,6 @@ var navMenus = {
         {
           idx: 1,
           title: 'Legs & Feet',
-          content: 'Legs & Feet text content',
           icon: 'img/icons/icon_feet_legs_bl.png',
           color: '#9FABC0',
           txtColor: '#333',
@@ -636,7 +631,6 @@ var navMenus = {
         {
           idx: 2,
           title: 'Body Conformation',
-          content: 'Body Conformation text content',
           icon: 'img/icons/icon_body_conformation_bl.png',
           color: '#E9E1A2',
           txtColor: '#333',
@@ -649,7 +643,6 @@ var navMenus = {
         {
           idx: 3,
           title: 'Dairy Strength',
-          content: 'Dairy Strength text content',
           icon: 'img/icons/icon_dairy_strength_wh.png',
           color: '#C7BC52',
           txtColor: '#fff',
@@ -674,7 +667,6 @@ var navMenus = {
         {
           idx: 0,
           title: 'Teat Traits',
-          content: 'Teat Traits text content',
           icon: 'img/icons/icon_blank.png',
           color: '#1C3764',
           txtColor: '#fff',
@@ -687,7 +679,6 @@ var navMenus = {
         {
           idx: 1,
           title: 'Udder Traits',
-          content: 'Udder Traits text content',
           icon: 'img/icons/icon_blank.png',
           color: '#d9d9d9',
           txtColor:'#333',
@@ -717,7 +708,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 8,
               target: {
@@ -734,7 +724,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 8,
               target: {
@@ -751,7 +740,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 8,
               target: {
@@ -768,8 +756,7 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
-              main_img: 'img/Trait_17_00035.jpg',
-              img_path: 'img/trait',
+               img_path: 'img/trait',
               standard_score: 5,
               target: {
                   type: 'view',
@@ -785,7 +772,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 7,
               target: {
@@ -802,9 +788,8 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
-              standard_score: 1,
+              standard_score: 7,
               target: {
                   type: 'view',
                   view: 'traits',
@@ -831,8 +816,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 5,
               target: {
@@ -849,8 +832,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 5,
               target: {
@@ -867,8 +848,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#1C3764',
               txtColor: '#fff',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 7,
               target: {
@@ -886,8 +865,6 @@ var navMenus = {
               name: 'teat_length',
               color: '#d9d9d9',
               txtColor:'#333',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 5,
               target: {
@@ -916,8 +893,6 @@ var navMenus = {
           icon: 'img/icons/icon_blank.png',
           color: '#9FABC0',
           txtColor: '#1C3764',
-          vid_src: 'video/test1.mp4',
-          main_img: 'rear_legs_side_view_01.png',
           img_path: 'img/trait',
           standard_score: 5,
           target: {
@@ -934,8 +909,6 @@ var navMenus = {
             icon: 'img/icons/icon_blank.png',
             color: '#D9D9D9',
             txtColor:'#1C3764',
-            vid_src: 'video/test1.mp4',
-            main_img: 'img/Trait_17_00035.jpg',
             img_path: 'img/trait',
             standard_score: 9,
             target: {
@@ -952,8 +925,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#9FABC0',
               txtColor: '#1C3764',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 5,
               target: {
@@ -964,21 +935,18 @@ var navMenus = {
             },
             {
               idx: 3,
-              title: '',
-              name: '',
-              content: '',
+              title: 'Bone Quality',
+              name: 'bone_quality',
+              content: txtDesc.traits.bone_quality,
               icon: 'img/icons/icon_blank.png',
               color: '#D9D9D9',
               txtColor: '#1C3764',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 7,
               target: {
-                  type: 'blank',
+                  type: 'view',
                   view: 'traits',
                   route: 'feet_legs/bone_quality'
-
                 }
             },
             {
@@ -989,8 +957,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#9FABC0',
               txtColor: '#1C3764',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 7,
               target: {
@@ -1019,8 +985,6 @@ var navMenus = {
           icon: 'img/icons/icon_blank.png',
           color: '#E9E1A2',
           txtColor: '#1C3764',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
           img_path: 'img/trait',
           standard_score: 6,
           target: {
@@ -1037,8 +1001,6 @@ var navMenus = {
           icon: 'img/icons/icon_blank.png',
           color: '#D9D9D9',
           txtColor: '#1C3764',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
           img_path: 'img/trait',
           standard_score: 6,
           target: {
@@ -1055,8 +1017,6 @@ var navMenus = {
           icon: 'img/icons/icon_blank.png',
           color: '#E9E1A2',
           txtColor: '#1C3764',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
           img_path: 'img/trait',
           standard_score: 5,
           target: {
@@ -1073,8 +1033,6 @@ var navMenus = {
           icon: 'img/icons/icon_blank.png',
           color: '#D9D9D9',
           txtColor: '#1C3764',
-          vid_src: 'video/test1.mp4',
-          main_img: 'img/Trait_17_00035.jpg',
           img_path: 'img/trait',
           standard_score: 6,
           target: {
@@ -1103,8 +1061,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#C7BC52',
               txtColor:'#fff',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 5,
               target: {
@@ -1121,8 +1077,6 @@ var navMenus = {
               icon: 'img/icons/icon_blank.png',
               color: '#d9d9d9',
               txtColor:'#333',
-              vid_src: 'video/test1.mp4',
-              main_img: 'img/Trait_17_00035.jpg',
               img_path: 'img/trait',
               standard_score: 6,
               target: {
@@ -1147,7 +1101,6 @@ var navMenus = {
         icon: 'img/icons/icon_blank.png',
         color: '#D9D9D9',
         txtColor:'#333',
-        vid_src: 'video/locomotion_low.mp4',
         img_path: 'img/trait',
         standard_score: 9,
         target: {
@@ -1157,77 +1110,84 @@ var navMenus = {
           }
         }
       ]
+    }
+};
+
+var help_text = [
+{
+  title: 'Navigating the menus',
+  main_text: [
+     "The Virtual Holstein web app is designed to work on all commonly used devices, from desktop computers to smartphones",
+     "Using any of the following methods, ou can navigate to your chosen screen by a single mouse-click or tap (on touch-screen devices)."
+  ],
+  sub_text: [
+       {
+         title: "Use the menu wheel" ,
+         body: [
+         "Tap wheel segments once to explore. The options will change according to your selection.",
+         "To go back to the previous menu, ether tap the 'back' arrow by the screen title, or just tap in the centre of the menu wheel."]
+       },
+       {
+         title: "Use the 'classic' menus at the top of the page",
+         body: [
+         "Tap the Holstein logo to return to the home screen at any time."
+         ]
+       },
+       {
+         title: "Use the side-bars",
+         body: [
+           "Some screens have a row of options down the right hand side of the screen. Tap any one of them to reveal the side-bar options, then tap to select.",
+           "The side-bars are short-cuts to the trait menus for each of the available composites.",
+           "To cancel or hide the side-bars without making a selection, tap elswhere on the screen."
+         ]
+       }
+     ]
+  },
+  {
+      title: 'Viewing an Individual Trait',
+      main_text: [
+       "The individual trait viewer allows you visually to compare the different scores for that trait, using the slider.",
+       "Details for each trait, including an eplanation of the scores, can be found in the accompanying text."
+     ],
+     sub_text: [
+         {
+           title: "Using the slider" ,
+           body: [
+           "You can use the slider provided to select each score to view. The slider will indicate the current score being displayed.",
+           "You can drag the circle marker alond the slider using the mouse or with a finger on touch devices.",
+           "Alternatively, just tap near one of the number markers on the slider to select a score to view."
+           ]
+         }
+       ]
     },
-    ideal_cow: {
-      name: 'ideal_cow',
-      parent: 'main',
-      title: 'Ideal Cow',
-      icons_show: false,
-      items: [
+    {
+      title: 'Viewing the Ideal Holstein Cow',
+      main_text: [
+       "Hold down left mouse button and move mouse within the frame to rotate the 3D Holsrein in any direction.",
+       "On touch devices just touch and move within the frame to rotate.",
+       "To auto-rotate, choose 'animate'"
+     ],
+      sub_text: [
         {
-          idx: 0,
-          title: 'Ideal Cow 1',
-          name: 'ideal_cow_1',
-          content: 'Ideal Cow 1 text content',
-          icon: 'img/icons/icon_blank.png',
-          color: '#1C3764',
-          target: {
-              type: 'view',
-              view: 'ideal_cow',
-              route: 'ideal_cow_1'
-            }
+          title: "Zooming and Panning" ,
+          body: [
+          "On touch devices, pinch/drag using 2 fingers to zoom and pan.",
+          "On desktop/laptop computers (PC or Mac), use your mouse wheel to zoom, or right button to zoom and pan.",
+          "On a laptop touchpad, left-click and use 2 fingers to zoom and pan.",
+          "On a keyboard, you can use the arrow keys to zoom and pan.",
+          "Choose 'reset' to restore the 3D Holstein to its original position."
+          ]
         },
         {
-          idx: 1,
-          title: 'Ideal Cow 2',
-          name: 'ideal_cow_2',
-          content: 'Ideal Cow 2 text content',
-          icon: 'img/icons/icon_blank.png',
-          color: '#D9D9D9',
-          target: {
-              type: 'view',
-              view: 'ideal_cow',
-              route: 'ideal_cow_2'
-            }
+          title: "Troubleshooting" ,
+          body: [
+          "If you are unable to view the 3D Holstein on your device, please try the following:",
+          "<ul style='list-style:circle;'><li>Try using a different browser, such as Chrome or Firefox</li><li>Ensure your browser is updated to the latest version</li><li>Ensure that WebGL is enabled on yor browser</li><li>Ensure your computer has the latest updates</li><li>Update the driver for your graphics card</li><ul>"
+          ]
         }
       ]
-    },
-  guide: {
-    name: 'guide',
-    parent: 'main',
-    title: 'Guide',
-    icons_show: false,
-    items: [
-      {
-        idx: 0,
-        title: 'Guide 1',
-        name: 'guide_1',
-        content: 'Guide 1 text content',
-        icon: 'img/icons/icon_blank.png',
-        color: '#1C3764',
-        target: {
-            type: 'view',
-            view: 'guide',
-            route: 'guide_1'
-          }
-      },
-      {
-        idx: 1,
-        title: 'Guide 2',
-        name: 'guide_2',
-        content: 'Guide 2 text content',
-        icon: 'img/icons/icon_blank.png',
-        color: '#D9D9D9',
-        target: {
-            type: 'view',
-            view: 'guide',
-            route: 'guide_2'
-          }
-      }
-  	]
-  }
-
-};
+   }
+]
 
 var contacts = [
   {
@@ -1295,22 +1255,14 @@ var navOptsOuter = {
   bg: '#c99'
 };
 
-var sideTabs = [
-  {
-    title: 'tab 1',
-    bg: '#c00',
-    target: ''
-  }
-];
-
 var ideal_cow = {
   path: 'data/lores_baked7.json',
   normal_map: 'data/hilo_holstein_normal_map.jpg',
-  xOffset: -4,
+  xOffset: -8,
   yOffset: -25,
   zOffset: 0,
   xRot: 0,
-  yRot: -1,
+  yRot: -0.75,
   zRot: 0,
   scale: 0.7,
 }

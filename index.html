@@ -42,7 +42,7 @@
     <script src="js/threelib/OrbitControls.js"></script>
     <script src="js/threelib/JSONLoader.js"></script>
     <!--main app-->
-    <script src='js/holstein.js'></script>
+    <script src='js/holstein.min.js'></script>
 
 </head>
 
@@ -51,7 +51,6 @@
     <nav ng-controller='navCtrl' class="navbar navbar-default">
 
       <div class="container-fluid">
-
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
             <span class="icon-bar"></span>
@@ -64,7 +63,7 @@
         <div class="collapse navbar-collapse" id="myNavbar" uib-collapse="isNavCollapsed">
           <ul class="nav navbar-nav navbar-right">
             <li uib-dropdown><a href="#!" uib-dropdown-toggle>Traits<b class="caret"></b></a>
-              <bs-nav-dropdown args="navMenus.traits"></bs-nav-dropdown>
+              <bs-nav-dropdown args="navMenus.traits" is-nav-collapsed="isNavCollapsed"></bs-nav-dropdown>
             </li>
             <li><a href="#!ideal-cow" ng-click="isNavCollapsed = true">Ideal Cow</a></li>
             <li><a href="#!locomotion" ng-click="isNavCollapsed = true">Locomotion</a></li>
@@ -82,7 +81,7 @@
 
 	<footer class='footer' ng-class="{'sticky_footer':stickyFooter}">
     	<div class='container'>
-   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'2px'}">&copy; Copyright Holstein UK 2018 - Developed by Breeze &amp; Freeze Ltd</span></p>
+   			<p class='smTxt top12 gry' ng-style="{'position':'absolute','left':'12px','bottom':'2px'}">&copy; Copyright Holstein UK 2018 - App by Breeze &amp; Freeze Ltd</span></p>
    		</div>
  </footer>
 

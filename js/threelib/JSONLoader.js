@@ -1,3 +1,4 @@
+/*
 import { Loader } from './Loader.js';
 import { LoaderUtils } from './LoaderUtils.js';
 import { AnimationClip } from '../animation/AnimationClip.js';
@@ -9,7 +10,7 @@ import { Face3 } from '../core/Face3.js';
 import { Geometry } from '../core/Geometry.js';
 import { FileLoader } from './FileLoader.js';
 import { DefaultLoadingManager } from './LoadingManager.js';
-
+*/
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author alteredq / http://alteredqualia.com/
@@ -576,4 +577,4 @@ Object.assign( JSONLoader.prototype, {
 } );
 
 
-export { JSONLoader };
+//export { JSONLoader };

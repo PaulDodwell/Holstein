@@ -1,0 +1,87 @@
+
+<style>
+.wrap_3D {
+  border:1px solid #333;
+  border-radius:12px;
+  overflow:hidden;
+}
+.wrap_3D a {
+  text-decoration:none;
+  padding-left:6px;
+  cursor:pointer;
+}
+.ctrls_3D {
+  position:absolute;
+  bottom:6px;
+  left:0;
+  padding-left:4px;
+}
+.load_show {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:100;
+}
+h1 {
+  padding-left:0;
+  margin-top:4px !important;
+}
+h5 {
+  padding-left:12px;
+}
+p {
+  font-size:0.9em;
+}
+@media screen and (max-width: 896px) {
+
+  .wrap_3D {
+    margin-left:24px;
+    margin-right:24px;
+    min-height:40px;
+  }
+
+}
+@media screen and (max-width: 492px) {
+
+  .wrap_3D {
+    margin-left:6px;
+    margin-right:6px;
+  }
+
+}
+</style>
+<div class='container-fluid'>
+
+        <div class='row'>
+          <div class='col-sm-1 col-spacer'></div>
+          <div class='col-sm-10' style='padding:0;'><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> Ideal Holstein Cow</a></h1></div>
+          <div class='col-sm-1 col-spacer'></div>
+        </div>
+        <div class='row'>
+          <div class='col-md-1 col-spacer'></div>
+          <div ng-controller="SceneControl" class='col-md-7 wrap_3D' style='padding-right:4px !important;padding-left:4px !important;background-color:{{set3d.hexColorBG}};'>
+              <div style='position:relative;width:96%;'>
+              <div class='ctrls_3D noselect'><a ng-click="toggleRotate()"><span ng-show="controls.autoRotate">Stop</span><span ng-show="!controls.autoRotate">Animate</span></a> <a ng-click="resetView()"><span>Reset</span></a></div>
+              <div style='margin-top:4px;' cow-3d="cow3D" set-3d="set3d" controls="controls" three-viewport></div>
+              <div ng-hide="load3D.status == 'loaded'" class='load_show loading'></div>
+            </div>
+          </div>
+          <div class='col-md-3'>
+              <h2 style='text-align:left;padding-left:12px;margin-bottom:18px;'>Ideal Holstein Cow</h2>
+              <h5><b>Rotating the 3D Holstein</b></h5>
+              <p>Hold down left mouse button and move mouse within the frame to rotate the cow in any direction.</p>
+              <p>On touch devices just touch and move within the frame to rotate.</p>
+              <h5><b>Zooming in and out</b></h5>
+              <p>Pinch within the frame to zoom on touch devices.</p>
+              <p>On PC or Mac, use mouse wheel or right button to zoom.</p>
+              <p>On Mac touchpad, left-click + 2 fingers to zoom.</p>
+              <p>On a keyboard, use the arrow keys to zoom.</p>
+          </div>
+          <div class='col-md-1 col-spacer'></div>
+
+       </div>
+
+</div>

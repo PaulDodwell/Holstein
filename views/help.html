@@ -1,14 +1,54 @@
 
+<style>
+  .help_topic {
+    padding:12px;
+    border:1px solid #333;
+    border-radius:12px;
+    margin-top:24px;
+    margin-bottom:12px;
+  }
+  .help_icon {
+    font-size:1.3em;
+    padding:0.2em 0.6em;
+    border-radius:999px;
+    /*background-color:#1C3764;*/
+    background-color:#D6BD47;
+    color:#fff;
+  }
+  .page_title {
+    text-align:center !important;
+  }
+  .help_topic h2 {
+    text-align:left;
+  }
+  .help_topic div div p ul {
+    list-style:disc !important;
+  }
+  .help_topic div div p ul li {
+    margin-left:24px !important;;
+  }
+</style>
 <div class='main_content  container-fluid'>
 
         <div class='row'>
-        <div class="col-12"><h1><a class='back_link' ng-href="#/traits/{{parentMenu}}" ng-click="sideBars.active=false;"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> HELP PAGE</a></h1></div>
+        <div class="col-12"><h1><a class='back_link' ng-href="" ng-click="goBack()"><img ng-src="img/arrowL.png" title="Back" alt="Back" /> BACK</a></h1></div>
         </div>
         <div class='row'>
-            <div class='col-sm-8 col xs-12'>
-              <div class='col-sm-12' style='text-align:center'><h3> coming soon - to be supplied</h3></div>
+          <div class='col-sm-2 col_spacer'></div>
+            <div class='col-sm-8'>
+              <div class='col-sm-12' style='text-align:center'>
+                <h1 class='page_title'><span class='help_icon'>?</span></h1>
+                <div class='help_topic' ng-repeat="topic in helpText">
+                  <h2>{{topic.title}}</h2>
+                  <p ng-repeat="para in topic.main_text">{{para}}</p>
+                  <div ng-repeat="sub in topic.sub_text">
+                    <p class='dark_blue'><b>{{sub.title}}</b></p>
+                    <div><p style='font-size:1em;' ng-repeat="sub_para in sub.body" ng-bind-html="sub_para"></p></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          <div class='col-sm-2 col xs-0'></div>
+          <div class='col-sm-2 col_spacer'></div>
         </div>
 
 </div>

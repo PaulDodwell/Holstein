@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('threeViewer.directives', ['threeViewer.services'])
-    // Creates the directive (reusable chunk of html and javascript) for three.js.
-    // Note that right now the SceneService and CameraService are injected into the directive.  These
-    // services are used to manipulate the scene else where.
-    // Currently the Renderer and controls are part of the directive but could just as easily be
-    // moved into their own services if functionality they provide need to be manipulated by a UI control.
+
   .directive('threeViewport', ['SceneService', 'CameraService', function (SceneService, CameraService) {
       return {
           restrict: "AE",
@@ -34,7 +30,7 @@ angular.module('threeViewer.directives', ['threeViewer.services'])
 
                   SceneService.scene.add(CameraService.perspectiveCam);
 
-                  /* uncomment to add test cube
+                  /* uncomment to add test cube - pjd
                   geometry = new THREE.BoxGeometry(100,100,100,10,10,10);
 
                   material = new THREE.MeshBasicMaterial({
@@ -50,7 +46,7 @@ angular.module('threeViewer.directives', ['threeViewer.services'])
                   renderer = new THREE.WebGLRenderer({ antialias: true });
                   renderer.setSize(el[0].offsetWidth, el[0].offsetWidth * (1 / $scope.set3d.aspect));
                   renderer.setClearColor(new THREE.Color($scope.set3d.colorBG), $scope.set3d.opacityBG);
-
+                  rendererResize();
                   // set up the controls with the camera and renderer
                   $scope.controls = new THREE.OrbitControls(CameraService.perspectiveCam, renderer.domElement);
                   //controls.target.set(camX, camY, 0);
@@ -67,7 +63,7 @@ angular.module('threeViewer.directives', ['threeViewer.services'])
                   el[0].appendChild(renderer.domElement);
 
                   // handles resizing the renderer when the window is resized
-                  window.addEventListener('resize', onWindowResize, false);
+                  window.addEventListener('resize', rendererResize, false);
               }
 
               function animate() {
@@ -76,16 +72,20 @@ angular.module('threeViewer.directives', ['threeViewer.services'])
                   $scope.controls.update();
               }
 
-              function onWindowResize(event) {
+              function rendererResize(force) {
                 console.log("renderer width: "+$element[0].offsetWidth);
-                  renderer.setSize($element[0].offsetWidth, $element[0].offsetWidth * (1 / $scope.set3d.aspect));
-                  CameraService.perspectiveCam.aspect = $scope.set3d.aspect;
-                  CameraService.perspectiveCam.updateProjectionMatrix();
-              }
+                var canvas = renderer.domElement;
+                var width = $element[0].offsetWidth;
+                var height = window.innerHeight * 0.7;
 
-              //loadLight3(SceneService.scene);
-              //loadLight4(SceneService.scene);
-              console.log('children: '+ SceneService.scene.children.length);
+                if (force || canvas.width !== width || canvas.height !== height) {
+                  renderer.setSize(width, height);
+                  var camZ = width < 450 ? $scope.set3d.camPhoneZ : $scope.set3d.camZ;
+                  CameraService.perspectiveCam.position.set(0, 0, camZ);
+                  CameraService.perspectiveCam.aspect = width / height;
+                  CameraService.perspectiveCam.updateProjectionMatrix();
+                }
+              }
 
               var loadLightAmbient = function(scene) {
                 if(typeof SceneService.scene.getObjectByName( "LX_Ambient" ) == 'undefined') {

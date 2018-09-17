@@ -15,7 +15,7 @@ angular.module('threeViewer.services', [])
         // default values for camera
         var viewAngle = 35;
         //var aspectRatio = window.innerWidth / window.innerHeight;
-        var aspectRatio = 12 / 9;
+        var aspectRatio = 14 / 9;
         var near = 0.1
         var far = 15000;
 
@@ -137,22 +137,17 @@ angular.module('threeViewer.services', [])
 
             ModelDataService.getData(args.path).then(function (dataResponse) {
 
-                //var model = dataResponse.data;
                 var model=(args.path);
 
                 var manager = new THREE.LoadingManager();
 
                 manager.onStart = function ( item, loaded, total ) {
-                  $rootScope.$apply(function() {
                     $rootScope.load3D.status = 'loading';
                     $rootScope.load3D.items = loaded;
-                  });
                   console.log(item, loaded, total);
                 };
                 manager.onProgress = function (item, loaded, total) {
-                  $rootScope.$apply(function() {
                     $rootScope.load3D.items = loaded;
-                  });
                   console.log(item, loaded, total);
                 };
                 manager.onLoad = function () {
@@ -162,9 +157,7 @@ angular.module('threeViewer.services', [])
                   console.log('all items loaded');
                 };
                 manager.onError = function () {
-                  $rootScope.$apply(function() {
                     $rootScope.load3D.status = 'load error';
-                  });
                   console.log('there has been an error');
                 };
 
@@ -212,8 +205,8 @@ angular.module('threeViewer.services', [])
                       );
                      c.divideScalar(2);
 
-              	   console.log("Box Min: "+mesh.geometry.boundingBox.min.x+", "+mesh.geometry.boundingBox.min.y+", "+mesh.geometry.boundingBox.min.z);
-              	   console.log("Box Max: "+mesh.geometry.boundingBox.max.x+", "+mesh.geometry.boundingBox.max.y+", "+mesh.geometry.boundingBox.max.z);
+              	   //console.log("Box Min: "+mesh.geometry.boundingBox.min.x+", "+mesh.geometry.boundingBox.min.y+", "+mesh.geometry.boundingBox.min.z);
+              	   //console.log("Box Max: "+mesh.geometry.boundingBox.max.x+", "+mesh.geometry.boundingBox.max.y+", "+mesh.geometry.boundingBox.max.z);
 
               		return c;
 
